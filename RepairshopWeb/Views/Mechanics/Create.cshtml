@@ -1,10 +1,9 @@
-﻿@model RepairshopWeb.Models.ClientViewModel
-
+﻿@model RepairshopWeb.Models.MechanicViewModel
 @{
-    ViewData["Title"] = "Create new client";
+    ViewData["Title"] = "Create";
 }
 
-<h1>New Client</h1>
+<h1>New Mechanic</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -61,10 +60,26 @@
             <div class="form-group">
                 <div class="control-section">
                     <div class="control_wrapper TextBox-control-section">
-                        <ejs-maskedtextbox asp-for="Nif" id="nif" mask="000000000" placeholder="NIF" floatLabelType="Auto"></ejs-maskedtextbox>
+                        <ejs-maskedtextbox asp-for="Nif" id="nif" mask="000000000" placeholder="Nif" floatLabelType="Auto"></ejs-maskedtextbox>
                     </div>
                 </div>
                 <span asp-validation-for="Nif" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="control-section">
+                    <div class="control_wrapper TextBox-control-section">
+                        <ejs-maskedtextbox asp-for="Niss" id="niss" mask="00000000000" placeholder="Niss" floatLabelType="Auto"></ejs-maskedtextbox>
+                    </div>
+                </div>
+                <span asp-validation-for="Niss" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="control-section">
+                    <div class="control_wrapper TextBox-control-section">
+                        <ejs-textbox asp-for="IdentityDocument" id="identitydocument" placeholder="ID Number" floatLabelType="Auto"></ejs-textbox>
+                    </div>
+                </div>
+                <span asp-validation-for="IdentityDocument" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ImageFile"></label>

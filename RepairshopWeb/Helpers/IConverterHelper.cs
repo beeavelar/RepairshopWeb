@@ -9,5 +9,9 @@ namespace RepairshopWeb.Helpers
         Client ToClient(ClientViewModel model, Guid imageId, bool isNew);
 
         ClientViewModel ToClientViewModel(Client client);
+
+        Mechanic ToMechanic(MechanicViewModel model, Guid imageId, bool isNew);
+
+        MechanicViewModel ToMechanicViewModel(Mechanic mechanic);
     }
 }

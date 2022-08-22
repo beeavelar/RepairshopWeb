@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using RepairshopWeb.Data;
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Data.Repositories;
@@ -13,6 +14,7 @@ using RepairshopWeb.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace RepairshopWeb
@@ -42,6 +44,20 @@ namespace RepairshopWeb
             })
             .AddEntityFrameworkStores<DataContext>();
 
+            //TOKEN
+            //services.AddAuthentication()
+            //    .AddCookie()
+            //    .AddJwtBearer(cfg =>
+            //    {
+            //        cfg.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidIssuer = this.Configuration["Tokens:Issuer"],
+            //            ValidAudience = this.Configuration["Tokens:Audience"],
+            //            IssuerSigningKey = new SymmetricSecurityKey(
+            //               Encoding.UTF8.GetBytes(this.Configuration["Tokens:Key"]))
+            //        };
+            //    });
+
             services.AddDbContext<DataContext>(cfg =>
             {
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
@@ -56,6 +72,8 @@ namespace RepairshopWeb
             services.AddScoped<IConverterHelper, ConverterHelper>();
 
             services.AddScoped<IClientsRepository, ClientRepository>();
+
+            services.AddScoped<IMechanicRepository, MechanicRepository>();
 
             services.ConfigureApplicationCookie(options =>
             {

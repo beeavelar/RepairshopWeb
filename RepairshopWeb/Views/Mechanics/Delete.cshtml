@@ -1,10 +1,10 @@
-﻿@model RepairshopWeb.Data.Entities.Client
+﻿@model RepairshopWeb.Data.Entities.Mechanic
 
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete client</h1>
+<h1>Delete mechanic</h1>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
@@ -53,6 +53,18 @@
                     </dt>
                     <dd class = "col-sm-9">
                         @Html.DisplayFor(model => model.Nif)
+                    </dd>
+                    <dt class = "col-sm-3">
+                        @Html.DisplayNameFor(model => model.Niss)
+                    </dt>
+                    <dd class = "col-sm-9">
+                        @Html.DisplayFor(model => model.Niss)
+                    </dd>
+                    <dt class = "col-sm-3">
+                        @Html.DisplayNameFor(model => model.IdentityDocument)
+                    </dt>
+                    <dd class = "col-sm-9">
+                        @Html.DisplayFor(model => model.IdentityDocument)
                     </dd>
                 </dl>
             </div>

@@ -1,37 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using RepairshopWeb.Data;
+using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepairshopWeb.Controllers
 {
-    public class ClientsController : Controller
+    public class MechanicsController : Controller
     {
-        private readonly IClientsRepository _clientRepository;
+        private readonly IMechanicRepository _mechanicRepository;
         private readonly IUserHelper _userHelper;
         private readonly IBlobHelper _blobHelper;
         private readonly IConverterHelper _converterHelper;
 
-        public ClientsController(IClientsRepository clientRepository,
+        public MechanicsController(IMechanicRepository mechanicRepository,
             IUserHelper userHelper, IBlobHelper blobHelper, IConverterHelper converterHelper)
         {
-            _clientRepository = clientRepository;
+            _mechanicRepository = mechanicRepository;
             _userHelper = userHelper;
             _blobHelper = blobHelper;
             _converterHelper = converterHelper;
         }
 
-        // GET: Clients
-        public IActionResult Index()
+        // GET: Mechanics
+        public async Task<IActionResult> Index()
         {
-            return View(_clientRepository.GetAll().OrderBy(o => o.FirstName));
+            return View(_mechanicRepository.GetAll().OrderBy(o => o.FirstName));
         }
 
-        // GET: Clients/Details/5
+        // GET: Mechanics/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,28 +43,28 @@ namespace RepairshopWeb.Controllers
                 return NotFound();
             }
 
-            var client = await _clientRepository.GetByIdAsync(id.Value);
+            var mechanic = await _mechanicRepository.GetByIdAsync(id.Value);
 
-            if (client == null)
+            if (mechanic == null)
             {
                 return NotFound();
             }
 
-            return View(client);
+            return View(mechanic);
         }
 
-        // GET: Clients/Create
+        // GET: Mechanics/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Clients/Create
+        // POST: Mechanics/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ClientViewModel model)
+        public async Task<IActionResult> Create(MechanicViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -68,39 +72,39 @@ namespace RepairshopWeb.Controllers
 
                 if (model.ImageFile != null && model.ImageFile.Length > 0)
                 {
-                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "clients");
+                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "mechanics");
                 }
 
-                var client = _converterHelper.ToClient(model, imageId, true);
+                var mechanic = _converterHelper.ToMechanic(model, imageId, true);
 
-                client.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                mechanic.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
 
-                await _clientRepository.CreateAsync(client);
+                await _mechanicRepository.CreateAsync(mechanic);
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
         }
 
-        // GET: Clients/Edit/5
+        // GET: Mechanics/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
                 return NotFound();
 
-            var client = await _clientRepository.GetByIdAsync(id.Value);
-            if (client == null)
+            var mechanic = await _mechanicRepository.GetByIdAsync(id.Value);
+            if (mechanic == null)
                 return NotFound();
 
-            var model = _converterHelper.ToClientViewModel(client);
+            var model = _converterHelper.ToMechanicViewModel(mechanic);
             return View(model);
         }
 
-        // POST: Clients/Edit/5
+        // POST: Mechanics/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(ClientViewModel model)
+        public async Task<IActionResult> Edit(MechanicViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -110,17 +114,17 @@ namespace RepairshopWeb.Controllers
 
                     if (model.ImageFile != null && model.ImageFile.Length > 0)
                     {
-                        imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "clients");
+                        imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "mechanics");
                     }
 
-                    var client = _converterHelper.ToClient(model, imageId, false);
+                    var mechanic = _converterHelper.ToMechanic(model, imageId, false);
 
-                    client.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
-                    await _clientRepository.UpdateAsync(client);
+                    mechanic.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                    await _mechanicRepository.UpdateAsync(mechanic);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!await _clientRepository.ExistAsync(model.Id))
+                    if (!await _mechanicRepository.ExistAsync(model.Id))
                     {
                         return NotFound();
                     }
@@ -134,7 +138,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
-        // GET: Clients/Delete/5
+        // GET: Mechanics/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,29 +146,29 @@ namespace RepairshopWeb.Controllers
                 return NotFound();
             }
 
-            var client = await _clientRepository.GetByIdAsync(id.Value);
+            var mechanic = await _mechanicRepository.GetByIdAsync(id.Value);
 
-            if (client == null)
+            if (mechanic == null)
             {
                 return NotFound();
             }
 
-            return View(client);
+            return View(mechanic);
         }
 
-        // POST: Clients/Delete/5
+        // POST: Mechanics/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var client = await _clientRepository.GetByIdAsync(id);
-            await _clientRepository.DeleteAsync(client);
+            var mechanic = await _mechanicRepository.GetByIdAsync(id);
+            await _mechanicRepository.DeleteAsync(mechanic);
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult OwnerNotFound()
+
+        public IActionResult MechanicNotFound()
         {
             return View();
         }
-
     }
 }

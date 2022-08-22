@@ -7,6 +7,10 @@ namespace RepairshopWeb.Data
     public class DataContext : IdentityDbContext<User>
     {
         public DbSet<Client> Clients { get; set; }
+
+        public DbSet<Mechanic> Mechanics { get; set; }
+
+        public DbSet<MechanicSpeciality> MechanicSpecialitys { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }

@@ -1,0 +1,80 @@
+﻿@model RepairshopWeb.Data.Entities.Mechanic
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Mechanic Details</h1>
+
+<div>
+   <hr />
+   <div class="row">
+       <div class="col-md-8">
+            <dl class="row">
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.PostalCode)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.PostalCode)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Phone)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Phone)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Nif)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Nif)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Niss)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Niss)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.IdentityDocument)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.IdentityDocument)
+                </dd>
+            </dl>
+       </div>
+       <div class="col-md-4">            
+            <img src="@Url.Content(Model.ImageFullPath)" alt="Photo" style="width:200px;height:250px;max-width:100%;height:auto">
+       </div>
+   </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"> <i class="fa-solid fa-user-pen"></i></a> 
+    <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
+</div>
+
