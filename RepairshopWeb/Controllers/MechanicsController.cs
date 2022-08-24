@@ -39,16 +39,12 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("MechanicNotFound");
 
             var mechanic = await _mechanicRepository.GetByIdAsync(id.Value);
 
             if (mechanic == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("MechanicNotFound");
 
             return View(mechanic);
         }
@@ -71,9 +67,7 @@ namespace RepairshopWeb.Controllers
                 Guid imageId = Guid.Empty;
 
                 if (model.ImageFile != null && model.ImageFile.Length > 0)
-                {
                     imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "mechanics");
-                }
 
                 var mechanic = _converterHelper.ToMechanic(model, imageId, true);
 
@@ -89,11 +83,11 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-                return NotFound();
+                return new NotFoundViewResult("MechanicNotFound");
 
             var mechanic = await _mechanicRepository.GetByIdAsync(id.Value);
             if (mechanic == null)
-                return NotFound();
+                return new NotFoundViewResult("MechanicNotFound");
 
             var model = _converterHelper.ToMechanicViewModel(mechanic);
             return View(model);
@@ -113,9 +107,7 @@ namespace RepairshopWeb.Controllers
                     Guid imageId = model.ImageId;
 
                     if (model.ImageFile != null && model.ImageFile.Length > 0)
-                    {
                         imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "mechanics");
-                    }
 
                     var mechanic = _converterHelper.ToMechanic(model, imageId, false);
 
@@ -125,13 +117,9 @@ namespace RepairshopWeb.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!await _mechanicRepository.ExistAsync(model.Id))
-                    {
-                        return NotFound();
-                    }
+                        return new NotFoundViewResult("MechanicNotFound");
                     else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -142,16 +130,12 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("MechanicNotFound");
 
             var mechanic = await _mechanicRepository.GetByIdAsync(id.Value);
 
             if (mechanic == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("MechanicNotFound");
 
             return View(mechanic);
         }

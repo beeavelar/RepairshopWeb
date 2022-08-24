@@ -263,14 +263,17 @@ namespace RepairshopWeb.Controllers
             if (user != null)
             {
                 var result = await _userHelper.ResetPasswordAsync(user, model.Token, model.Password);
+
                 if (result.Succeeded)
                 {
                     this.ViewBag.Message = "Password reset successful.";
                     return this.View();
                 }
+
                 this.ViewBag.Message = "Error while resetting the password.";
                 return View(model);
             }
+
             this.ViewBag.Message = "User not found";
             return View(model);
         }

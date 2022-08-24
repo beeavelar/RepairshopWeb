@@ -37,16 +37,12 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return new NotFoundViewResult("ClientNotFound");
-            }
 
             var client = await _clientRepository.GetByIdAsync(id.Value);
 
             if (client == null)
-            {
                 return new NotFoundViewResult("ClientNotFound");
-            }
 
             return View(client);
         }
@@ -69,9 +65,7 @@ namespace RepairshopWeb.Controllers
                 Guid imageId = Guid.Empty;
 
                 if (model.ImageFile != null && model.ImageFile.Length > 0)
-                {
                     imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "clients");
-                }
 
                 var client = _converterHelper.ToClient(model, imageId, true);
 
@@ -111,9 +105,7 @@ namespace RepairshopWeb.Controllers
                     Guid imageId = model.ImageId;
 
                     if (model.ImageFile != null && model.ImageFile.Length > 0)
-                    {
                         imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "clients");
-                    }
 
                     var client = _converterHelper.ToClient(model, imageId, false);
 
@@ -123,13 +115,9 @@ namespace RepairshopWeb.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!await _clientRepository.ExistAsync(model.Id))
-                    {
                         return new NotFoundViewResult("ClientNotFound");
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -140,16 +128,12 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return new NotFoundViewResult("ClientNotFound");
-            }
 
             var client = await _clientRepository.GetByIdAsync(id.Value);
 
             if (client == null)
-            {
                 return new NotFoundViewResult("ClientNotFound");
-            }
 
             return View(client);
         }

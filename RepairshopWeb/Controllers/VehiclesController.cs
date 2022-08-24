@@ -35,16 +35,12 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("VehicleNotFound");
 
             var vehicle = await _vehicleRepository.GetByIdAsync(id.Value);
 
             if (vehicle == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("VehicleNotFound");
 
             return View(vehicle);
         }
@@ -67,9 +63,7 @@ namespace RepairshopWeb.Controllers
                 Guid imageId = Guid.Empty;
 
                 if (model.ImageFile != null && model.ImageFile.Length > 0)
-                {
                     imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "vehicles");
-                }
 
                 var vehicle = _converterHelper.ToVehicle(model, imageId, true);
 
@@ -85,11 +79,11 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-                return NotFound();
+                return new NotFoundViewResult("VehicleNotFound");
 
             var vehicle = await _vehicleRepository.GetByIdAsync(id.Value);
             if (vehicle == null)
-                return NotFound();
+                return new NotFoundViewResult("VehicleNotFound");
 
             var model = _converterHelper.ToVehicleViewModel(vehicle);
             return View(model);
@@ -109,9 +103,7 @@ namespace RepairshopWeb.Controllers
                     Guid imageId = model.ImageId;
 
                     if (model.ImageFile != null && model.ImageFile.Length > 0)
-                    {
                         imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "vehicles");
-                    }
 
                     var vehicle = _converterHelper.ToVehicle(model, imageId, false);
 
@@ -121,13 +113,9 @@ namespace RepairshopWeb.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!await _vehicleRepository.ExistAsync(model.Id))
-                    {
-                        return NotFound();
-                    }
+                        return new NotFoundViewResult("VehicleNotFound");
                     else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -138,16 +126,12 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("VehicleNotFound");
 
             var vehicle = await _vehicleRepository.GetByIdAsync(id.Value);
 
             if (vehicle == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("VehicleNotFound");
 
             return View(vehicle);
         }
