@@ -2,6 +2,7 @@
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,7 +24,23 @@ namespace RepairshopWeb.Data
             await _context.Database.EnsureCreatedAsync();
 
             //await _userHelper.CheckRoleAsync("Admin");
-            //await _userHelper.CheckRoleAsync("Owner");
+            //await _userHelper.CheckRoleAsync("Client");
+
+            //if (!_context.Brands.Any())
+            //{
+            //    var models = new List<Model>();
+            //    models.Add(new Model { Name = "Panda" });
+            //    models.Add(new Model { Name = "Tipo" });
+            //    models.Add(new Model { Name = "500" });
+
+            //    _context.Brands.Add(new Brand
+            //    {
+            //        Models = models,
+            //        Name = "Fiat"
+            //    });
+
+            //    await _context.SaveChangesAsync();
+            //}
 
             var user = await _userHelper.GetUserByEmailAsync("debora.avelar.21695@formandos.cinel.pt");
             if (user == null) 
@@ -72,6 +89,14 @@ namespace RepairshopWeb.Data
                 AddMechanic("Cleyton", "Sousa", 92937483, 28392837, "1928392839", user);
                 await _context.SaveChangesAsync();
             }
+
+            if (!_context.Vehicles.Any())
+            {
+                AddVehicle("000D111", user);
+                AddVehicle("2222G333", user);
+                AddVehicle("3333J888", user);
+                await _context.SaveChangesAsync();
+            }
         }
         private void AddClient(string firstname, string lastname, string email, int nif, User user)
         {
@@ -93,6 +118,15 @@ namespace RepairshopWeb.Data
                 Phone = phone,
                 Nif = nif,
                 IdentityDocument = ídentitydocument,
+                User = user
+            });
+        }
+
+        private void AddVehicle(string licensePlate, User user)
+        {
+            _context.Vehicles.Add(new Vehicle
+            {
+                LicensePlate = licensePlate,
                 User = user
             });
         }

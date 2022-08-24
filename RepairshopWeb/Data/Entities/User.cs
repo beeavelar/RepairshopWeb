@@ -15,6 +15,7 @@ namespace RepairshopWeb.Data.Entities
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string LastName { get; set; }
 
+        [Display(Name = "Full Name")]
         public string FullName => $"{FirstName} {LastName}";
     }
 }

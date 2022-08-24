@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepairshopWeb.Data;
 
 namespace RepairshopWeb.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220823155732_ChangeMechanic2")]
+    partial class ChangeMechanic2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,6 +250,23 @@ namespace RepairshopWeb.Migrations
                     b.ToTable("Mechanics");
                 });
 
+            modelBuilder.Entity("RepairshopWeb.Data.Entities.MechanicSpeciality", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MechanicSpecialities");
+                });
+
             modelBuilder.Entity("RepairshopWeb.Data.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -323,50 +342,6 @@ namespace RepairshopWeb.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("RepairshopWeb.Data.Entities.Vehicle", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Brand")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClientName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ImageId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LicensePlate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("VehicleModel")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Vehicles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -428,15 +403,6 @@ namespace RepairshopWeb.Migrations
                 });
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Mechanic", b =>
-                {
-                    b.HasOne("RepairshopWeb.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("RepairshopWeb.Data.Entities.Vehicle", b =>
                 {
                     b.HasOne("RepairshopWeb.Data.Entities.User", "User")
                         .WithMany()

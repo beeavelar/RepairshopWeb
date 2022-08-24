@@ -5,7 +5,6 @@ using System;
 namespace RepairshopWeb.Helpers
 {
     public class ConverterHelper : IConverterHelper
-
     {
         public Client ToClient(ClientViewModel model, Guid imageId, bool isNew)
         {
@@ -79,5 +78,38 @@ namespace RepairshopWeb.Helpers
             };
         }
 
+        public Vehicle ToVehicle(VehicleViewModel model, Guid imageId, bool isNew)
+        {
+            return new Vehicle
+            {
+                Id = isNew ? 0 : model.Id,
+                ClientName = model.ClientName,
+                LicensePlate = model.LicensePlate,
+                Brand = model.Brand,
+                VehicleModel = model.VehicleModel,
+                Category = model.Category,
+                Color = model.Color,
+                Year = model.Year,
+                ImageId = imageId,
+                User = model.User
+            };
+        }
+
+        public VehicleViewModel ToVehicleViewModel(Vehicle vehicle)
+        {
+            return new VehicleViewModel
+            {
+                Id = vehicle.Id,
+                ClientName = vehicle.ClientName,
+                LicensePlate = vehicle.LicensePlate,
+                Brand = vehicle.Brand,
+                VehicleModel = vehicle.VehicleModel,
+                Category = vehicle.Category,
+                Color = vehicle.Color,
+                Year = vehicle.Year,
+                ImageId = vehicle.ImageId,
+                User = vehicle.User
+            };
+        }
     }
 }

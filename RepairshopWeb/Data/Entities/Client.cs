@@ -18,13 +18,13 @@ namespace RepairshopWeb.Data.Entities
         public string LastName { get; set; }
         public string Address { get; set; }
 
-        [Display(Name = "Postal Code")]
+        [Display(Name = "Zip Code")]
         public string PostalCode { get; set; }
 
         public int Phone { get; set; }
 
         [Required]
-        [Display(Name = "E-mail")]
+        [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -39,7 +39,9 @@ namespace RepairshopWeb.Data.Entities
 
         public string ImageFullPath => ImageId == Guid.Empty
            ? $"https://repairshopweb.azurewebsites.net/images/noimage.jpg"
-           : $"https://repairshodebora.blob.core.windows.net/clients/{ImageId}"; 
+           : $"https://repairshodebora.blob.core.windows.net/clients/{ImageId}";
+
+        public string FullName => $"{FirstName} {LastName}";
     }
 }
 

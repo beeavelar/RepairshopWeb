@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <!-- Link for layout 403 FORBIDDEN -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500,800" rel="stylesheet">
     <!-- Syncfusion ASP.NET Core controls styles -->
     <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/20.2.43/fluent.css" />
     <!-- Syncfusion ASP.NET Core controls scripts -->
@@ -28,9 +30,11 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Vehicles" asp-action="Index">Vehicles</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Mechanics" asp-action="Index">Mechanics</a>
@@ -58,8 +62,6 @@
 	</header>
 
     <!-- BODY -->
-    <section id="backgroundimage">
-    </section>
 
     <div class="container">
         <main role="main" class="pb-3">

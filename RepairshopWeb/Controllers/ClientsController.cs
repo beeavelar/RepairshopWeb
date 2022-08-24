@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Helpers;
@@ -9,14 +10,15 @@ using System.Threading.Tasks;
 
 namespace RepairshopWeb.Controllers
 {
+    [Authorize]
     public class ClientsController : Controller
     {
-        private readonly IClientsRepository _clientRepository;
+        private readonly IClientRepository _clientRepository;
         private readonly IUserHelper _userHelper;
         private readonly IBlobHelper _blobHelper;
         private readonly IConverterHelper _converterHelper;
 
-        public ClientsController(IClientsRepository clientRepository,
+        public ClientsController(IClientRepository clientRepository,
             IUserHelper userHelper, IBlobHelper blobHelper, IConverterHelper converterHelper)
         {
             _clientRepository = clientRepository;
@@ -36,14 +38,14 @@ namespace RepairshopWeb.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("ClientNotFound");
             }
 
             var client = await _clientRepository.GetByIdAsync(id.Value);
 
             if (client == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("ClientNotFound");
             }
 
             return View(client);
@@ -85,11 +87,11 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-                return NotFound();
+                return new NotFoundViewResult("ClientNotFound");
 
             var client = await _clientRepository.GetByIdAsync(id.Value);
             if (client == null)
-                return NotFound();
+                return new NotFoundViewResult("ClientNotFound");
 
             var model = _converterHelper.ToClientViewModel(client);
             return View(model);
@@ -122,7 +124,7 @@ namespace RepairshopWeb.Controllers
                 {
                     if (!await _clientRepository.ExistAsync(model.Id))
                     {
-                        return NotFound();
+                        return new NotFoundViewResult("ClientNotFound");
                     }
                     else
                     {
@@ -139,14 +141,14 @@ namespace RepairshopWeb.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("ClientNotFound");
             }
 
             var client = await _clientRepository.GetByIdAsync(id.Value);
 
             if (client == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("ClientNotFound");
             }
 
             return View(client);
@@ -161,7 +163,7 @@ namespace RepairshopWeb.Controllers
             await _clientRepository.DeleteAsync(client);
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult OwnerNotFound()
+        public IActionResult ClientNotFound()
         {
             return View();
         }

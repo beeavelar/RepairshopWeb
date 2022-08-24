@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepairshopWeb.Data;
 
 namespace RepairshopWeb.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220823194223_AddVehicleAndBrand")]
+    partial class AddVehicleAndBrand
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,6 +152,23 @@ namespace RepairshopWeb.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("RepairshopWeb.Data.Entities.Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands");
+                });
+
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Client", b =>
                 {
                     b.Property<int>("Id")
@@ -246,6 +265,45 @@ namespace RepairshopWeb.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Mechanics");
+                });
+
+            modelBuilder.Entity("RepairshopWeb.Data.Entities.MechanicSpeciality", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MechanicSpecialities");
+                });
+
+            modelBuilder.Entity("RepairshopWeb.Data.Entities.Model", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BrandId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
+
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.User", b =>
@@ -351,16 +409,18 @@ namespace RepairshopWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("VehicleModel")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Year")
+                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ModelId");
 
                     b.HasIndex("UserId");
 
@@ -436,13 +496,33 @@ namespace RepairshopWeb.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("RepairshopWeb.Data.Entities.Model", b =>
+                {
+                    b.HasOne("RepairshopWeb.Data.Entities.Brand", null)
+                        .WithMany("Models")
+                        .HasForeignKey("BrandId");
+                });
+
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Vehicle", b =>
                 {
+                    b.HasOne("RepairshopWeb.Data.Entities.Model", "Model")
+                        .WithMany()
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RepairshopWeb.Data.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
+                    b.Navigation("Model");
+
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RepairshopWeb.Data.Entities.Brand", b =>
+                {
+                    b.Navigation("Models");
                 });
 #pragma warning restore 612, 618
         }

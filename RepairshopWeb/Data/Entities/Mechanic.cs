@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RepairshopWeb.Data.Entities
@@ -18,14 +19,14 @@ namespace RepairshopWeb.Data.Entities
         public string LastName { get; set; }
         public string Address { get; set; }
 
-        [Display(Name = "Postal Code")]
+        [Display(Name = "Zip Code")]
         [MaxLength(8, ErrorMessage = "The field {0} can contain {1} characteres length.")]
         public string PostalCode { get; set; }
 
         [Display(Name = "Cellphone")]
         public int? Phone { get; set; }
 
-        [Display(Name = "E-mail")]
+        [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -39,6 +40,9 @@ namespace RepairshopWeb.Data.Entities
         [Display(Name = "Identity Number")]
         public string IdentityDocument { get; set; }
 
+        //public ICollection<MechanicSpeciality> Specialities { get; set; }
+
+        //public int SpecialityId { get; set; }
         //public MechanicSpeciality Speciality { get; set; }
 
         [Display(Name = "Photo")]
@@ -49,5 +53,7 @@ namespace RepairshopWeb.Data.Entities
         public string ImageFullPath => ImageId == Guid.Empty
            ? $"https://repairshopweb.azurewebsites.net/images/noimage.jpg"
            : $"https://repairshodebora.blob.core.windows.net/clients/{ImageId}";
+
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

@@ -1,41 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RepairshopWeb.Data;
-using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RepairshopWeb.Controllers
 {
-    public class MechanicsController : Controller
+    public class VehiclesController : Controller
     {
-        private readonly IMechanicRepository _mechanicRepository;
+        private readonly IVehicleRepository _vehicleRepository;
         private readonly IUserHelper _userHelper;
         private readonly IBlobHelper _blobHelper;
         private readonly IConverterHelper _converterHelper;
 
-        public MechanicsController(IMechanicRepository mechanicRepository,
+        public VehiclesController(IVehicleRepository vehicleRepository,
             IUserHelper userHelper, IBlobHelper blobHelper, IConverterHelper converterHelper)
         {
-            _mechanicRepository = mechanicRepository;
+            _vehicleRepository = vehicleRepository;
             _userHelper = userHelper;
             _blobHelper = blobHelper;
             _converterHelper = converterHelper;
         }
 
-        // GET: Mechanics
+        // GET: Vehicles
         public IActionResult Index()
         {
-            return View(_mechanicRepository.GetAll().OrderBy(o => o.FirstName));
+            return View(_vehicleRepository.GetAll().OrderBy(o => o.Id));
         }
 
-        // GET: Mechanics/Details/5
+        // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,28 +39,28 @@ namespace RepairshopWeb.Controllers
                 return NotFound();
             }
 
-            var mechanic = await _mechanicRepository.GetByIdAsync(id.Value);
+            var vehicle = await _vehicleRepository.GetByIdAsync(id.Value);
 
-            if (mechanic == null)
+            if (vehicle == null)
             {
                 return NotFound();
             }
 
-            return View(mechanic);
+            return View(vehicle);
         }
 
-        // GET: Mechanics/Create
+        // GET: Vehicles/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Mechanics/Create
+        // POST: Vehicles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(MechanicViewModel model)
+        public async Task<IActionResult> Create(VehicleViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -72,39 +68,39 @@ namespace RepairshopWeb.Controllers
 
                 if (model.ImageFile != null && model.ImageFile.Length > 0)
                 {
-                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "mechanics");
+                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "vehicles");
                 }
 
-                var mechanic = _converterHelper.ToMechanic(model, imageId, true);
+                var vehicle = _converterHelper.ToVehicle(model, imageId, true);
 
-                mechanic.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                vehicle.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
 
-                await _mechanicRepository.CreateAsync(mechanic);
+                await _vehicleRepository.CreateAsync(vehicle);
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
         }
 
-        // GET: Mechanics/Edit/5
+        // GET: Vehicles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
                 return NotFound();
 
-            var mechanic = await _mechanicRepository.GetByIdAsync(id.Value);
-            if (mechanic == null)
+            var vehicle = await _vehicleRepository.GetByIdAsync(id.Value);
+            if (vehicle == null)
                 return NotFound();
 
-            var model = _converterHelper.ToMechanicViewModel(mechanic);
+            var model = _converterHelper.ToVehicleViewModel(vehicle);
             return View(model);
         }
 
-        // POST: Mechanics/Edit/5
+        // POST: Vehicles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(MechanicViewModel model)
+        public async Task<IActionResult> Edit(VehicleViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -114,17 +110,17 @@ namespace RepairshopWeb.Controllers
 
                     if (model.ImageFile != null && model.ImageFile.Length > 0)
                     {
-                        imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "mechanics");
+                        imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "vehicles");
                     }
 
-                    var mechanic = _converterHelper.ToMechanic(model, imageId, false);
+                    var vehicle = _converterHelper.ToVehicle(model, imageId, false);
 
-                    mechanic.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
-                    await _mechanicRepository.UpdateAsync(mechanic);
+                    vehicle.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                    await _vehicleRepository.UpdateAsync(vehicle);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!await _mechanicRepository.ExistAsync(model.Id))
+                    if (!await _vehicleRepository.ExistAsync(model.Id))
                     {
                         return NotFound();
                     }
@@ -138,7 +134,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
-        // GET: Mechanics/Delete/5
+        // GET: Vehicles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -146,27 +142,27 @@ namespace RepairshopWeb.Controllers
                 return NotFound();
             }
 
-            var mechanic = await _mechanicRepository.GetByIdAsync(id.Value);
+            var vehicle = await _vehicleRepository.GetByIdAsync(id.Value);
 
-            if (mechanic == null)
+            if (vehicle == null)
             {
                 return NotFound();
             }
 
-            return View(mechanic);
+            return View(vehicle);
         }
 
-        // POST: Mechanics/Delete/5
+        // POST: Vehicles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var mechanic = await _mechanicRepository.GetByIdAsync(id);
-            await _mechanicRepository.DeleteAsync(mechanic);
+            var vehicle = await _vehicleRepository.GetByIdAsync(id);
+            await _vehicleRepository.DeleteAsync(vehicle);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult MechanicNotFound()
+        public IActionResult VehicleNotFound()
         {
             return View();
         }

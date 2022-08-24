@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using RepairshopWeb.Data.Entities;
+﻿using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Data.Repository;
+using System.Linq;
 
 namespace RepairshopWeb.Data.Repositories
 {
-    public interface IClientsRepository : IGenericRepository<Client>
+    public interface IVehicleRepository : IGenericRepository<Vehicle>
     {
         public IQueryable GetAllWithUsers();
     }

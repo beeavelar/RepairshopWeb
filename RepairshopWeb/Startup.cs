@@ -71,9 +71,13 @@ namespace RepairshopWeb
 
             services.AddScoped<IConverterHelper, ConverterHelper>();
 
-            services.AddScoped<IClientsRepository, ClientRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
 
             services.AddScoped<IMechanicRepository, MechanicRepository>();
+
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
+
+            //services.AddScoped<IBrandRepository, BrandRepository>();
 
             services.ConfigureApplicationCookie(options =>
             {

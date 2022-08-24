@@ -13,5 +13,9 @@ namespace RepairshopWeb.Helpers
         Mechanic ToMechanic(MechanicViewModel model, Guid imageId, bool isNew);
 
         MechanicViewModel ToMechanicViewModel(Mechanic mechanic);
+
+        Vehicle ToVehicle(VehicleViewModel model, Guid imageId, bool isNew);
+
+        VehicleViewModel ToVehicleViewModel(Vehicle vehicle);
     }
 }

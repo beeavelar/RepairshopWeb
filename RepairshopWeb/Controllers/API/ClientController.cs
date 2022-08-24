@@ -10,9 +10,9 @@ namespace RepairshopWeb.Controllers.API
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ClientController : ControllerBase
     {
-        private readonly IClientsRepository _clientRepository;
+        private readonly IClientRepository _clientRepository;
 
-        public ClientController(IClientsRepository clientRepository)
+        public ClientController(IClientRepository clientRepository)
         {
             _clientRepository = clientRepository;
         }

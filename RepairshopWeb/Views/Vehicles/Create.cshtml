@@ -1,0 +1,79 @@
+﻿@model RepairshopWeb.Models.VehicleViewModel
+
+@{
+    ViewData["Title"] = "Create new vehicle";
+}
+
+<h1>New vehicle</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="control-section">
+                    <div class="control_wrapper TextBox-control-section">
+                        <ejs-textbox asp-for="ClientName" id="clientname" placeholder="Client Name" floatLabelType="Auto"></ejs-textbox>
+                    </div>
+                </div>
+                <span asp-validation-for="ClientName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="control-section">
+                    <div class="control_wrapper TextBox-control-section">
+                        <ejs-textbox asp-for="LicensePlate" id="licenseplate" placeholder="License Plate" floatLabelType="Auto"></ejs-textbox>
+                    </div>
+                </div>
+                <span asp-validation-for="LicensePlate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="control-section">
+                    <div class="control_wrapper TextBox-control-section">
+                        <ejs-textbox asp-for="VehicleModel" id="vehicleModel" placeholder="Model" floatLabelType="Auto"></ejs-textbox>
+                    </div>
+                </div>
+                <span asp-validation-for="VehicleModel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                @{var data = new string[] { "Car", "Motorcycle", "Truck", "Other"};}
+                <ejs-combobox asp-for="Category" id="category" dataSource="data"></ejs-combobox>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="control-section">
+                    <div class="control_wrapper TextBox-control-section">
+                        <ejs-textbox asp-for="Color" id="color" placeholder="Color" floatLabelType="Auto"></ejs-textbox>
+                    </div>
+                </div>
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="control-section">
+                    <div class="control_wrapper TextBox-control-section">
+                        <ejs-maskedtextbox asp-for="Year" id="year" mask="0000" placeholder="Year" floatLabelType="Auto"></ejs-maskedtextbox>
+                    </div>
+                </div>
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i></button>
+                <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

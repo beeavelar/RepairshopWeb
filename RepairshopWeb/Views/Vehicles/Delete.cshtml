@@ -1,10 +1,10 @@
-﻿@model RepairshopWeb.Data.Entities.Mechanic
+﻿@model RepairshopWeb.Data.Entities.Vehicle
 
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete mechanic</h1>
+<h1>Delete vehicle</h1>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
@@ -13,52 +13,46 @@
             <div class="col-md-8">
                 <dl class="row">
                     <dt class = "col-sm-3">
-                        @Html.DisplayNameFor(model => model.FullName)
+                        @Html.DisplayNameFor(model => model.ClientName)
                     </dt>
                     <dd class = "col-sm-9">
-                        @Html.DisplayFor(model => model.FullName)
+                        @Html.DisplayFor(model => model.ClientName)
                     </dd>
                     <dt class = "col-sm-3">
-                        @Html.DisplayNameFor(model => model.Address)
+                        @Html.DisplayNameFor(model => model.LicensePlate)
                     </dt>
                     <dd class = "col-sm-9">
-                        @Html.DisplayFor(model => model.Address)
+                        @Html.DisplayFor(model => model.LicensePlate)
                     </dd>
                     <dt class = "col-sm-3">
-                        @Html.DisplayNameFor(model => model.PostalCode)
+                        @Html.DisplayNameFor(model => model.Brand)
                     </dt>
                     <dd class = "col-sm-9">
-                        @Html.DisplayFor(model => model.PostalCode)
+                        @Html.DisplayFor(model => model.Brand)
                     </dd>
                     <dt class = "col-sm-3">
-                        @Html.DisplayNameFor(model => model.Phone)
+                        @Html.DisplayNameFor(model => model.VehicleModel)
                     </dt>
                     <dd class = "col-sm-9">
-                        @Html.DisplayFor(model => model.Phone)
+                        @Html.DisplayFor(model => model.VehicleModel)
                     </dd>
                     <dt class = "col-sm-3">
-                        @Html.DisplayNameFor(model => model.Email)
+                        @Html.DisplayNameFor(model => model.Category)
                     </dt>
                     <dd class = "col-sm-9">
-                        @Html.DisplayFor(model => model.Email)
+                        @Html.DisplayFor(model => model.Category)
                     </dd>
                     <dt class = "col-sm-3">
-                        @Html.DisplayNameFor(model => model.Nif)
+                        @Html.DisplayNameFor(model => model.Color)
                     </dt>
                     <dd class = "col-sm-9">
-                        @Html.DisplayFor(model => model.Nif)
+                        @Html.DisplayFor(model => model.Color)
                     </dd>
                     <dt class = "col-sm-3">
-                        @Html.DisplayNameFor(model => model.Niss)
+                        @Html.DisplayNameFor(model => model.Year)
                     </dt>
                     <dd class = "col-sm-9">
-                        @Html.DisplayFor(model => model.Niss)
-                    </dd>
-                    <dt class = "col-sm-3">
-                        @Html.DisplayNameFor(model => model.IdentityDocument)
-                    </dt>
-                    <dd class = "col-sm-9">
-                        @Html.DisplayFor(model => model.IdentityDocument)
+                        @Html.DisplayFor(model => model.Year)
                     </dd>
                 </dl>
             </div>
@@ -74,3 +68,4 @@
         <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
     </form>
 </div>
+
