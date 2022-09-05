@@ -1,0 +1,44 @@
+﻿@model RepairshopWeb.Data.Entities.Repair
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete repair</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<div>
+    <div>
+        <div class="row">
+            <div class="col-md-8">
+                <dl class="row">
+                    <dt class = "col-sm-3">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd class = "col-sm-9">
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                    <dt class = "col-sm-3">
+                        @Html.DisplayNameFor(model => model.RepairPrice)
+                    </dt>
+                    <dd class = "col-sm-9">
+                        @Html.DisplayFor(model => model.RepairPrice)
+                    </dd>
+                    <dt class = "col-sm-3">
+                        @Html.DisplayNameFor(model => model.LaborPrice)
+                    </dt>
+                    <dd class = "col-sm-9">
+                        @Html.DisplayFor(model => model.LaborPrice)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+        <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
+    </form>
+</div>

@@ -30,7 +30,7 @@ namespace RepairshopWeb.Controllers
         // GET: Clients
         public IActionResult Index()
         {
-            return View(_clientRepository.GetAll().OrderBy(o => o.FirstName));
+            return View(_clientRepository.GetAll().OrderBy(c => c.FirstName));
         }
 
         // GET: Clients/Details/5
@@ -84,6 +84,7 @@ namespace RepairshopWeb.Controllers
                 return new NotFoundViewResult("ClientNotFound");
 
             var client = await _clientRepository.GetByIdAsync(id.Value);
+            
             if (client == null)
                 return new NotFoundViewResult("ClientNotFound");
 

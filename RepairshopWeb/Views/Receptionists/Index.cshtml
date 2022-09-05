@@ -1,10 +1,10 @@
-﻿@model IEnumerable<RepairshopWeb.Data.Entities.Mechanic>
+﻿@model IEnumerable<RepairshopWeb.Data.Entities.Receptionist>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Mechanics</h1>
+<h1>Receptionist</h1>
 
 <p>
     <a asp-action="Create"  class="btn btn-primary">Create New</a>
@@ -35,9 +35,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdentityDocument)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Speciality)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ImageId)
@@ -71,9 +68,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdentityDocument)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Speciality)
             </td>
             <td>
                 <img src="@Url.Content(item.ImageFullPath)" alt="Photo" style="width:100px;height:150px;max-width:100%;height:auto">

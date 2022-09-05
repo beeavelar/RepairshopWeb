@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Helpers;
 using System;
@@ -21,7 +22,7 @@ namespace RepairshopWeb.Data
 
         public async Task SeedAsync()
         {
-            await _context.Database.EnsureCreatedAsync();
+            await _context.Database.MigrateAsync();
 
             //await _userHelper.CheckRoleAsync("Admin");
             //await _userHelper.CheckRoleAsync("Client");
@@ -84,19 +85,28 @@ namespace RepairshopWeb.Data
 
             if (!_context.Mechanics.Any())
             {
-                AddMechanic("João António", "Sanches", 928372829, 29384736, "1928392839", user);
-                AddMechanic("Lindovaldo", "Silva", 92837282, 28374837, "1928392839", user);
-                AddMechanic("Cleyton", "Sousa", 92937483, 28392837, "1928392839", user);
+                AddMechanic("João António", "Sanches", 928372829, 29384736, user);
+                AddMechanic("Lindovaldo", "Silva", 92837282, 28374837, user);
+                AddMechanic("Cleyton", "Sousa", 92937483, 28392837, user);
                 await _context.SaveChangesAsync();
             }
 
-            if (!_context.Vehicles.Any())
+            if (!_context.Receptionists.Any())
             {
-                AddVehicle("000D111", user);
-                AddVehicle("2222G333", user);
-                AddVehicle("3333J888", user);
+                AddReceptionist("Juliana", "Lopes", 938273829, 273625267, user);
+                AddReceptionist("Gabriela", "Brito", 938283728, 263762662, user);
+                AddReceptionist("Gustavo", "Almeida", 938273827, 282736222, user);
                 await _context.SaveChangesAsync();
             }
+
+            if (!_context.Repairs.Any())
+            {
+                AddRepair("Troca de motor", 600, 100, user);
+                AddRepair("Troca de amortecedores", 100, 50, user);
+                AddRepair("Troca de freios", 100, 50, user);
+                await _context.SaveChangesAsync();
+            }
+
         }
         private void AddClient(string firstname, string lastname, string email, int nif, User user)
         {
@@ -109,7 +119,7 @@ namespace RepairshopWeb.Data
                 User = user
             });
         }
-        private void AddMechanic(string firstname, string lastname, int phone, int nif, string ídentitydocument, User user)
+        private void AddMechanic(string firstname, string lastname, int phone, int nif, User user)
         {
             _context.Mechanics.Add(new Mechanic
             {
@@ -117,16 +127,29 @@ namespace RepairshopWeb.Data
                 LastName = lastname,
                 Phone = phone,
                 Nif = nif,
-                IdentityDocument = ídentitydocument,
                 User = user
             });
         }
 
-        private void AddVehicle(string licensePlate, User user)
+        private void AddReceptionist(string firstname, string lastname, int phone, int nif, User user)
         {
-            _context.Vehicles.Add(new Vehicle
+            _context.Receptionists.Add(new Receptionist
             {
-                LicensePlate = licensePlate,
+                FirstName = firstname,
+                LastName = lastname,
+                Phone = phone,
+                Nif = nif,
+                User = user
+            });
+        }
+
+        private void AddRepair(string description, decimal repairPrice, decimal laborPrice, User user)
+        {
+            _context.Repairs.Add(new Repair
+            {
+                Description = description,
+                RepairPrice = repairPrice,
+                LaborPrice = laborPrice,
                 User = user
             });
         }

@@ -1,21 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using RepairshopWeb.Data;
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RepairshopWeb
 {
@@ -75,9 +68,9 @@ namespace RepairshopWeb
 
             services.AddScoped<IMechanicRepository, MechanicRepository>();
 
-            services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IReceptionistRepository, ReceptionistRepository>();
 
-            //services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<IRepairRepository, RepairRepository>();
 
             services.ConfigureApplicationCookie(options =>
             {

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RepairshopWeb.Data.Entities
 {
+    [Table("Mechanics")]
     public class Mechanic : IEntity
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -42,7 +45,7 @@ namespace RepairshopWeb.Data.Entities
 
         //public ICollection<MechanicSpeciality> Specialities { get; set; }
 
-        //public int SpecialityId { get; set; }
+        public string Speciality { get; set; }
         //public MechanicSpeciality Speciality { get; set; }
 
         [Display(Name = "Photo")]
@@ -52,7 +55,7 @@ namespace RepairshopWeb.Data.Entities
 
         public string ImageFullPath => ImageId == Guid.Empty
            ? $"https://repairshopweb.azurewebsites.net/images/noimage.jpg"
-           : $"https://repairshodebora.blob.core.windows.net/clients/{ImageId}";
+           : $"https://repairshodebora.blob.core.windows.net/mechanics/{ImageId}";
 
         public string FullName => $"{FirstName} {LastName}";
     }

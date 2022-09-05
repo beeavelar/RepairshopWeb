@@ -54,6 +54,7 @@ namespace RepairshopWeb.Helpers
                 Nif = model.Nif,
                 Niss = model.Niss,
                 IdentityDocument = model.IdentityDocument,
+                Speciality = model.Speciality,
                 ImageId = imageId,
                 User = model.User
             };
@@ -73,43 +74,48 @@ namespace RepairshopWeb.Helpers
                 Nif = mechanic.Nif,
                 Niss = mechanic.Niss,
                 IdentityDocument = mechanic.IdentityDocument,
+                Speciality = mechanic.Speciality,
                 ImageId = mechanic.ImageId,
                 User = mechanic.User
             };
         }
 
-        public Vehicle ToVehicle(VehicleViewModel model, Guid imageId, bool isNew)
+        public Receptionist ToReceptionist(ReceptionistViewModel model, Guid imageId, bool isNew)
         {
-            return new Vehicle
+            return new Receptionist
             {
                 Id = isNew ? 0 : model.Id,
-                ClientName = model.ClientName,
-                LicensePlate = model.LicensePlate,
-                Brand = model.Brand,
-                VehicleModel = model.VehicleModel,
-                Category = model.Category,
-                Color = model.Color,
-                Year = model.Year,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Address = model.Address,
+                PostalCode = model.PostalCode,
+                Phone = model.Phone,
+                Email = model.Email,
+                Nif = model.Nif,
+                Niss = model.Niss,
                 ImageId = imageId,
                 User = model.User
             };
         }
 
-        public VehicleViewModel ToVehicleViewModel(Vehicle vehicle)
+        public ReceptionistViewModel ToReceptionistViewModel(Receptionist receptionist)
         {
-            return new VehicleViewModel
+            return new ReceptionistViewModel
             {
-                Id = vehicle.Id,
-                ClientName = vehicle.ClientName,
-                LicensePlate = vehicle.LicensePlate,
-                Brand = vehicle.Brand,
-                VehicleModel = vehicle.VehicleModel,
-                Category = vehicle.Category,
-                Color = vehicle.Color,
-                Year = vehicle.Year,
-                ImageId = vehicle.ImageId,
-                User = vehicle.User
+                Id = receptionist.Id,
+                FirstName = receptionist.FirstName,
+                LastName = receptionist.LastName,
+                Address = receptionist.Address,
+                PostalCode = receptionist.PostalCode,
+                Phone = receptionist.Phone,
+                Email = receptionist.Email,
+                Nif = receptionist.Nif,
+                Niss = receptionist.Niss,
+                IdentityDocument = receptionist.IdentityDocument,
+                ImageId = receptionist.ImageId,
+                User = receptionist.User
             };
         }
+
     }
 }

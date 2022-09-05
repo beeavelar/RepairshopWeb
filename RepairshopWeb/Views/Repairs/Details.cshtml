@@ -1,0 +1,41 @@
+﻿@model RepairshopWeb.Data.Entities.Repair
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Repair details</h1>
+
+<div>
+   <hr />
+   <div class="row">
+       <div class="col-md-8">
+            <dl class="row">
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.RepairPrice)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.RepairPrice)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.LaborPrice)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.LaborPrice)
+                </dd>
+            </dl>
+       </div>
+   </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"> <i class="fa-solid fa-user-pen"></i></a> 
+    <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
+</div>
+

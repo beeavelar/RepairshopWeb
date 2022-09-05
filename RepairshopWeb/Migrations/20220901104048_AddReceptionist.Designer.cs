@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepairshopWeb.Data;
 
 namespace RepairshopWeb.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220901104048_AddReceptionist")]
+    partial class AddReceptionist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,34 +305,6 @@ namespace RepairshopWeb.Migrations
                     b.ToTable("Receptionists");
                 });
 
-            modelBuilder.Entity("RepairshopWeb.Data.Entities.Repair", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<decimal>("LaborPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("RepairPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Repairs");
-                });
-
             modelBuilder.Entity("RepairshopWeb.Data.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -476,15 +450,6 @@ namespace RepairshopWeb.Migrations
                 });
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Receptionist", b =>
-                {
-                    b.HasOne("RepairshopWeb.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("RepairshopWeb.Data.Entities.Repair", b =>
                 {
                     b.HasOne("RepairshopWeb.Data.Entities.User", "User")
                         .WithMany()

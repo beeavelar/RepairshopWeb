@@ -32,7 +32,7 @@ namespace RepairshopWeb.Controllers
         // GET: Mechanics
         public IActionResult Index()
         {
-            return View(_mechanicRepository.GetAll().OrderBy(o => o.FirstName));
+            return View(_mechanicRepository.GetAll().OrderBy(m => m.FirstName));
         }
 
         // GET: Mechanics/Details/5

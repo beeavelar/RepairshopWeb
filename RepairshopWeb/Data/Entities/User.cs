@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RepairshopWeb.Data.Entities
 {
+    [Table("Users")]
     public class User : IdentityUser
     {
         [Display(Name = "First Name")]
