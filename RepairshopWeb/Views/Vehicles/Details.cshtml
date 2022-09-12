@@ -1,0 +1,64 @@
+﻿@model RepairshopWeb.Data.Entities.Vehicle
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Vehicle details</h1>
+
+<div>
+   <hr />
+   <div class="row">
+       <div class="col-md-8">
+            <dl class="row">
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.LicensePlate)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.LicensePlate)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Client)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Client.FullName)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Brand)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Brand)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.VehicleModel)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.VehicleModel)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Category)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Category)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Color)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Color)
+                </dd>
+                <dt class = "col-sm-3">
+                    @Html.DisplayNameFor(model => model.Year)
+                </dt>
+                <dd class = "col-sm-9">
+                    @Html.DisplayFor(model => model.Year)
+                </dd>
+            </dl>
+       </div>
+   </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"> <i class="fa-solid fa-user-pen"></i></a> 
+    <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
+</div>

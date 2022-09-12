@@ -14,6 +14,8 @@ namespace RepairshopWeb.Data
 
         public DbSet<Repair> Repairs { get; set; }
 
+        public DbSet<Vehicle> Vehicles { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }

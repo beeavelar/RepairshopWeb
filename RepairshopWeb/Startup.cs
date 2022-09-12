@@ -72,6 +72,8 @@ namespace RepairshopWeb
 
             services.AddScoped<IRepairRepository, RepairRepository>();
 
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Account/NotAuthorized";

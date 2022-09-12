@@ -25,10 +25,12 @@ namespace RepairshopWeb.Data.Entities
         [Display(Name = "Zip Code")]
         public string PostalCode { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$", ErrorMessage = "Entered phone format is not valid.")]
+        [Display(Name = "Cellphone")]
         public int Phone { get; set; }
 
         [Required]
-        [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -39,7 +41,7 @@ namespace RepairshopWeb.Data.Entities
         [Display(Name = "Photo")]
         public Guid ImageId { get; set; }
 
-        //public ICollection<Vehicle> Vehicles { get; set; }
+        public ICollection<Vehicle> Vehicles { get; set; }
 
         public User User { get; set; }
 

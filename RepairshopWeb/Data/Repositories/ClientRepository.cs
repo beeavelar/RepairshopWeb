@@ -18,7 +18,7 @@ namespace RepairshopWeb.Data.Repositories
 
         public IQueryable GetAllWithUsers()
         {
-            return _context.Clients.Include(o => o.User);
+            return _context.Clients.Include(c => c.User);
         }
 
         //public IEnumerable<SelectListItem> GetComboClients()

@@ -33,7 +33,7 @@ namespace RepairshopWeb.Controllers
                 return new NotFoundViewResult("RepairNotFound");
 
             var repair = await _repairRepository.GetByIdAsync(id.Value);
-            
+
             if (repair == null)
                 return new NotFoundViewResult("RepairNotFound");
 
@@ -69,7 +69,7 @@ namespace RepairshopWeb.Controllers
                 return new NotFoundViewResult("RepairNotFound");
 
             var repair = await _repairRepository.GetByIdAsync(id.Value);
-            
+
             if (repair == null)
                 return new NotFoundViewResult("RepairNotFound");
 
@@ -84,9 +84,7 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("Id,Price,Description,LaborPrice")] Repair repair)
         {
             if (id != repair.Id)
-            {
                 return new NotFoundViewResult("RepairNotFound");
-            }
 
             if (ModelState.IsValid)
             {
@@ -97,7 +95,7 @@ namespace RepairshopWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (! await _repairRepository.ExistAsync(repair.Id))
+                    if (!await _repairRepository.ExistAsync(repair.Id))
                         return new NotFoundViewResult("RepairNotFound");
                     else
 
@@ -136,6 +134,5 @@ namespace RepairshopWeb.Controllers
         {
             return View();
         }
-
     }
 }

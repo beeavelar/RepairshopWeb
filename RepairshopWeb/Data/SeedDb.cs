@@ -107,6 +107,14 @@ namespace RepairshopWeb.Data
                 await _context.SaveChangesAsync();
             }
 
+            //if (!_context.Vehicles.Any())
+            //{
+            //    AddVehicle("11-AA-11", user);
+            //    AddVehicle("22-BB-22", user);
+            //    AddVehicle("33-CC-33", user);
+            //    await _context.SaveChangesAsync();
+            //}
+
         }
         private void AddClient(string firstname, string lastname, string email, int nif, User user)
         {
@@ -153,5 +161,14 @@ namespace RepairshopWeb.Data
                 User = user
             });
         }
+
+        //private void AddVehicle(string licensePlate, User user)
+        //{
+        //    _context.Vehicles.Add(new Vehicle
+        //    {
+        //        LicensePlate = licensePlate,
+        //        User = user
+        //    });
+        //}
     }
 }

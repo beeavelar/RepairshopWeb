@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using RepairshopWeb.Data.Entities;
 
 namespace RepairshopWeb.Models
@@ -8,5 +10,7 @@ namespace RepairshopWeb.Models
     {
         [Display(Name = "Photo")]
         public IFormFile ImageFile { get; set; }
+
+        //public IEnumerable<SelectListItem> Clients { get; set; }
     }
 }

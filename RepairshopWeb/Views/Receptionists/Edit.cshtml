@@ -29,13 +29,13 @@
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PostalCode" class="control-label"></label>
-                <input asp-for="PostalCode" class="form-control" />
+                <label asp-for="PostalCode" class="control-label" ></label>
+                <input asp-for="PostalCode" class="form-control" onkeypress="$(this).mask('0000-000')"/>
                 <span asp-validation-for="PostalCode" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
+                <input asp-for="Phone" class="form-control" onkeypress="$(this).mask('000000000')"/>
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">

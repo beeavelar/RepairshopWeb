@@ -15,7 +15,7 @@ namespace RepairshopWeb.Data.Repositories
 
         public IQueryable GetAllWithUsers()
         {
-            return _context.Repairs.Include(o => o.User);
+            return _context.Repairs.Include(r => r.User);
         }
     }
 }
