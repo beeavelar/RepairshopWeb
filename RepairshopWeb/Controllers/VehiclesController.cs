@@ -61,7 +61,7 @@ namespace RepairshopWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LicensePlate,ClientId,Brand,VehicleModel,Category,Color,Year")] Vehicle vehicle)
+        public async Task<IActionResult> Create(Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace RepairshopWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LicensePlate,ClientId,Brand,VehicleModel,Category,Color,Year")] Vehicle vehicle)
+        public async Task<IActionResult> Edit(int id, Vehicle vehicle)
         {
             if (id != vehicle.Id)
                 return new NotFoundViewResult("VehicleNotFound");
