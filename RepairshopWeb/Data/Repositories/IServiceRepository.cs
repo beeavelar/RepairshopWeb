@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace RepairshopWeb.Data.Repositories
 {
-    public interface IRepairRepository : IGenericRepository<Repair>
+    public interface IServiceRepository : IGenericRepository<Service>
     {
         public IQueryable GetAllWithUsers();
     }

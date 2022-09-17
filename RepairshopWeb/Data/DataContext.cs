@@ -12,7 +12,7 @@ namespace RepairshopWeb.Data
 
         public DbSet<Receptionist> Receptionists { get; set; }
 
-        public DbSet<Repair> Repairs { get; set; }
+        public DbSet<Service> Services { get; set; }
 
         public DbSet<Vehicle> Vehicles { get; set; }
 

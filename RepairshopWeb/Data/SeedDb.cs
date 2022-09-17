@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -44,7 +43,7 @@ namespace RepairshopWeb.Data
             //}
 
             var user = await _userHelper.GetUserByEmailAsync("debora.avelar.21695@formandos.cinel.pt");
-            if (user == null) 
+            if (user == null)
             {
                 user = new User
                 {
@@ -54,13 +53,13 @@ namespace RepairshopWeb.Data
                     UserName = "debora.avelar.21695@formandos.cinel.pt",
                 };
 
-                var result = await _userHelper.AddUserAsync(user, "123456"); 
-                if (result != IdentityResult.Success) 
+                var result = await _userHelper.AddUserAsync(user, "123456");
+                if (result != IdentityResult.Success)
                     throw new InvalidOperationException("Could not create the user in seeder.");
 
                 //Adicionar o role ao user
                 //await _userHelper.AddUserToRoleAsync(user, "Admin");
-                
+
                 //var token = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
                 //await _userHelper.ConfirmEmailAsync(user, token);
             }
@@ -72,7 +71,7 @@ namespace RepairshopWeb.Data
             //if (!isInRole)
             //    await _userHelper.AddUserToRoleAsync(user, "Admin");
 
-            if (!_context.Clients.Any()) 
+            if (!_context.Clients.Any())
             {
                 AddClient("Miguel", "Mendes", "miguel@gmail.com", 28373827, user);
                 AddClient("Pedro", "Rodrigues", "pedro@gmail.com", 27383728, user);
@@ -99,11 +98,11 @@ namespace RepairshopWeb.Data
                 await _context.SaveChangesAsync();
             }
 
-            if (!_context.Repairs.Any())
+            if (!_context.Services.Any())
             {
-                AddRepair("Troca de motor", 600, 100, user);
-                AddRepair("Troca de amortecedores", 100, 50, user);
-                AddRepair("Troca de freios", 100, 50, user);
+                AddService("Troca de motor", 600, user);
+                AddService("Troca de amortecedores", 100, user);
+                AddService("Troca de freios", 100, user);
                 await _context.SaveChangesAsync();
             }
 
@@ -151,13 +150,12 @@ namespace RepairshopWeb.Data
             });
         }
 
-        private void AddRepair(string description, decimal repairPrice, decimal laborPrice, User user)
+        private void AddService(string description, decimal repairPrice, User user)
         {
-            _context.Repairs.Add(new Repair
+            _context.Services.Add(new Service
             {
                 Description = description,
                 RepairPrice = repairPrice,
-                LaborPrice = laborPrice,
                 User = user
             });
         }

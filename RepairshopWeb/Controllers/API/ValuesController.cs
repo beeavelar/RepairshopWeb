@@ -6,19 +6,19 @@ namespace RepairshopWeb.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RepairController : ControllerBase
+    public class ServiceController : ControllerBase
     {
-        private readonly IRepairRepository _repairRepository;
+        private readonly IServiceRepository _serviceRepository;
 
-        public RepairController(IRepairRepository repairRepository)
+        public ServiceController(IServiceRepository serviceRepository)
         {
-            _repairRepository = repairRepository;
+            _serviceRepository = serviceRepository;
         }
 
         [HttpGet]
         public IActionResult GetClients()
         {
-            return Ok(_repairRepository.GetAllWithUsers());
+            return Ok(_serviceRepository.GetAllWithUsers());
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<RepairshopWeb.Data.Entities.Repair>
+﻿@model IEnumerable<RepairshopWeb.Data.Entities.Service>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Repairs</h1>
+<h1>Services</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
@@ -17,9 +17,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RepairPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LaborPrice)
             </th>
             <th></th>
         </tr>
@@ -34,9 +31,6 @@
                 @Html.DisplayFor(modelItem => item.RepairPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LaborPrice)
-            </td>
-            <td>
                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"> <i class="fa-solid fa-user-pen"></i></a> |
                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fa-solid fa-bars"></i></a> |
                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
@@ -45,3 +39,4 @@
 }
     </tbody>
 </table>
+

@@ -1,10 +1,10 @@
-﻿@model RepairshopWeb.Data.Entities.Repair
+﻿@model RepairshopWeb.Data.Entities.Service
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Repair details</h1>
+<h1>Service details</h1>
 
 <div>
    <hr />
@@ -22,12 +22,6 @@
                 </dt>
                 <dd class = "col-sm-9">
                     @Html.DisplayFor(model => model.RepairPrice)
-                </dd>
-                <dt class = "col-sm-3">
-                    @Html.DisplayNameFor(model => model.LaborPrice)
-                </dt>
-                <dd class = "col-sm-9">
-                    @Html.DisplayFor(model => model.LaborPrice)
                 </dd>
             </dl>
        </div>

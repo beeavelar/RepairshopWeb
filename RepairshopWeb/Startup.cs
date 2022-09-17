@@ -70,7 +70,7 @@ namespace RepairshopWeb
 
             services.AddScoped<IReceptionistRepository, ReceptionistRepository>();
 
-            services.AddScoped<IRepairRepository, RepairRepository>();
+            services.AddScoped<IServiceRepository, ServiceRepository>();
 
             services.AddScoped<IVehicleRepository, VehicleRepository>();
 

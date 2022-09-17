@@ -4,18 +4,18 @@ using System.Linq;
 
 namespace RepairshopWeb.Data.Repositories
 {
-    public class RepairRepository : GenericRepository<Repair>, IRepairRepository
+    public class ServiceRepository : GenericRepository<Service>, IServiceRepository
     {
         private readonly DataContext _context;
 
-        public RepairRepository(DataContext context) : base(context)
+        public ServiceRepository(DataContext context) : base(context)
         {
             _context = context;
         }
 
         public IQueryable GetAllWithUsers()
         {
-            return _context.Repairs.Include(r => r.User);
+            return _context.Services.Include(s => s.User);
         }
     }
 }
