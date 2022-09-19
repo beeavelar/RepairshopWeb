@@ -43,15 +43,14 @@ namespace RepairshopWeb.Data.Entities
         [Display(Name = "Identity Number")]
         public string IdentityDocument { get; set; }
 
-        //public ICollection<MechanicSpeciality> Specialities { get; set; }
-
         public string Speciality { get; set; }
-        //public MechanicSpeciality Speciality { get; set; }
 
         [Display(Name = "Photo")]
         public Guid ImageId { get; set; }
 
         public User User { get; set; }
+
+        public ICollection<RepairOrder> RepairOrders { get; set; }
 
         public string ImageFullPath => ImageId == Guid.Empty
            ? $"https://repairshopweb.azurewebsites.net/images/noimage.jpg"

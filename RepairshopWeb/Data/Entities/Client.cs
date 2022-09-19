@@ -13,6 +13,7 @@ namespace RepairshopWeb.Data.Entities
 
         [Required]
         [MaxLength(50, ErrorMessage = "The field {0} can contain {1} characteres length.")]
+        //[RegularExpression(@"^[ 0-9a-zA-Z\b]+$'/>", ErrorMessage = "Numbers and special characters are not allowed in the name.")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 

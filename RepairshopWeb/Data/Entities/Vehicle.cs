@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -39,5 +40,8 @@ namespace RepairshopWeb.Data.Entities
 
         public User User { get; set; }
 
+        public ICollection<RepairOrder> RepairOrders { get; set; }
+
+        public ICollection<Appointment> Appointments { get; set; }
     }
 }
