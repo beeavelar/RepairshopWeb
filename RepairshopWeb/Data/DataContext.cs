@@ -28,5 +28,11 @@ namespace RepairshopWeb.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Appointment>().HasOne(x => x.Client).WithMany(x => x.Appointments).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Appointment>().HasOne(x => x.Vehicle).WithMany(x => x.Appointments).OnDelete(DeleteBehavior.NoAction);
+            base.OnModelCreating(builder);  
+        }
     }
 }

@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RepairshopWeb.Data.Entities
 {
-    [Table("Appointment")]
+    [Table("Appointments")]
     public class Appointment : IEntity
     {
+        [Key]
         public int Id { get; set; }
 
-        [Column("RepairOrderId")]
         [Display(Name = "Repair Order Number")]
         public int RepairOrderId { get; set; }
 
@@ -17,15 +17,6 @@ namespace RepairshopWeb.Data.Entities
         [Range(1, int.MaxValue, ErrorMessage = "You must select a repair order number.")]
         public RepairOrder RepairOrder { get; set; }
 
-        [Display(Name = "Repair Date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
-        public DateTime RepairDate { get; set; }
-
-        [Display(Name = "Alert Repair Date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
-        public DateTime AlertRepairDate { get; set; }
-
-        [Column("ClientId")]
         [Display(Name = "Client Name")]
         public int ClientId { get; set; }
 
@@ -33,7 +24,6 @@ namespace RepairshopWeb.Data.Entities
         [Range(1, int.MaxValue, ErrorMessage = "You must select a client.")]
         public Client Client { get; set; }
 
-        [Column("VehicleId")]
         [Display(Name = "License Plate")]
         public int VehicleId { get; set; }
 
@@ -41,8 +31,16 @@ namespace RepairshopWeb.Data.Entities
         [Range(1, int.MaxValue, ErrorMessage = "You must select a client.")]
         public Vehicle Vehicle { get; set; }
 
-        [Display(Name = "Payment State")]
-        public string Status { get; set; }
+        [Display(Name = "Appointment Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
+        public DateTime RepairDate { get; set; }
+
+        [Display(Name = "Alert Repair Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
+        public DateTime AlertRepairDate { get; set; }
+
+        [Display(Name = "Repair Status")]
+        public string RepairStatus { get; set; }
 
         public User User { get; set; }
 

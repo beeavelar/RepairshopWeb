@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RepairshopWeb.Data.Entities
 {
-    [Table("RepairOrderDetailTemps")]
+    [Table("RepairOrdersDetailsTemps")]
     public class RepairOrderDetailTemp : IEntity
     {
+        [Key]
         public int Id { get; set; }
 
-        [Column("VehicleId")]
         [Display(Name = "Vehicle License Plate")]
         public int VehicleId { get; set; }
 
@@ -23,7 +23,6 @@ namespace RepairshopWeb.Data.Entities
         [Range(1, int.MaxValue, ErrorMessage = "You must select a service.")]
         public Service Service { get; set; }
 
-        [Column("MechanicId")]
         [Display(Name = "Mechanic Name")]
         public int MechanicId { get; set; }
 

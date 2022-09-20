@@ -21,7 +21,7 @@ namespace RepairshopWeb.Data
 
         public async Task SeedAsync()
         {
-            await _context.Database.MigrateAsync();
+            await _context.Database.MigrateAsync(); //Quando corre o seed corre tbm as migrações automaticamente
 
             //await _userHelper.CheckRoleAsync("Admin");
             //await _userHelper.CheckRoleAsync("Client");
