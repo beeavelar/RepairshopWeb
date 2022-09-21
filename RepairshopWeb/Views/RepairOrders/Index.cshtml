@@ -1,0 +1,82 @@
+﻿@model IEnumerable<RepairshopWeb.Data.Entities.RepairOrder>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Repair Orders</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @if (this.User.IsInRole("Admin"))
+        	{
+            	<th>
+                	@Html.DisplayNameFor(model => model.User.FullName)
+            	</th>
+        	}
+            <th>
+                @Html.DisplayNameFor(model => model.RepairOrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalServicesToDo)
+            </th>
+            <th>
+            	@Html.DisplayNameFor(model => model.Appointment)
+        	</th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalMechanicsWorking)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalToPay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentState)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @if (this.User.IsInRole("Admin"))
+        	{
+        	<th>
+            	@Html.DisplayFor(modelItem => item.User.FullName)
+        	</th>
+        	}
+            <td>
+                @Html.DisplayFor(modelItem => item.RepairOrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vehicle.LicensePlate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalServicesToDo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appointment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalMechanicsWorking)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalToPay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentState)
+            </td>
+            <td>
+                <a asp-action="CreateAppointment" asp-route-id="@item.Id" class="btn btn-info" id="btn_CreateAppointment">Create Appointment</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" id="btn_Delete">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

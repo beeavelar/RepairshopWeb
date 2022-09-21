@@ -13,7 +13,7 @@ namespace RepairshopWeb.Data.Entities
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Repair Order Date")]
+        [Display(Name = "Local Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
         public DateTime RepairOrderDate { get; set; }
 

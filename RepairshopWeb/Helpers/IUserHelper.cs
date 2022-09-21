@@ -23,7 +23,7 @@ namespace RepairshopWeb.Helpers
 
         //Task AddUserToRoleAsync(User user, string roleName);
 
-        //Task<bool> IsUserInRoleAsync(User user, string roleName);
+        Task<bool> IsUserInRoleAsync(User user, string roleName);
 
         //TOKEN
         //Task<SignInResult> ValidatePasswordAsync(User user, string password);
