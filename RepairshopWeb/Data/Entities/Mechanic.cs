@@ -56,6 +56,7 @@ namespace RepairshopWeb.Data.Entities
            ? $"https://repairshopweb.azurewebsites.net/images/noimage.jpg"
            : $"https://repairshodebora.blob.core.windows.net/mechanics/{ImageId}";
 
+        [Display(Name = "Mechanic Name")]
         public string FullName => $"{FirstName} {LastName}";
     }
 }

@@ -10,6 +10,7 @@ namespace RepairshopWeb.Data.Repositories
     public interface IVehicleRepository : IGenericRepository<Vehicle>
     {
         public IQueryable GetAllWithUsers();
+        IEnumerable<SelectListItem> GetComboVehicles();
 
     }
 }

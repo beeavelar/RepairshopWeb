@@ -21,5 +21,22 @@ namespace RepairshopWeb.Data.Repositories
             return _context.Vehicles.Include(v => v.User);
         }
 
+        public IEnumerable<SelectListItem> GetComboVehicles()
+        {
+            var list = _context.Vehicles.Select(v => new SelectListItem
+            {
+                Text = v.LicensePlate,
+                Value = v.Id.ToString()
+            }).ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Select a licencse plate...)",
+                Value = "0"
+            });
+
+            return list;
+
+        }
     }
 }

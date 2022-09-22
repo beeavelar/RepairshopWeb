@@ -17,6 +17,18 @@ namespace RepairshopWeb.Data.Repositories
             _userHelper = userHelper;
         }
 
+        public async Task<IQueryable<RepairOrderDetailTemp>> GetDetailsTempsAsync(string userName)
+        {
+            var user = await _userHelper.GetUserByEmailAsync(userName);
+            if (user==null)
+                return null;
+
+            return _context.RepairOrderDetailsTemp
+                .Include(s => s.Service)
+                .Where(ro => ro.User == user)
+                .OrderBy(ro => ro.Service.Description);
+        }
+
         public async Task<IQueryable<RepairOrder>> GetRepairOrderAsync(string userName)
         {
             var user = await _userHelper.GetUserByEmailAsync(userName);
