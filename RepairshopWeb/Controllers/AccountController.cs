@@ -1,16 +1,11 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RepairshopWeb.Controllers
 {
@@ -35,24 +30,24 @@ namespace RepairshopWeb.Controllers
             return View();
         }
 
-        [HttpPost] 
+        [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var result = await _userHelper.LoginAsync(model);
 
-                if (result.Succeeded) 
+                if (result.Succeeded)
                 {
                     if (this.Request.Query.Keys.Contains("ReturnUrl"))
                         return Redirect(this.Request.Query["ReturnUrl"].First());
-                    
+
                     return this.RedirectToAction("Index", "Home");
                 }
             }
 
             this.ModelState.AddModelError(string.Empty, "Failed to login!");
-            return View(model); 
+            return View(model);
         }
 
         public async Task<IActionResult> Logout()
@@ -72,7 +67,7 @@ namespace RepairshopWeb.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userHelper.GetUserByEmailAsync(model.Username);
-                if (user == null) 
+                if (user == null)
                 {
                     user = new User
                     {
@@ -87,10 +82,10 @@ namespace RepairshopWeb.Controllers
                     if (result != IdentityResult.Success)
                     {
                         ModelState.AddModelError(string.Empty, "The user couldn´t be created.");
-                        return View(model); 
+                        return View(model);
                     }
 
-                    var loginViewModel = new LoginViewModel 
+                    var loginViewModel = new LoginViewModel
                     {
                         Password = model.Password,
                         RemenberMe = false,
@@ -98,6 +93,7 @@ namespace RepairshopWeb.Controllers
                     };
 
                     var result2 = await _userHelper.LoginAsync(loginViewModel);
+                    await _emailHelper.SendEmail("d.avelar13@gmail.com", "Testando");
 
                     if (result2.Succeeded)
                         return RedirectToAction("Index", "Home");
@@ -110,16 +106,16 @@ namespace RepairshopWeb.Controllers
 
         public async Task<IActionResult> ChangeUser()
         {
-            var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name); 
-            var model = new ChangeUserViewModel(); 
+            var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+            var model = new ChangeUserViewModel();
 
             if (user != null)
             {
-                model.FirstName = user.FirstName; 
+                model.FirstName = user.FirstName;
                 model.LastName = user.LastName;
             }
 
-            return View(model); 
+            return View(model);
         }
 
         [HttpPost]
@@ -127,23 +123,23 @@ namespace RepairshopWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name); 
+                var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
 
-                if (user != null) 
+                if (user != null)
                 {
-                    user.FirstName = model.FirstName; 
+                    user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
 
-                    var response = await _userHelper.UpdateUserAsync(user); 
+                    var response = await _userHelper.UpdateUserAsync(user);
 
-                    if (response.Succeeded) 
+                    if (response.Succeeded)
                         ViewBag.UserMessage = "User updated!";
 
-                    else 
+                    else
                         ModelState.AddModelError(string.Empty, response.Errors.FirstOrDefault().Description);
                 }
             }
-            return View(model); 
+            return View(model);
         }
 
         public IActionResult ChangePassword()
@@ -196,11 +192,11 @@ namespace RepairshopWeb.Controllers
         //}
 
         [HttpPost]
-        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model) 
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
-                var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name); 
+                var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
 
                 if (user != null)
                 {
@@ -250,7 +246,7 @@ namespace RepairshopWeb.Controllers
 
         //        return this.View();
         //    }
-   
+
         //}
 
         public IActionResult ResetPassword(string token)

@@ -6,12 +6,13 @@ namespace RepairshopWeb.Helpers
 {
     public class EmailHelper : IEmailHelper
     {
-        public async Task SendEmail(string email, string subject, string message)
+        public async Task SendEmail(string email, string subject)
         {
-            var apiKey = "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";
+            var apiKey = "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";
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("cet69.repairshop@gmail.com", "Repair Shop");
+            var from = new EmailAddress("cet69.repairshop@gmail.com", "RepairShop");
             var to = new EmailAddress(email);
+            var message = "Deu certo!";
             var htmlContent = "";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, message, htmlContent);
 

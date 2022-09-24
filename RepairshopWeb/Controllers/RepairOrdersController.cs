@@ -74,11 +74,18 @@ namespace RepairshopWeb.Controllers
         //Confirm RepairOrder
         public async Task<IActionResult> ConfirmOrder()
         {
-            var response = await _repairOrderRepository.ConfirmRepairOrderAsync(this.User.Identity.Name);
-            if (response)
-                return RedirectToAction("Index");
+            try
+            {
+                var response = await _repairOrderRepository.ConfirmRepairOrderAsync(this.User.Identity.Name);
+                if (response)
+                    return RedirectToAction("Index");
 
-            return RedirectToAction("Create");
+                return RedirectToAction("Create");
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
         }
 
         public IActionResult ItemNotFound()
