@@ -44,12 +44,30 @@ namespace RepairshopWeb.Controllers
             {
                 Services = _serviceRepository.GetComboServices(),
                 Vehicles = _vehicleRepository.GetComboVehicles(),
-                Mechanics = _mechanicRepository.GetComboMechanics()
+                Mechanics = _mechanicRepository.GetComboMechanics(),
             };
-
             return View(model);
         }
 
-       
+        //Add service na Repair Order Detail Temp
+        [HttpPost]
+        public async Task<IActionResult> AddService(AddItemViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _repairOrderRepository.AddItemToOrderAsync(model, this.User.Identity.Name);
+                return RedirectToAction("Create");
+            }
+            return View(model);
+        }
+
+        public async Task<IActionResult> DeleteItem(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            await _repairOrderRepository.DeleteDetailTempAsync(id.Value);
+            return RedirectToAction("Create");
+        }
     }
 }

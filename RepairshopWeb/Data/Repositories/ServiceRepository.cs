@@ -30,7 +30,7 @@ namespace RepairshopWeb.Data.Repositories
 
             list.Insert(0, new SelectListItem
             {
-                Text = "(Select a service...)",
+                Text = "Select a service...",
                 Value = "0"
             });
 

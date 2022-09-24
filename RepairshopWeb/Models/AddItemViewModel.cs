@@ -8,15 +8,15 @@ namespace RepairshopWeb.Models
     {
         [Display(Name="Service")]
         [Range(1,int.MaxValue, ErrorMessage = "You must select a service.")]
-        public string ServiceId { get; set; }
+        public int ServiceId { get; set; }
 
         [Display(Name = "Vehicle")]
         [Range(1, int.MaxValue, ErrorMessage = "You must select a service.")]
-        public string VehicleId { get; set; }
+        public int VehicleId { get; set; }
 
         [Display(Name = "Mechanic")]
         [Range(1, int.MaxValue, ErrorMessage = "You must select a service.")]
-        public string MechanicId { get; set; }
+        public int MechanicId { get; set; }
 
         public IEnumerable<SelectListItem> Services { get; set; }
 

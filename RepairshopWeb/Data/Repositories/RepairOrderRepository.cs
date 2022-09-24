@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Helpers;
+using RepairshopWeb.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +18,53 @@ namespace RepairshopWeb.Data.Repositories
             _userHelper = userHelper;
         }
 
+        public async Task AddItemToOrderAsync(AddItemViewModel model, string userName)
+        {
+            var user = await _userHelper.GetUserByEmailAsync(userName);
+            if (user == null)
+                return;
+
+            var service = await _context.Services.FindAsync(model.ServiceId);
+            if(service == null)
+                return;
+
+            var vehicle = await _context.Vehicles.FindAsync(model.VehicleId);
+            if (vehicle == null)
+                return;
+
+            var mechanic = await _context.Mechanics.FindAsync(model.MechanicId);
+            if (mechanic == null)
+                return;
+
+            var repairOrderDetailTemp = await _context.RepairOrderDetailsTemp
+                .Where(rodt => rodt.User == user && rodt.Service == service && rodt.Vehicle == vehicle && rodt.Mechanic == mechanic)
+                .FirstOrDefaultAsync();
+
+            if(repairOrderDetailTemp == null)
+            {
+                repairOrderDetailTemp = new RepairOrderDetailTemp
+                {
+                    Vehicle = vehicle,
+                    Service = service,
+                    RepairPrice = service.RepairPrice,
+                    Mechanic = mechanic,
+                    User = user,
+                };
+                _context.RepairOrderDetailsTemp.Add(repairOrderDetailTemp);
+            }
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteDetailTempAsync(int id)
+        {
+            var repairOrderDetailTemp = await _context.RepairOrderDetailsTemp.FindAsync(id);
+            if (repairOrderDetailTemp == null)
+                return;
+
+            _context.RepairOrderDetailsTemp.Remove(repairOrderDetailTemp);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IQueryable<RepairOrderDetailTemp>> GetDetailsTempsAsync(string userName)
         {
             var user = await _userHelper.GetUserByEmailAsync(userName);
@@ -24,9 +72,11 @@ namespace RepairshopWeb.Data.Repositories
                 return null;
 
             return _context.RepairOrderDetailsTemp
-                .Include(s => s.Service)
-                .Where(ro => ro.User == user)
-                .OrderBy(ro => ro.Service.Description);
+               .Include(v => v.Vehicle)
+               .Include(s => s.Service)
+               .Include(m => m.Mechanic)
+               .Where(ro => ro.User == user)
+               .OrderBy(ro => ro.Vehicle.Id);
         }
 
         public async Task<IQueryable<RepairOrder>> GetRepairOrderAsync(string userName)
