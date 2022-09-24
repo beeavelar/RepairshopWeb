@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RepairshopWeb.Data.Repositories;
+using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
 using System.Threading.Tasks;
 
@@ -64,10 +65,25 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> DeleteItem(int? id)
         {
             if (id == null)
-                return NotFound();
+                return new NotFoundViewResult("ItemNotFound");
 
             await _repairOrderRepository.DeleteDetailTempAsync(id.Value);
             return RedirectToAction("Create");
+        }
+
+        //Confirm RepairOrder
+        public async Task<IActionResult> ConfirmOrder()
+        {
+            var response = await _repairOrderRepository.ConfirmRepairOrderAsync(this.User.Identity.Name);
+            if (response)
+                return RedirectToAction("Index");
+
+            return RedirectToAction("Create");
+        }
+
+        public IActionResult ItemNotFound()
+        {
+            return View();
         }
     }
 }

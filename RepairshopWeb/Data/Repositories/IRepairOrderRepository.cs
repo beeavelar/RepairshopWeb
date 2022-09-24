@@ -19,5 +19,8 @@ namespace RepairshopWeb.Data.Repositories
 
         //Método para deletar Services da Repair Order Detail Temp
         Task DeleteDetailTempAsync(int id);
+
+        //Método para confirmar a Repair Order
+        Task<bool> ConfirmRepairOrderAsync(string userName);
     }
 }

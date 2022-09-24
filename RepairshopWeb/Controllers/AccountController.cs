@@ -18,11 +18,13 @@ namespace RepairshopWeb.Controllers
     {
         private readonly IUserHelper _userHelper;
         private readonly IConfiguration _configuration;
+        private readonly IEmailHelper _emailHelper;
 
-        public AccountController(IUserHelper userHelper, IConfiguration configuration)
+        public AccountController(IUserHelper userHelper, IConfiguration configuration, IEmailHelper emailHelper)
         {
             _userHelper = userHelper;
             _configuration = configuration;
+            _emailHelper = emailHelper;
         }
 
         public IActionResult Login()

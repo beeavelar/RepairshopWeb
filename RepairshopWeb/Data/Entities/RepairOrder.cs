@@ -30,9 +30,6 @@ namespace RepairshopWeb.Data.Entities
         [Display(Name = "Total Services To Do")]
         public int TotalServicesToDo => Items == null ? 0 : Items.Count();
 
-        [Display(Name = "Total Mechanics Working")]
-        public decimal TotalMechanicsWorking => Items == null ? 0 : Items.Sum(i => i.MechanicId);
-
         [Display(Name = "Total To Pay")]
         [DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal TotalToPay => Items == null ? 0 : Items.Sum(i => i.RepairPrice);

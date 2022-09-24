@@ -2,6 +2,7 @@
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -53,6 +54,43 @@ namespace RepairshopWeb.Data.Repositories
                 _context.RepairOrderDetailsTemp.Add(repairOrderDetailTemp);
             }
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> ConfirmRepairOrderAsync(string userName)
+        {
+            var user = await _userHelper.GetUserByEmailAsync(userName);
+            if (user == null)
+                return false;
+
+            var repairOrderTemps = await _context.RepairOrderDetailsTemp
+                .Include(ro => ro.Service)
+                .Where(ro => ro.User == user)
+                .ToListAsync();
+
+            if (repairOrderTemps == null || repairOrderTemps.Count == 0)
+                return false;
+
+            //Passa as informações do RepairOrderDetailTemp para RepairOrderDetail
+            var details = repairOrderTemps.Select(ro => new RepairOrderDetail
+            {
+                Vehicle = ro.Vehicle,
+                Service = ro.Service,
+                RepairPrice = ro.RepairPrice,
+                Mechanic = ro.Mechanic
+            }).ToList();
+
+            //Passa as informações do RepairOrderDetail para RepairOrder
+            var repairOrder = new RepairOrder
+            {
+                RepairOrderDate = DateTime.UtcNow,
+                User = user,
+                Items = details
+            };
+
+            await CreateAsync(repairOrder);
+            _context.RepairOrderDetailsTemp.RemoveRange(repairOrderTemps);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task DeleteDetailTempAsync(int id)

@@ -2,8 +2,271 @@
     ViewData["Title"] = "Home Page";
 }
 
-<section id="backgroundimage"></section>
-
-<div class="text-center">
-    <h1>Welcome to RepairShop</h1>
+<!-- banner -->
+<div class="full_bg">
+    <div class="container_width">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="ser_img">
+                    <figure><img src="images/imf.png" alt="#" /></figure>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <!-- carousel code -->
+                <div id="banner1" class="carousel slide slider_main">
+                    <ol class="carousel-indicators">
+                        <li data-target="#banner1" data-slide-to="0" class="active">q</li>
+                        <li data-target="#banner1" data-slide-to="1">q</li>
+                        <li data-target="#banner1" data-slide-to="2">q</li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <!-- first slide -->
+                        <div class="carousel-item active">
+                            <div class="container">
+                                <div class="carousel-caption relative">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="creative">
+                                                <div class="auto_text">
+                                                    <h1>WHO <br>WE ARE?</h1>
+                                                    <p>We are a company with several years in the market, we solve any faults with competence and rigor, and practicing the best prices on the market.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- second slide -->
+                        <div class="carousel-item">
+                            <div class="container">
+                                <div class="carousel-caption relative">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="creative">
+                                                <div class="auto_text">
+                                                    <h1>OUR <br>SERVICES</h1>
+                                                    <p>We do various types of services from mechanics, painting, etc....</p>
+                                                    <a class="read_more" asp-area="" asp-controller="Repairs" asp-action="Index">Services</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- controls -->
+                    <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#banner1" role="button" data-slide="next">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- end banner -->
+<!-- services -->
+<div class="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage text_align_left">
+                    <h2 name="services" id="services"><img src="images/heading.png" alt="#" />Our Services</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div id="ho_heal" class="our_class text_align_center">
+                    <i class="d_no"><img src="images/cho3.3.png" alt="#" /></i>
+                    <i class="d_bo"><img src="images/cho3.png" alt="#" /></i>
+                    <h3>AIR CONDITIONING</h3>
+                    <p>content of a page when looking at its layout. The point of using Lorem Ipsum</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mar_top90">
+                <div id="ho_heal" class="our_class text_align_center">
+                    <i class="d_no"><img src="images/cho2.png" alt="#" /></i>
+                    <i class="d_bo"><img src="images/cho2.2.png" alt="#" /></i>
+                    <h3>AUTOMOTIVE FILTERS</h3>
+                    <p>content of a page when looking at its layout. The point of using Lorem Ipsum</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div id="ho_heal" class="our_class text_align_center">
+                    <i class="d_no"><img src="images/cho1.png" alt="#" /></i>
+                    <i class="d_bo"><img src="images/cho1.1.png" alt="#" /></i>
+                    <h3>ELECTRICAL SYSTEM</h3>
+                    <p>content of a page when looking at its layout. The point of using Lorem Ipsum</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mar_top90">
+                <div id="ho_heal" class="our_class text_align_center">
+                    <i class="d_no"><img src="images/cho4.png" alt="#" /></i>
+                    <i class="d_bo"><img src="images/cho4.4.png" alt="#" /></i>
+                    <h3>BRAKE REPAIR</h3>
+                    <p>content of a page when looking at its layout. The point of using Lorem Ipsum</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end services -->
+<!-- customers -->
+<div class="customers">
+    <div class="clients_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="titlepage text_align_center">
+                        <h2><img src="images/heading.png" alt="#" />Our Customers Says</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- start slider section -->
+    <div id="myCarousel" class="carousel slide clients_banner" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="container">
+                    <div class="carousel-caption tetxs">
+                        <div class="row d_flex">
+                            <div class="col-md-6">
+                                <div class="custom">
+                                    <div class="clint">
+                                        <i><img src="images/clint2.png" alt="#" /></i>
+                                        <h4>Sofi den</h4>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="custom">
+                                    <div class="clint">
+                                        <i><img src="images/clint1.png" alt="#" /></i>
+                                        <h4>Jony Mental</h4>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="carousel-caption tetxs">
+                        <div class="row d_flex">
+                            <div class="col-md-6">
+                                <div class="custom">
+                                    <div class="clint">
+                                        <i><img src="images/clint2.png" alt="#" /></i>
+                                        <h4>Sofi den</h4>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="custom">
+                                    <div class="clint">
+                                        <i><img src="images/clint1.png" alt="#" /></i>
+                                        <h4>Jony Mental</h4>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="carousel-caption tetxs">
+                        <div class="row d_flex">
+                            <div class="col-md-6">
+                                <div class="custom">
+                                    <div class="clint">
+                                        <i><img src="images/clint2.png" alt="#" /></i>
+                                        <h4>Sofi den</h4>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="custom">
+                                    <div class="clint">
+                                        <i><img src="images/clint1.png" alt="#" /></i>
+                                        <h4>Jony Mental</h4>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+<!-- end customers -->
+<!-- contact -->
+<div class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="titlepage">
+                    <h2><img src="images/heading.png" alt="#" />Request a call back</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row d_flex">
+            <div class="col-md-6">
+                <form id="request" class="main_form">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input class="form_control" placeholder="Name" type="type" name=" Name">
+                        </div>
+                        <div class="col-md-12">
+                            <input class="form_control" placeholder="Email" type="type" name="Phone Number">
+                        </div>
+                        <div class="col-md-12">
+                            <input class="form_control" placeholder="Phone number" type="type" name="Phone Number">
+                        </div>
+                        <div class="col-md-12">
+                            <input class="form_cont" placeholder="Message" type="type" name="message">
+                        </div>
+                        <div class="col-md-12">
+                            <button class="send_btn">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="cont_img">
+                    <figure><img src="~/images/contact.png" alt="#" /></figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end contact -->

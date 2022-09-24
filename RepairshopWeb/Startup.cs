@@ -60,6 +60,8 @@ namespace RepairshopWeb
 
             services.AddScoped<IUserHelper, UserHelper>();
 
+            services.AddScoped<IEmailHelper, EmailHelper>();
+
             services.AddScoped<IBlobHelper, BlobHelper>();
 
             services.AddScoped<IConverterHelper, ConverterHelper>();

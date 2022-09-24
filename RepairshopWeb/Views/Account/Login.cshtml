@@ -3,41 +3,41 @@
 @{
     ViewData["Title"] = "Login";
 }
-<div class="text-center">
-    <h1 style="text-align: center;">Login</h1>
-</div>
-<hr />
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>Login</h2>
+
 <div class="row">
     <div class="col-md-4 offset-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
-                <div class="control-section">
-                    <div class="control_wrapper TextBox-control-section">
-                        <ejs-textbox asp-for="Username" id="username" placeholder="Username" floatLabelType="Auto"></ejs-textbox>
-                    </div>
-                </div>
-                <span asp-validation-for="Username" class="text-danger"></span>
+                <label asp-for="Username">Username</label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-warning"></span>
             </div>
             <div class="form-group">
-                <div class="control-section">
-                    <div class="control_wrapper TextBox-control-section">
-                        <ejs-textbox asp-for="Password" id="password" type="password" placeholder="Password" floatLabelType="Auto"></ejs-textbox>
-                    </div>
-                </div>
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-warning"></span>
             </div>
             <div class="form-group">
                 <div class="form-check">
-                    <input asp-for="RemenberMe" type="checkbox" class="form-check-input"/>
-                    <label asp-for="RemenberMe" class="form-check-label">Remenber Me?</label>
-                    <span asp-validation-for="RemenberMe" class="text-warning"></span>
+                    <input asp-for="RemenberMe" type="checkbox" class="form-check-input" />
+                    <label asp-for="RemenberMe" class="form-check-label">Remember Me?</label>
                 </div>
+                <span asp-validation-for="RemenberMe" class="text-warning"></span>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success"><i class="fa-solid fa-arrow-right-to-bracket"></i></button>
-                <a asp-action="Register" class="btn btn-primary"> Register</a>
-                <a asp-action="RecoverPassword" class="btn btn-link">Forgot your password?</a>
+                <center>
+                    <input type="submit" value="Login" class="btn btn-success" style="width:250px;" />
+                </center>
+                <br />
+                <br />
+                <span>Forgot </span><a asp-area="" asp-controller="Account" asp-action="RecoverPass">your password?</a>
             </div>
         </form>
     </div>
