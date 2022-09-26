@@ -20,17 +20,20 @@ namespace RepairshopWeb.Helpers
             return await _userManager.CreateAsync(user, password);
         }
 
+        //public async Task AddUserToRoleAsync(User user, string roleName)
+        //{
+        //    await _userManager.AddToRoleAsync(user, roleName);
+        //}
+
         public async Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword)
         {
             return await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
         }
 
-        //TOKEN
-
-        //public async Task<string> GeneratePasswordResetTokenAsync(User user)
-        //{
-        //    return await _userManager.GeneratePasswordResetTokenAsync(user);
-        //}
+        public async Task<string> GeneratePasswordResetTokenAsync(User user)
+        {
+            return await _userManager.GeneratePasswordResetTokenAsync(user);
+        }
 
         public async Task<User> GetUserByEmailAsync(string email)
         {

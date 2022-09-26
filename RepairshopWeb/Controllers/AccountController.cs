@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
+using SendGrid;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -100,7 +101,11 @@ namespace RepairshopWeb.Controllers
                     };
 
                     var result2 = await _userHelper.LoginAsync(loginViewModel);
-                    await _emailHelper.SendEmail("d.avelar13@gmail.com", "Testando");
+
+                    await _emailHelper.SendEmail($"{model.Username}", $"Welcome to RepairShop", $"Mr. /Ms. {user.FirstName} {user.LastName},<br/><br/> " +
+                      $"Welcome to RepairShop!<br/>" +
+                        "<br/><br/>Best regards, " +
+                        "<br/>RepairShop");
 
                     if (result2.Succeeded)
                         return RedirectToAction("Index", "Home");
@@ -110,6 +115,7 @@ namespace RepairshopWeb.Controllers
             }
             return View(model);
         }
+
 
         public async Task<IActionResult> ChangeUser()
         {
@@ -225,35 +231,37 @@ namespace RepairshopWeb.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> RecoverPassword(RecoverPasswordViewModel model)
-        //{
-        //    if (this.ModelState.IsValid)
-        //    {
-        //        var user = await _userHelper.GetUserByEmailAsync(model.Email);
-        //        if (user == null)
-        //        {
-        //            ModelState.AddModelError(string.Empty, "The e-mail doesn´t correspont to a registered user.");
-        //            return View(model);
-        //        }
-        //        var myToken = await _userHelper.GeneratePasswordResetTokenAsync(user);
+        [HttpPost]
+        public async Task<IActionResult> RecoverPassword(RecoverPasswordViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var user = await _userHelper.GetUserByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "The email doesn't correspont to a registered user.");
+                    return View(model);
+                }
 
-        //        var link = this.Url.Action(
-        //            "ResetPassword",
-        //            "Account",
-        //            new { token = myToken}, protocol: HttpContext.Request.Scheme);
+                var myToken = await _userHelper.GeneratePasswordResetTokenAsync(user);
 
-        //        Response response = _mailHelper.SendEmail(model.Email, "Repairshop Password Reset", $"<h1>Repairshop Password Reset</h1>" +
-        //        $"To reset the password click in this link:</br></br>" +
-        //        $"<a href = \"(link)\">Reset Password</a>");
+                var link = this.Url.Action("ResetPassword", "Account", new { token = myToken }, protocol: HttpContext.Request.Scheme);
 
-        //        if (response.IsSuccess)
-        //            this.ViewBag.Message = "The instructions to recover your password has been sent to your e-mail.";
 
-        //        return this.View();
-        //    }
+                await _emailHelper.SendEmail(user.Email, "RepairShop Reset Password",
+                       $"Mr. /Mrs. {user.FirstName} {user.LastName},<br/> " +
+                       $"To reset your password click on the link below:<br/><br/>" +
+                       $"<a href = \"{link}\">Reset Password</a>" +
+                        "<br/><br/>Best regards, " +
+                        "<br/>RepairShop");
 
-        //}
+                this.ViewBag.Message = "The instructions to recover your password has been sent to your email.";
+
+                return this.View();
+            }
+
+            return this.View(model);
+        }
 
         public IActionResult ResetPassword(string token)
         {
@@ -283,6 +291,11 @@ namespace RepairshopWeb.Controllers
         }
 
         public IActionResult NotAuthorized()
+        {
+            return View();
+        }
+
+        public IActionResult UserNotFound()
         {
             return View();
         }

@@ -27,8 +27,9 @@ namespace RepairshopWeb.Helpers
 
         Task<SignInResult> ValidatePasswordAsync(User user, string password);
 
-        //Task<string> GeneratePasswordResetTokenAsync(User user);
+        Task<string> GeneratePasswordResetTokenAsync(User user);
 
         Task<IdentityResult> ResetPasswordAsync(User user, string token, string password);
+
     }
 }
