@@ -9,12 +9,12 @@ namespace RepairshopWeb.Models
 
         [Required]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string NewPassword { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; }
+        [Compare("NewPassword")]
+        public string ConfirmNewPassword { get; set; }
 
         [Required]
         public string Token { get; set; }

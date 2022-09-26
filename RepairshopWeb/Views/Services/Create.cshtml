@@ -3,21 +3,21 @@
 @{
     ViewData["Title"] = "Create new service";
 }
-
-<h1>New Service</h1>
-<hr />
+<br />
+<br />
+<br />
+<h1 style="text-align: center;"><b>NEW SERVICE</b></h1>
+<br />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4"d-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <ejs-maskedtextbox asp-for="Description" id="description" placeholder="Description" floatLabelType="Auto"></ejs-maskedtextbox>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RepairPrice" class="control-label"></label>
-                <input asp-for="RepairPrice" class="form-control" />
+               <ejs-maskedtextbox asp-for="RepairPrice" id="repairprice" placeholder="Repair Price" floatLabelType="Auto"></ejs-maskedtextbox>
                 <span asp-validation-for="RepairPrice" class="text-danger"></span>
             </div>
             <div class="form-group">

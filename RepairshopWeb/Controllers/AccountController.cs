@@ -274,7 +274,7 @@ namespace RepairshopWeb.Controllers
             var user = await _userHelper.GetUserByEmailAsync(model.UserName);
             if (user != null)
             {
-                var result = await _userHelper.ResetPasswordAsync(user, model.Token, model.Password);
+                var result = await _userHelper.ResetPasswordAsync(user, model.Token, model.NewPassword);
 
                 if (result.Succeeded)
                 {
