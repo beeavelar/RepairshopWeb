@@ -5,10 +5,10 @@ namespace RepairshopWeb.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MechanicController : ControllerBase
+    public class MechanicsController : ControllerBase
     {
         private readonly IMechanicRepository _mechanicRepository;
-        public MechanicController(IMechanicRepository mechanicRepository)
+        public MechanicsController(IMechanicRepository mechanicRepository)
         {
             _mechanicRepository = mechanicRepository;
         }

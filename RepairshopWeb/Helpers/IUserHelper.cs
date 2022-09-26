@@ -25,10 +25,8 @@ namespace RepairshopWeb.Helpers
 
         Task<bool> IsUserInRoleAsync(User user, string roleName);
 
-        //TOKEN
-        //Task<SignInResult> ValidatePasswordAsync(User user, string password);
+        Task<SignInResult> ValidatePasswordAsync(User user, string password);
 
-        //TOKEN
         //Task<string> GeneratePasswordResetTokenAsync(User user);
 
         Task<IdentityResult> ResetPasswordAsync(User user, string token, string password);

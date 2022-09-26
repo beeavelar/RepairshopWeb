@@ -7,26 +7,18 @@
 <br />
 <br />
 <br />
-<h1 style="text-align: center;">LOGIN</h1>
+<h1 style="text-align: center;"><b>LOGIN</b></h1>
 <br />
 <div class="row">
     <div class="col-md-4 offset-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
-                <div class="control-section">
-                    <div class="control_wrapper TextBox-control-section">
-                        <ejs-textbox asp-for="Username" id="username" placeholder="Username" floatLabelType="Auto"></ejs-textbox>
-                    </div>
-                </div>
+                <ejs-textbox asp-for="Username" id="username" placeholder="Username" floatLabelType="Auto"></ejs-textbox>
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
-               <div class="control-section">
-                    <div class="control_wrapper TextBox-control-section">
-                        <ejs-textbox asp-for="Password" id="password" type="password" placeholder="Password" floatLabelType="Auto"></ejs-textbox>
-                    </div>
-                </div>
+                <ejs-textbox asp-for="Password" id="password" type="password" placeholder="Password" floatLabelType="Auto"></ejs-textbox>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">

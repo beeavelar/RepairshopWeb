@@ -10,8 +10,8 @@
 <br />
 <br />
 <br />
-<h1>Edit vehicle</h1>
-<br />
+<h1><b>EDIT VEHICLE</b></h1>
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -36,12 +36,6 @@
                 <label asp-for="VehicleModel" class="control-label"></label>
                 <input asp-for="VehicleModel" class="form-control" />
                 <span asp-validation-for="VehicleModel" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                @{var categories = new string[] { "Car", "Motorcycle", "Truck", "Other"};}
-                <ejs-combobox asp-for="Category" id="category" dataSource="categories"></ejs-combobox>
-                <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Color" class="control-label"></label>

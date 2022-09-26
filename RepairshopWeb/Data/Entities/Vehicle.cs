@@ -31,8 +31,6 @@ namespace RepairshopWeb.Data.Entities
         [MaxLength(50, ErrorMessage = "The field {0} only can contain {1} characters lenght.")]
         public string VehicleModel { get; set; }
 
-        public string Category { get; set; }
-
         public string Color { get; set; }
 
         [Range(1950, 2022)]

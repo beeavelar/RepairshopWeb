@@ -6,11 +6,11 @@ namespace RepairshopWeb.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReceptionistController : ControllerBase
+    public class ReceptionistsController : ControllerBase
     {
         private readonly IReceptionistRepository _receptionistRepository;
 
-        public ReceptionistController(IReceptionistRepository receptionistRepository)
+        public ReceptionistsController(IReceptionistRepository receptionistRepository)
         {
             _receptionistRepository = receptionistRepository;
         }

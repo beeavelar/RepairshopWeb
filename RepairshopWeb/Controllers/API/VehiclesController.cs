@@ -6,11 +6,11 @@ namespace RepairshopWeb.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VehicleController : ControllerBase
+    public class VehiclesController : ControllerBase
     {
         private readonly IVehicleRepository _vehicleRepository;
 
-        public VehicleController(IVehicleRepository vehicleRepository)
+        public VehiclesController(IVehicleRepository vehicleRepository)
         {
             _vehicleRepository = vehicleRepository;
         }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RepairshopWeb.Data.Repositories;
 
@@ -6,11 +8,12 @@ namespace RepairshopWeb.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ServiceController : ControllerBase
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class ServicesController : ControllerBase
     {
         private readonly IServiceRepository _serviceRepository;
 
-        public ServiceController(IServiceRepository serviceRepository)
+        public ServicesController(IServiceRepository serviceRepository)
         {
             _serviceRepository = serviceRepository;
         }

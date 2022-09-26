@@ -43,7 +43,7 @@
         <a asp-area="" asp-controller="Vehicles" asp-action="Index">Vehicles</a>
         <a asp-area="" asp-controller="Mechanics" asp-action="Index">Mechanics</a>
         <a asp-area="" asp-controller="Receptionists" asp-action="Index">Receptionists</a>
-        <a asp-area="" asp-controller="Repairs" asp-action="Index">Repairs</a>
+        <a asp-area="" asp-controller="Services" asp-action="Index">Services</a>
         <a asp-area="" asp-controller="RepairOrders" asp-action="Index">Repair Orders</a>
 
         @if (this.User.Identity.IsAuthenticated)
@@ -57,7 +57,7 @@
         }
     </div>
     <!-- header -->
-    <header class="header-area">
+    <header class="header-area" id="home">
         <div class="container-fluid">
             <div class="row d_flex">
                 <div class=" col-md-3 col-sm-3">
@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-md-7 di_none">
                     <ul class="Informa_conta">
-                        <li> <a><i class="fa fa-phone" aria-hidden="true"></i>Call Now +01 123467890</a></li>
+                        <li> <a><i class="fa fa-phone" aria-hidden="true"></i>Call Now +351 987654321</a></li>
                         <li> <a href="https://www.cinel.pt/appv2" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i> CINEL</a></li>
                         <li> <a><i class="fa fa-envelope" aria-hidden="true"></i> avelar.dbr@gmail.com</a></li>
                     </ul>
@@ -101,24 +101,22 @@
                     </div>
                     <div class="col-md-12">
                         <ul class="menu_footer">
-                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Our Services</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Contact us</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Index">About</a></li>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#services">Our Services</a></li>
+                            <li><a href="#contact_us">Contact us</a></li>
+                            <li><a href="#about">About</a></li>
                         </ul>
-
                     </div>
                     <div class="col-md-12">
                         <ul class="top_infomation">
-                            <li> <a style="color:white;"><i class="fa fa-phone" aria-hidden="true"></i>Call Now +01 123467890</a></li>
+                            <li> <a style="color:white;"><i class="fa fa-phone" aria-hidden="true"></i>Call Now +351 987654321</a></li>
                             <li> <a href="https://www.cinel.pt/appv2" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i> CINEL</a></li>
                             <li> <a style="color:white;"><i class="fa fa-envelope" aria-hidden="true"></i> avelar.dbr@gmail.com</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div>
-            </div>
+            <br />
             <div class="copyright">
                 <div class="container">
                     <div class="row d_flex">

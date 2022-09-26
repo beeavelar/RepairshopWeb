@@ -1,10 +1,15 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
+using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace RepairshopWeb.Controllers
@@ -15,7 +20,9 @@ namespace RepairshopWeb.Controllers
         private readonly IConfiguration _configuration;
         private readonly IEmailHelper _emailHelper;
 
-        public AccountController(IUserHelper userHelper, IConfiguration configuration, IEmailHelper emailHelper)
+        public AccountController(IUserHelper userHelper, 
+            IConfiguration configuration, 
+            IEmailHelper emailHelper)
         {
             _userHelper = userHelper;
             _configuration = configuration;
@@ -147,49 +154,48 @@ namespace RepairshopWeb.Controllers
             return View();
         }
 
-        //TOKEN
 
-        //[HttpPost]
-        //public async Task<IActionResult> CreateToken([FromBody] LoginViewModel model)
-        //{
-        //    if (this.ModelState.IsValid)
-        //    {
-        //        var user = await _userHelper.GetUserByEmailAsync(model.Username);
-        //        if (user != null)
-        //        {
-        //            var result = await _userHelper.ValidatePasswordAsync(
-        //                user,
-        //                model.Password);
+        [HttpPost]
+        public async Task<IActionResult> CreateToken([FromBody] LoginViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var user = await _userHelper.GetUserByEmailAsync(model.Username);
+                if (user != null)
+                {
+                    var result = await _userHelper.ValidatePasswordAsync(
+                        user,
+                        model.Password);
 
-        //            if (result.Succeeded)
-        //            {
-        //                var claims = new[]
-        //                {
-        //                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-        //                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        //                };
+                    if (result.Succeeded)
+                    {
+                        var claims = new[]
+                        {
+                            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        };
 
-        //                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
-        //                var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-        //                var token = new JwtSecurityToken(
-        //                    _configuration["Tokens:Issuer"],
-        //                    _configuration["Tokens:Audience"],
-        //                    claims,
-        //                    expires: DateTime.UtcNow.AddDays(90),
-        //                    signingCredentials: credentials);
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
+                        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                        var token = new JwtSecurityToken(
+                            _configuration["Tokens:Issuer"],
+                            _configuration["Tokens:Audience"],
+                            claims,
+                            expires: DateTime.UtcNow.AddDays(15),
+                            signingCredentials: credentials);
 
-        //                var results = new
-        //                {
-        //                    token = new JwtSecurityTokenHandler().WriteToken(token),
-        //                    expiration = token.ValidTo
-        //                };
+                        var results = new
+                        {
+                            token = new JwtSecurityTokenHandler().WriteToken(token),
+                            expiration = token.ValidTo
+                        };
 
-        //                return this.Created(string.Empty, result);
-        //            }
-        //        }
-        //    }
-        //    return BadRequest();
-        //}
+                        return this.Created(string.Empty, results);
+                    }
+                }
+            }
+            return BadRequest();
+        }
 
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)

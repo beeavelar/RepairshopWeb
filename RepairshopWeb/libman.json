@@ -3,8 +3,22 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "font-awesome@6.1.2",
+      "library": "font-awesome@5.15.3",
       "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "bootstrap-datepicker@1.9.0",
+      "destination": "wwwroot/lib/bootstrap-datepicker/"
+    },
+    {
+      "library": "datatables.net@2.1.1",
+      "destination": "wwwroot/lib/datatables.net/"
     }
   ]
+
+  "Tokens": {
+    "Key": "uiqdi2ji2j3JROjioJRIOjoi3joi3joi3joeijEE",
+    "Issuer": "localhost",
+    "Audience": "users"
+  }
 }

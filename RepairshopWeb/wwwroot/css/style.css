@@ -328,6 +328,8 @@ button {
     z-index: 99
 
 }
+
+
 ul.email {
     display: flex;
     align-items: center;
@@ -901,7 +903,7 @@ ul.menu_footer li a {
     transition: ease-in all 0.5s;
 }
 ul.menu_footer li a.active {
-    color: #fff;
+    color: #636c9a;
 }
 ul.menu_footer li a:hover {
     color: #fff;
