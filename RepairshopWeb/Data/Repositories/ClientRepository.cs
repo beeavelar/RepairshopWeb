@@ -20,21 +20,5 @@ namespace RepairshopWeb.Data.Repositories
         {
             return _context.Clients.Include(c => c.User);
         }
-
-        //public IEnumerable<SelectListItem> GetComboClients()
-        //{
-        //    var list = _context.Clients.Select(c => new SelectListItem
-        //    {
-        //        Text = c.FullName,
-        //        Value = c.Id.ToString()
-        //    }).ToList();
-
-        //    list.Insert(0, new SelectListItem
-        //    {
-        //        Text = "(Select a client...)",
-        //        Value = "0"
-        //    });
-        //    return list;
-        //}
     }
 }

@@ -63,26 +63,32 @@ namespace RepairshopWeb.Data.Repositories
                 return false;
 
             var repairOrderTemps = await _context.RepairOrderDetailsTemp
-                .Include(ro => ro.Service)
-                .Where(ro => ro.User == user)
+                .Include(rodt => rodt.Service)
+                .Include(rodt => rodt.Vehicle)
+                .Include(rodt => rodt.Mechanic)
+                .Where(rodt => rodt.User == user)
                 .ToListAsync();
 
             if (repairOrderTemps == null || repairOrderTemps.Count == 0)
                 return false;
 
             //Passa as informações do RepairOrderDetailTemp para RepairOrderDetail
-            var details = repairOrderTemps.Select(ro => new RepairOrderDetail
+            var details = repairOrderTemps.Select(rod => new RepairOrderDetail
             {
-                Vehicle = ro.Vehicle,
-                Service = ro.Service,
-                RepairPrice = ro.RepairPrice,
-                Mechanic = ro.Mechanic
+                Vehicle = rod.Vehicle,
+                VehicleId = rod.VehicleId,
+                Service = rod.Service,
+                ServiceId = rod.ServiceId,
+                RepairPrice = rod.RepairPrice,
+                Mechanic = rod.Mechanic,
+                MechanicId = rod.MechanicId
             }).ToList();
 
             //Passa as informações do RepairOrderDetail para RepairOrder
             var repairOrder = new RepairOrder
             {
-                RepairOrderDate = DateTime.UtcNow,
+                RepairOrderDate = DateTime.Now,
+                VehicleId = details[0].VehicleId,
                 User = user,
                 Items = details
             };
@@ -100,6 +106,16 @@ namespace RepairshopWeb.Data.Repositories
                 return;
 
             _context.RepairOrderDetailsTemp.Remove(repairOrderDetailTemp);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteRepairOrderAsync(int id)
+        {
+            var repairOrder = await _context.RepairOrders.FindAsync(id);
+            if (repairOrder == null)
+                return;
+
+            _context.RepairOrders.Remove(repairOrder);
             await _context.SaveChangesAsync();
         }
 
@@ -128,14 +144,32 @@ namespace RepairshopWeb.Data.Repositories
                 return _context.RepairOrders
                     .Include(ro => ro.Items)
                     .ThenInclude(s => s.Service)
+                    .Include(v => v.Vehicle)
                     .OrderByDescending(ro => ro.RepairOrderDate);
             }
 
             return _context.RepairOrders //Se não for Admin, buscar as RepairOrders do user(cliente) que estiver logado
                 .Include(ro => ro.Items)
                 .ThenInclude(s => s.Service)
+                .Include(v => v.Vehicle)
                 .Where(ro => ro.User == user) //onde o User for igual ao user
                 .OrderByDescending(ro => ro.RepairOrderDate);
+        }
+        public async Task AppointementRepairOrder(AppointmentViewModel model)
+        {
+            var repairOrder = await _context.RepairOrders.FindAsync(model.Id);
+            if (repairOrder == null)
+                return;
+
+            repairOrder.Appointment = model.RepairDate;
+            repairOrder.AlertDate = model.AlertRepairDate;
+            _context.RepairOrders.Update(repairOrder);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<RepairOrder> GetRepairOrderAsync(int id)
+        {
+            return await _context.RepairOrders.FindAsync(id);
         }
     }
 }

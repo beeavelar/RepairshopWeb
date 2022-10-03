@@ -14,11 +14,15 @@ namespace RepairshopWeb.Data.Entities
 
         [Required]
         [Display(Name = "Local Date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm tt}", ApplyFormatInEditMode = false)]
         public DateTime RepairOrderDate { get; set; }
 
         [Display(Name = "Appointment Date")]
-        public Appointment Appointment { get; set; }
+        public DateTime? Appointment { get; set; }
+
+        [Display(Name = "Alert Appoin. Date")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm tt}", ApplyFormatInEditMode = false)]
+        public DateTime? AlertDate { get; set; }
 
         [Display(Name = "License Plate")]
         public int VehicleId { get; set; }
@@ -36,6 +40,9 @@ namespace RepairshopWeb.Data.Entities
 
         [Display(Name = "Payment State")]
         public string PaymentState { get; set; }
+
+        [Display(Name = "Repair Status")]
+        public string RepairStatus { get; set; }
 
         [Required]
         public User User { get; set; }

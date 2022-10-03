@@ -9,7 +9,7 @@ namespace RepairshopWeb.Data.Repositories
     public interface IRepairOrderRepository : IGenericRepository<RepairOrder>
     {
         //Método que devolve todas as RepairsOrders de um determinado cliente
-        Task<IQueryable<RepairOrder>> GetRepairOrderAsync(string userName);
+        Task<IQueryable<RepairOrder>> GetRepairOrderAsync(string userName); //Buscar as RO por user
 
         //Método que recebe um user e devolve o user temporario
         Task<IQueryable<RepairOrderDetailTemp>> GetDetailsTempsAsync(string userName);
@@ -22,5 +22,11 @@ namespace RepairshopWeb.Data.Repositories
 
         //Método para confirmar a Repair Order
         Task<bool> ConfirmRepairOrderAsync(string userName);
+
+        Task AppointementRepairOrder(AppointmentViewModel model);
+        Task<RepairOrder> GetRepairOrderAsync(int id);  //Buscar as RO por id
+
+        //Método para deletar a Repair Order 
+        Task DeleteRepairOrderAsync(int id);
     }
 }

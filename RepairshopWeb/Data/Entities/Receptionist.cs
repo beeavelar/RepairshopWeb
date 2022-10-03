@@ -25,10 +25,10 @@ namespace RepairshopWeb.Data.Entities
         [MaxLength(8, ErrorMessage = "The field {0} can contain {1} characteres length.")]
         public string PostalCode { get; set; }
 
-        [Display(Name = "Cellphone")]
+        [Display(Name = "Phone")]
         public int? Phone { get; set; }
 
-        [Display(Name = "Email")]
+        [Display(Name = "E-mail")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -39,7 +39,7 @@ namespace RepairshopWeb.Data.Entities
         [Display(Name = "NISS")]
         public int? Niss { get; set; }
 
-        [Display(Name = "Identity Number")]
+        [Display(Name = "ID Number")]
         public string IdentityDocument { get; set; }
 
         [Display(Name = "Photo")]

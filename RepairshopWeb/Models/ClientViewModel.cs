@@ -10,7 +10,5 @@ namespace RepairshopWeb.Models
     {
         [Display(Name = "Photo")]
         public IFormFile ImageFile { get; set; }
-
-        //public IEnumerable<SelectListItem> Clients { get; set; }
     }
 }

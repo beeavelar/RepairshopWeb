@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace RepairshopWeb.Controllers
@@ -71,8 +72,17 @@ namespace RepairshopWeb.Controllers
             return RedirectToAction("Create");
         }
 
+        public async Task<IActionResult> DeleteRepairOrder(int? id)
+        {
+            if (id == null)
+                return new NotFoundViewResult("ItemNotFound");
+
+            await _repairOrderRepository.DeleteRepairOrderAsync(id.Value);
+            return RedirectToAction("Index");
+        }
+
         //Confirm RepairOrder
-        public async Task<IActionResult> ConfirmOrder()
+        public async Task<IActionResult> ConfirmRepairOrder()
         {
             try
             {
@@ -86,6 +96,39 @@ namespace RepairshopWeb.Controllers
             {
                 throw;
             }
+        }
+
+        //Get do Appointment - Faz aparecer a view
+        public async Task<IActionResult> Appointment(int? id)
+        {
+            if (id == null)
+                return new NotFoundViewResult("ItemNotFound");
+
+            var repairOrder = await _repairOrderRepository.GetRepairOrderAsync(id.Value);
+
+            if (repairOrder == null)
+                return new NotFoundViewResult("ItemNotFound");
+
+            var model = new AppointmentViewModel
+            {
+                Id = repairOrder.Id,
+                RepairDate = DateTime.Today,
+                AlertRepairDate = DateTime.Today
+            };
+
+            return View(model);
+        }
+
+        //Post do Appointment - grava as informações
+        [HttpPost]
+        public async Task<IActionResult> Appointment(AppointmentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _repairOrderRepository.AppointementRepairOrder(model);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
         public IActionResult ItemNotFound()

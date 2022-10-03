@@ -150,27 +150,27 @@ namespace RepairshopWeb.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("RepairshopWeb.Data.Entities.Appointment", b =>
+            modelBuilder.Entity("RepairshopWeb.Data.Entities.Billing", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("AlertRepairDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RepairDate")
+                    b.Property<DateTime>("IssueDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentMethod")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RepairOrderId")
                         .HasColumnType("int");
 
-                    b.Property<string>("RepairStatus")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("TotalToPayId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -182,14 +182,15 @@ namespace RepairshopWeb.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("RepairOrderId")
-                        .IsUnique();
+                    b.HasIndex("RepairOrderId");
+
+                    b.HasIndex("TotalToPayId");
 
                     b.HasIndex("UserId");
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Billings");
                 });
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Client", b =>
@@ -352,6 +353,12 @@ namespace RepairshopWeb.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("AlertDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("Appointment")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("MechanicId")
                         .HasColumnType("int");
 
@@ -360,6 +367,9 @@ namespace RepairshopWeb.Migrations
 
                     b.Property<DateTime>("RepairOrderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("RepairStatus")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -640,26 +650,30 @@ namespace RepairshopWeb.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RepairshopWeb.Data.Entities.Appointment", b =>
+            modelBuilder.Entity("RepairshopWeb.Data.Entities.Billing", b =>
                 {
                     b.HasOne("RepairshopWeb.Data.Entities.Client", "Client")
-                        .WithMany("Appointments")
+                        .WithMany("Billings")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("RepairshopWeb.Data.Entities.RepairOrder", "RepairOrder")
-                        .WithOne("Appointment")
-                        .HasForeignKey("RepairshopWeb.Data.Entities.Appointment", "RepairOrderId")
+                        .WithMany()
+                        .HasForeignKey("RepairOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("RepairshopWeb.Data.Entities.RepairOrder", "TotalToPay")
+                        .WithMany()
+                        .HasForeignKey("TotalToPayId");
 
                     b.HasOne("RepairshopWeb.Data.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
                     b.HasOne("RepairshopWeb.Data.Entities.Vehicle", "Vehicle")
-                        .WithMany("Appointments")
+                        .WithMany("Billings")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -667,6 +681,8 @@ namespace RepairshopWeb.Migrations
                     b.Navigation("Client");
 
                     b.Navigation("RepairOrder");
+
+                    b.Navigation("TotalToPay");
 
                     b.Navigation("User");
 
@@ -813,7 +829,7 @@ namespace RepairshopWeb.Migrations
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Client", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("Billings");
 
                     b.Navigation("Vehicles");
                 });
@@ -825,14 +841,12 @@ namespace RepairshopWeb.Migrations
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.RepairOrder", b =>
                 {
-                    b.Navigation("Appointment");
-
                     b.Navigation("Items");
                 });
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Vehicle", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("Billings");
 
                     b.Navigation("RepairOrders");
                 });

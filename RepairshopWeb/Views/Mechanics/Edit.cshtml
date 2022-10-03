@@ -3,9 +3,14 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-<h1>Edit mechanic</h1>
-
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<h1><b>EDIT MECHANIC</b></h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,59 +19,59 @@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="ImageId" />
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
+                <label asp-for="FirstName" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
+                <input asp-for="FirstName" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
+                <label asp-for="LastName" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
+                <input asp-for="LastName" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
+                <label asp-for="Address" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
+                <input asp-for="Address" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PostalCode" class="control-label"></label>
-                <input asp-for="PostalCode" class="form-control" />
+                <label asp-for="PostalCode" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
+                <input asp-for="PostalCode" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
                 <span asp-validation-for="PostalCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
+                <label asp-for="Phone" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
+                <input asp-for="Phone" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <label asp-for="Email" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
+                <input asp-for="Email" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Nif" class="control-label"></label>
-                <input asp-for="Nif" class="form-control" />
+                <label asp-for="Nif" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
+                <input asp-for="Nif" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
                 <span asp-validation-for="Nif" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Niss" class="control-label"></label>
-                <input asp-for="Niss" class="form-control" />
+                <label asp-for="Niss" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
+                <input asp-for="Niss" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
                 <span asp-validation-for="Niss" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdentityDocument" class="control-label"></label>
-                <input asp-for="IdentityDocument" class="form-control" />
+                <label asp-for="IdentityDocument" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
+                <input asp-for="IdentityDocument" class="form-control" style="color: black; font-family: Arial; font-size: small" />
                 <span asp-validation-for="IdentityDocument" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Speciality" class="control-label"></label>
+                <label asp-for="Speciality" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
                 @{var specialities = new string[] { "Electrical and electronics", "Brakes", "Transmission systems", "Maintenance of light and heavy vehicles", "Automotive aesthetics"};}
-                <ejs-combobox asp-for="Speciality" id="speciality" dataSource="specialities"></ejs-combobox>
+                <ejs-combobox asp-for="Speciality" id="speciality" dataSource="specialities" style="color: black; font-family: Arial; font-size: small"></ejs-combobox>
                 <span asp-validation-for="Speciality" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageFile"></label>
-                <input asp-for="ImageFile" type="file" />
+                <label asp-for="ImageFile" style="color: black; font-family: Arial; font-size: small"></label>
+                <input asp-for="ImageFile" type="file" style="color: black; font-family: Arial; font-size: small"/>
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
             <div class="form-group">

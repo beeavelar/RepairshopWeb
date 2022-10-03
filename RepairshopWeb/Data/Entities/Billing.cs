@@ -4,13 +4,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RepairshopWeb.Data.Entities
 {
-    [Table("Appointments")]
-    public class Appointment : IEntity
+    [Table("Billings")]
+    public class Billing : IEntity
     {
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Repair Order Number")]
+        [Display(Name = "Issue Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
+        public DateTime IssueDate { get; set; }
+
+        [Display(Name = "Repair Order ID")]
         public int RepairOrderId { get; set; }
 
         [ForeignKey("RepairOrderId")]
@@ -24,23 +28,18 @@ namespace RepairshopWeb.Data.Entities
         [Range(1, int.MaxValue, ErrorMessage = "You must select a client.")]
         public Client Client { get; set; }
 
-        [Display(Name = "License Plate")]
+        [Display(Name = "Vehicle License Plate")]
         public int VehicleId { get; set; }
 
         [ForeignKey("VehicleId")]
         [Range(1, int.MaxValue, ErrorMessage = "You must select a client.")]
         public Vehicle Vehicle { get; set; }
 
-        [Display(Name = "Appointment Date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
-        public DateTime RepairDate { get; set; }
+        [Display(Name = "Payment Method")]
+        public string PaymentMethod { get; set; }
 
-        [Display(Name = "Alert Repair Date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
-        public DateTime AlertRepairDate { get; set; }
-
-        [Display(Name = "Repair Status")]
-        public string RepairStatus { get; set; }
+        [Display(Name = "Total To Pay")]
+        public RepairOrder TotalToPay { get; set; }
 
         public User User { get; set; }
 

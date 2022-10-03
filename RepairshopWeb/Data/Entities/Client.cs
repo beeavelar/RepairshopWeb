@@ -13,7 +13,6 @@ namespace RepairshopWeb.Data.Entities
 
         [Required]
         [MaxLength(50, ErrorMessage = "The field {0} can contain {1} characteres length.")]
-        //[RegularExpression(@"^[ 0-9a-zA-Z\b]+$'/>", ErrorMessage = "Numbers and special characters are not allowed in the name.")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
@@ -27,12 +26,12 @@ namespace RepairshopWeb.Data.Entities
         public string PostalCode { get; set; }
 
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$", ErrorMessage = "Entered phone format is not valid.")]
-        [Display(Name = "Cellphone")]
+        [Display(Name = "Phone")]
         public int Phone { get; set; }
 
         [Required]
         [EmailAddress]
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
 
         [Required]
@@ -44,7 +43,7 @@ namespace RepairshopWeb.Data.Entities
 
         public ICollection<Vehicle> Vehicles { get; set; }
 
-        public ICollection<Appointment> Appointments { get; set; }
+        public ICollection<Billing> Billings { get; set; }
 
         public User User { get; set; }
 

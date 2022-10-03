@@ -22,7 +22,7 @@ namespace RepairshopWeb.Data
 
         public DbSet<RepairOrderDetailTemp> RepairOrderDetailsTemp { get; set; }
 
-        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Billing> Billiings { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -30,8 +30,8 @@ namespace RepairshopWeb.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Appointment>().HasOne(x => x.Client).WithMany(x => x.Appointments).OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<Appointment>().HasOne(x => x.Vehicle).WithMany(x => x.Appointments).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Billing>().HasOne(x => x.Client).WithMany(x => x.Billings).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Billing>().HasOne(x => x.Vehicle).WithMany(x => x.Billings).OnDelete(DeleteBehavior.NoAction);
             base.OnModelCreating(builder);  
         }
     }
