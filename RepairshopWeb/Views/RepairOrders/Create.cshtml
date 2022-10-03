@@ -13,8 +13,7 @@
 <h1><b>NEW REPAIR ORDER</b></h1>
 <br />
 <p>
-	<a asp-action="AddService" class="btn btn-success">Add Service</a>
-	<a asp-action="ConfirmOrder" class="btn btn-primary" id="btnConfirm">Confirm</a>
+	<a asp-action="AddService" class="btn btn-success" data-toggle="tooltip" title="Add Service"><i class="fa-solid fa-plus"></i></a>
 </p>
 <br />
 <table class="table" style="color: black; font-family: Arial; font-size: small">
@@ -52,13 +51,16 @@
                 	@Html.DisplayFor(modelItem => item.RepairPrice)
             	</td>
             	<td id="@item.Id">
-                	<a asp-action="DeleteItem" asp-route-id="@item.Id" class="btn btn-danger" id="btnDeleteItem"><i class="fa-solid fa-trash-can"></i></a>
+                	<a asp-action="DeleteItem" asp-route-id="@item.Id" class="btn btn-danger" id="btnDeleteItem" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
             	</td>
         	</tr>
     	}
 	</tbody>
 </table>
-            <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i>Back</a>
+<p>
+    <a asp-action="ConfirmOrder" class="btn btn-primary" id="btnConfirm" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></a>
+    <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i>Back</a>
+</p>
 
 <div id="confirmDialog" class="modal fade">
     <div class="modal-dialog modal-sm">

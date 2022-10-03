@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RepairshopWeb.Data.Entities;
+using System.Linq;
 
 namespace RepairshopWeb.Data
 {
@@ -32,7 +33,7 @@ namespace RepairshopWeb.Data
         {
             builder.Entity<Billing>().HasOne(x => x.Client).WithMany(x => x.Billings).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Billing>().HasOne(x => x.Vehicle).WithMany(x => x.Billings).OnDelete(DeleteBehavior.NoAction);
-            base.OnModelCreating(builder);  
+            base.OnModelCreating(builder);
         }
     }
 }

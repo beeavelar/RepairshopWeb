@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Helpers;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -122,11 +123,26 @@ namespace RepairshopWeb.Controllers
         // POST: Services/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var service = await _serviceRepository.GetByIdAsync(id);
-            await _serviceRepository.DeleteAsync(service);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _serviceRepository.DeleteAsync(service);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException != null && ex.InnerException.Message.Contains("DELETE"))
+                {
+                    ViewBag.ErrorTitle = $"{service.Description} is probably being used.";
+                    ViewBag.ErrorMessage = $"{service.Description} cannot be deleted because there are Repair Orders that were made with this service.</br></br>" +
+                        $"Try to first delete all the Repair Orders that are using this service " +
+                        $"and try again to delete the service.";
+                }
+                return View("Error");
+            }
         }
 
         public IActionResult ServiceNotFound()

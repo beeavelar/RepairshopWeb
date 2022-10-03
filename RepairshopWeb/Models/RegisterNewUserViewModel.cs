@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using RepairshopWeb.Data.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace RepairshopWeb.Models
 {
-    public class RegisterNewUserViewModel
+    public class RegisterNewUserViewModel : User
     {
         [Required]
         [Display(Name = "First Name")]
@@ -23,5 +25,8 @@ namespace RepairshopWeb.Models
         [Required]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Photo")]
+        public IFormFile ImageFile { get; set; }
     }
 }

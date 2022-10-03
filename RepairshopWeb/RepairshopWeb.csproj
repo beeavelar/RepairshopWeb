@@ -24,6 +24,7 @@
     <Folder Include="wwwroot\icon\" />
     <Folder Include="wwwroot\images\clients\" />
     <Folder Include="wwwroot\images\mechanics\" />
+    <Folder Include="wwwroot\images\users\" />
     <Folder Include="wwwroot\images\vehicles\" />
     <Folder Include="wwwroot\images\receptionists\" />
   </ItemGroup>
