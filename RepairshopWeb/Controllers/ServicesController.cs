@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Data.Repositories;
@@ -40,6 +41,7 @@ namespace RepairshopWeb.Controllers
             return View(service);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Services/Create
         public IActionResult Create()
         {
@@ -62,6 +64,7 @@ namespace RepairshopWeb.Controllers
             return View(service);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Services/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -106,6 +109,7 @@ namespace RepairshopWeb.Controllers
             return View(service);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: services/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

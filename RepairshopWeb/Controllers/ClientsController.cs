@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace RepairshopWeb.Controllers
 {
-    [Authorize]
     public class ClientsController : Controller
     {
         private readonly IClientRepository _clientRepository;
@@ -47,6 +46,7 @@ namespace RepairshopWeb.Controllers
             return View(client);
         }
 
+        [Authorize(Roles = "Mechanic, Receptionist")]
         // GET: Clients/Create
         public IActionResult Create()
         {
@@ -77,6 +77,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Mechanic, Receptionist")]
         // GET: Clients/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -125,6 +126,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Mechanic, Receptionist")]
         // GET: Clients/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

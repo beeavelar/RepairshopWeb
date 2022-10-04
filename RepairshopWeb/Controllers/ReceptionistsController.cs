@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +50,7 @@ namespace RepairshopWeb.Controllers
             return View(receptionist);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Receptionists/Create
         public IActionResult Create()
         {
@@ -79,6 +81,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Receptionists/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -126,6 +129,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Receptionists/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

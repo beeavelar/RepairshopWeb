@@ -32,6 +32,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
+        //[Authorize(Roles = "Mechanic, Receptionist")]
         //Create do Repair Order
         public async Task<IActionResult> Create()
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -33,7 +34,7 @@ namespace RepairshopWeb.Controllers
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("BackOfficeIndex", "Home");
 
             return View();
         }
@@ -50,7 +51,7 @@ namespace RepairshopWeb.Controllers
                     if (this.Request.Query.Keys.Contains("ReturnUrl"))
                         return Redirect(this.Request.Query["ReturnUrl"].First());
 
-                    return this.RedirectToAction("Index", "Home");
+                    return this.RedirectToAction("BackOfficeIndex", "Home");
                 }
             }
 

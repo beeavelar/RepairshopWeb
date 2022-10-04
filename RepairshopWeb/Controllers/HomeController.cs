@@ -22,7 +22,10 @@ namespace RepairshopWeb.Controllers
         {
             return View();
         }
-
+        public IActionResult BackOfficeIndex()
+        {
+            return View();
+        }
         public IActionResult About()
         {
             return View();
