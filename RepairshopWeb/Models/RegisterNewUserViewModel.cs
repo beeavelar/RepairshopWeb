@@ -23,10 +23,11 @@ namespace RepairshopWeb.Models
         public string Password { get; set; }
 
         [Required]
+        public string Role { get; set; }
+
+        [Required]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "Photo")]
-        public IFormFile ImageFile { get; set; }
     }
 }

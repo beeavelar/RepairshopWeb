@@ -30,6 +30,12 @@
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Role" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
+                @{var roles = new string[] { "Client", "Receptionist", "Mechanic"};}
+                <ejs-combobox asp-for="Role" id="role" dataSource="roles"></ejs-combobox>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <div class="control-section">
                     <div class="control_wrapper TextBox-control-section">
                         <ejs-textbox asp-for="UserName" id="username" placeholder="Username" floatLabelType="Auto"></ejs-textbox>

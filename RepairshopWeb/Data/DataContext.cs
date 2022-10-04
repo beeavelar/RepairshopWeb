@@ -23,7 +23,7 @@ namespace RepairshopWeb.Data
 
         public DbSet<RepairOrderDetailTemp> RepairOrderDetailsTemp { get; set; }
 
-        public DbSet<Billing> Billiings { get; set; }
+        public DbSet<Billing> Billings { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {

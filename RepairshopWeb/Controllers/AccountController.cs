@@ -65,6 +65,7 @@ namespace RepairshopWeb.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Register()
         {
             return View();

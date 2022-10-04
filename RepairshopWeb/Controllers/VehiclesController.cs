@@ -50,7 +50,7 @@ namespace RepairshopWeb.Controllers
             return View(vehicle);
         }
 
-        [Authorize(Roles = "Mechanic, Receptionist")]
+        //[Authorize(Roles = "Mechanic, Receptionist")]
         // GET: Vehicles/Create
         public IActionResult Create()
         {
@@ -75,7 +75,7 @@ namespace RepairshopWeb.Controllers
             return View(vehicle);
         }
 
-        [Authorize(Roles = "Mechanic, Receptionist")]
+        //[Authorize(Roles = "Mechanic, Receptionist")]
         // GET: Vehicles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -121,7 +121,7 @@ namespace RepairshopWeb.Controllers
             return View(vehicle);
         }
 
-        [Authorize(Roles = "Mechanic, Receptionist")]
+        //[Authorize(Roles = "Mechanic, Receptionist")]
         // GET: Vehicles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

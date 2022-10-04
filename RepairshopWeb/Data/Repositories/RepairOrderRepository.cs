@@ -171,5 +171,10 @@ namespace RepairshopWeb.Data.Repositories
         {
             return await _context.RepairOrders.FindAsync(id);
         }
+
+        public IQueryable GetAllWithUsers()
+        {
+            return _context.RepairOrders.Include(ro => ro.User);
+        }
     }
 }

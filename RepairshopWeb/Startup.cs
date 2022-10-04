@@ -80,6 +80,8 @@ namespace RepairshopWeb
 
             services.AddScoped<IRepairOrderRepository, RepairOrderRepository>();
 
+            services.AddScoped<IBillingRepository, BillingRepository>();
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Account/NotAuthorized";

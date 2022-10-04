@@ -44,22 +44,26 @@
     <!-- end loader -->
     <div id="mySidepanel" class="sidepanel">
         <a class="closebtn" onclick="closeNav()" style="color:white;">×</a>
+
         <a class="active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-        <a asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
-        <a asp-area="" asp-controller="Vehicles" asp-action="Index">Vehicles</a>
-        <a asp-area="" asp-controller="Mechanics" asp-action="Index">Mechanics</a>
-        <a asp-area="" asp-controller="Receptionists" asp-action="Index">Receptionists</a>
-        <a asp-area="" asp-controller="Services" asp-action="Index">Services</a>
-        <a asp-area="" asp-controller="RepairOrders" asp-action="Index">Repair Orders</a>
 
         @if (this.User.Identity.IsAuthenticated)
         {
-            <a asp-area="" asp-controller="Account" asp-action="ChangeUser">My Account</a>
-            <a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+            <a class="active" asp-area="" asp-controller="Home" asp-action="BackOfficeIndex">Dashboard</a>
+            <a asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
+            <a asp-area="" asp-controller="Vehicles" asp-action="Index">Vehicles</a>
+            <a asp-area="" asp-controller="Mechanics" asp-action="Index">Mechanics</a>
+            <a asp-area="" asp-controller="Receptionists" asp-action="Index">Receptionists</a>
+            <a asp-area="" asp-controller="Services" asp-action="Index">Services</a>
+            <a asp-area="" asp-controller="RepairOrders" asp-action="Index">Repair Orders</a>
+            <a asp-area="" asp-controller="Billings" asp-action="Index">Billing</a>
+            <a asp-area="" asp-controller="Account" asp-action="Register">New Account</a>
+            <a class="active" asp-area="" asp-controller="Account" asp-action="ChangeUser">My Account</a>
+            <a class="active" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
         }
         else
         {
-            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+            <a class="active" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
         }
     </div>
     <!-- header -->
@@ -112,8 +116,9 @@
                         </ul>
                     </div>
                     <div class="col-md-12">
-                        <ul class="top_infomation">
-                            <li> <a style="color:white;"><i class="fa fa-phone" aria-hidden="true"></i>Call Now +351 987654321</a></li>
+                       <ul class="top_infomation">
+                            <li style="color: white"><b>WORK SCHEDULE:</b><br />From Monday to Friday<br />08:00 - 18:00<br /><br /><b>ADDRESS:</b><br />Rua Domingos Paiva, 44<br />2363-321 Lisboa</li>
+                            <li> <a style="color:white;"><i class="fa fa-phone" aria-hidden="true"></i>Call Now +01 123467890</a></li>
                             <li> <a href="https://www.cinel.pt/appv2" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i> CINEL</a></li>
                             <li> <a style="color:white;"><i class="fa fa-envelope" aria-hidden="true"></i> avelar.dbr@gmail.com</a></li>
                         </ul>

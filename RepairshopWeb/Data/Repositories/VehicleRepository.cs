@@ -31,7 +31,7 @@ namespace RepairshopWeb.Data.Repositories
 
             list.Insert(0, new SelectListItem
             {
-                Text = "Select a vehiclle licencse plate...",
+                Text = "Select a vehicle licencse plate...",
                 Value = "0"
             });
 

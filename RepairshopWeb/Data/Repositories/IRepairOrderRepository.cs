@@ -28,5 +28,7 @@ namespace RepairshopWeb.Data.Repositories
 
         //Método para deletar a Repair Order 
         Task DeleteRepairOrderAsync(int id);
+
+        public IQueryable GetAllWithUsers();
     }
 }

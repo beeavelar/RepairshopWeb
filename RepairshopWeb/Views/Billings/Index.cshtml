@@ -1,0 +1,66 @@
+﻿@model IEnumerable<RepairshopWeb.Data.Entities.Billing>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<h1><b>BILLINGS</b></h1>
+<br />
+<p>
+    <a asp-action="Create" class="btn btn-primary" data-toggle="tooltip" title="Create New"><i class="fa-solid fa-plus"></i></a>
+</p>
+<br />
+<table class="table"  style="color: black; font-family: Arial; font-size: small">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IssueDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RepairOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentMethod)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IssueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RepairOrder.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vehicle.LicensePlate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMethod)
+            </td>
+            <td>
+               <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning" data-toggle="tooltip" title="Edit"><i class="fa-solid fa-user-pen"></i></a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info" data-toggle="tooltip" title="Details"><i class="fa-solid fa-bars"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
