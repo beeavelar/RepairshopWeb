@@ -35,7 +35,6 @@ namespace RepairshopWeb.Data.Repositories
             });
 
             return list;
-
         }
     }
 }

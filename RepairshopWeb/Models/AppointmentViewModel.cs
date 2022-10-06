@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RepairshopWeb.Data.Entities;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace RepairshopWeb.Models
@@ -13,6 +14,6 @@ namespace RepairshopWeb.Models
 
         [Display(Name = "Alert Repair Date")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm tt}", ApplyFormatInEditMode = false)]
-        public DateTime AlertRepairDate { get; set; }
+        public DateTime AlertDate { get; set; }
     }
 }

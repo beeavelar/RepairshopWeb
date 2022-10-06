@@ -17,24 +17,24 @@ namespace RepairshopWeb.Data.Entities
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm tt}", ApplyFormatInEditMode = false)]
         public DateTime RepairOrderDate { get; set; }
 
-        [Display(Name = "Appointment Date")]
+        [Display(Name = "Appoin. Date")]
         public DateTime? Appointment { get; set; }
 
         [Display(Name = "Alert Appoin. Date")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm tt}", ApplyFormatInEditMode = false)]
         public DateTime? AlertDate { get; set; }
 
-        [Display(Name = "License Plate")]
+        [Display(Name = "Vehicle")]
         public int VehicleId { get; set; }
 
         [ForeignKey("VehicleId")]
         [Range(1, int.MaxValue, ErrorMessage = "You must select a vehicle license plate.")]
         public Vehicle Vehicle { get; set; }
 
-        [Display(Name = "Total Services To Do")]
+        [Display(Name = "Total Services to Do")]
         public int TotalServicesToDo => Items == null ? 0 : Items.Count();
 
-        [Display(Name = "Total To Pay")]
+        [Display(Name = "Total to Pay")]
         [DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal TotalToPay => Items == null ? 0 : Items.Sum(i => i.RepairPrice);
 

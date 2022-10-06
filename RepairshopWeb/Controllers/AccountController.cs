@@ -55,7 +55,7 @@ namespace RepairshopWeb.Controllers
                 }
             }
 
-            this.ModelState.AddModelError(string.Empty, "Failed to login!");
+            ViewBag.Message = "Failed to login! Please enter correct login and password."; 
             return View(model);
         }
 
@@ -84,10 +84,13 @@ namespace RepairshopWeb.Controllers
                         FirstName = model.FirstName,
                         LastName = model.LastName,
                         Email = model.Username,
+                        Role = model.Role,
                         UserName = model.Username
                     };
 
                     var result = await _userHelper.AddUserAsync(user, model.Password);
+
+                    await _userHelper.AddUserToRoleAsync(user, model.Role);
 
                     if (result != IdentityResult.Success)
                     {
@@ -102,18 +105,16 @@ namespace RepairshopWeb.Controllers
                         Username = model.Username
                     };
 
-                    var result2 = await _userHelper.LoginAsync(loginViewModel);
-
                     await _emailHelper.SendEmail($"{model.Username}", $"Welcome to RepairShop", $"Mr. /Ms. {user.FirstName} {user.LastName},<br/><br/> " +
-                      $"Welcome to RepairShop!<br/>" +
+                      $"Welcome to RepairShop!<br/><br/> Here's your login and password: <br/><br/> Login: {model.UserName}<br/>Password:{model.Password}" +
+                        "<br/><br/>For your security it is recommended that you change your password.<br/>To do this go to: <b>My Account >> Change password</b>" +
                         "<br/><br/>Best regards, " +
                         "<br/>RepairShop");
 
-                    if (result2.Succeeded)
-                        return RedirectToAction("Index", "Home");
-
-                    ModelState.AddModelError(string.Empty, "The user couldn´t be logged.");
+                    ViewBag.Message = "User created successfully!";
+                    return this.View();
                 }
+
             }
             return View(model);
         }
@@ -148,7 +149,7 @@ namespace RepairshopWeb.Controllers
                     var response = await _userHelper.UpdateUserAsync(user);
 
                     if (response.Succeeded)
-                        ViewBag.UserMessage = "User updated!";
+                        this.ViewBag.Message = "Your data has been updated!";
 
                     else
                         ModelState.AddModelError(string.Empty, response.Errors.FirstOrDefault().Description);
@@ -160,6 +161,29 @@ namespace RepairshopWeb.Controllers
         public IActionResult ChangePassword()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+
+                if (user != null)
+                {
+                    var result = await _userHelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+
+                    if (result.Succeeded)
+                    {
+                        await _userHelper.LogoutAsync();
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                        ViewBag.Message = "Invalid password! Please, enter your current password correctly.";
+                }
+            }
+            return View(model);
         }
 
 
@@ -205,29 +229,6 @@ namespace RepairshopWeb.Controllers
             return BadRequest();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
-
-                if (user != null)
-                {
-                    var result = await _userHelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-
-                    if (result.Succeeded)
-                    {
-                        await _userHelper.LogoutAsync();
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                        this.ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault().Description);
-                }
-            }
-            return View(model);
-        }
-
         public IActionResult RecoverPassword()
         {
             return View();
@@ -249,8 +250,7 @@ namespace RepairshopWeb.Controllers
 
                 var link = this.Url.Action("ResetPassword", "Account", new { token = myToken }, protocol: HttpContext.Request.Scheme);
 
-
-                await _emailHelper.SendEmail(user.Email, "RepairShop Reset Password",
+                await _emailHelper.SendEmail(user.Email, "RepairShop Reset Password<br/>",
                        $"Mr. /Mrs. {user.FirstName} {user.LastName},<br/> " +
                        $"To reset your password click on the link below:<br/><br/>" +
                        $"<a href = \"{link}\">Reset Password</a>" +
@@ -288,7 +288,7 @@ namespace RepairshopWeb.Controllers
                 return View(model);
             }
 
-            this.ViewBag.Message = "User not found";
+            this.ViewBag.Message = "User not found!";
             return View(model);
         }
 

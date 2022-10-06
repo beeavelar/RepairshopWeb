@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RepairshopWeb.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class RepairOrdersController : Controller
     {
         private readonly IRepairOrderRepository _repairOrderRepository;
@@ -64,6 +64,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
+        //Delete item from RepairOrderDetailTemp --> Before confirm
         public async Task<IActionResult> DeleteItem(int? id)
         {
             if (id == null)
@@ -73,6 +74,7 @@ namespace RepairshopWeb.Controllers
             return RedirectToAction("Create");
         }
 
+        //Delete Repair Order from RepoairOrders --> After confirm
         public async Task<IActionResult> DeleteRepairOrder(int? id)
         {
             if (id == null)
@@ -114,7 +116,7 @@ namespace RepairshopWeb.Controllers
             {
                 Id = repairOrder.Id,
                 RepairDate = DateTime.Today,
-                AlertRepairDate = DateTime.Today
+                AlertDate = DateTime.Today
             };
 
             return View(model);
@@ -127,6 +129,38 @@ namespace RepairshopWeb.Controllers
             if (ModelState.IsValid)
             {
                 await _repairOrderRepository.AppointementRepairOrder(model);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        //Get do Repair Order Status - Faz aparecer a view
+        public async Task<IActionResult> RepairStatus(int? id)
+        {
+            if (id == null)
+                return new NotFoundViewResult("ItemNotFound");
+
+            var repairOrder = await _repairOrderRepository.GetRepairOrderAsync(id.Value);
+
+            if (repairOrder == null)
+                return new NotFoundViewResult("ItemNotFound");
+
+            var model = new RepairOrderStatusViewModel
+            {
+                Id = repairOrder.Id,
+                RepairStatus = repairOrder.RepairStatus
+            };
+
+            return View(model);
+        }
+
+        //Post do Repair Order Status - grava as informações
+        [HttpPost]
+        public async Task<IActionResult> RepairStatus(RepairOrderStatusViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _repairOrderRepository.StatusRepairOrder(model);
                 return RedirectToAction("Index");
             }
             return View();

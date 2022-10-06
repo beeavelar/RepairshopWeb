@@ -24,6 +24,9 @@ namespace RepairshopWeb.Data.Repositories
         Task<bool> ConfirmRepairOrderAsync(string userName);
 
         Task AppointementRepairOrder(AppointmentViewModel model);
+
+        Task StatusRepairOrder(RepairOrderStatusViewModel model);
+
         Task<RepairOrder> GetRepairOrderAsync(int id);  //Buscar as RO por id
 
         //Método para deletar a Repair Order 

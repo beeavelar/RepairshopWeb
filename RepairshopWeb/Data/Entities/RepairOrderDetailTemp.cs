@@ -9,7 +9,7 @@ namespace RepairshopWeb.Data.Entities
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Vehicle License Plate")]
+        [Display(Name = "VehicleId")]
         public int VehicleId { get; set; }
 
         [ForeignKey("VehicleId")]
@@ -23,7 +23,7 @@ namespace RepairshopWeb.Data.Entities
         [Range(1, int.MaxValue, ErrorMessage = "You must select a service.")]
         public Service Service { get; set; }
 
-        [Display(Name = "Mechanic Name")]
+        [Display(Name = "Mechanic")]
         public int MechanicId { get; set; }
 
         [ForeignKey("MechanicId")]

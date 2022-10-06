@@ -162,7 +162,17 @@ namespace RepairshopWeb.Data.Repositories
                 return;
 
             repairOrder.Appointment = model.RepairDate;
-            repairOrder.AlertDate = model.AlertRepairDate;
+            repairOrder.AlertDate = model.AlertDate;
+            _context.RepairOrders.Update(repairOrder);
+            await _context.SaveChangesAsync();
+        }
+        public async Task StatusRepairOrder(RepairOrderStatusViewModel model)
+        {
+            var repairOrder = await _context.RepairOrders.FindAsync(model.Id);
+            if (repairOrder == null)
+                return;
+
+            repairOrder.RepairStatus = model.RepairStatus;
             _context.RepairOrders.Update(repairOrder);
             await _context.SaveChangesAsync();
         }

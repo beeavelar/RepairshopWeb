@@ -10,57 +10,92 @@
 <br />
 <br />
 <br />
-<h1><b>BILLINGS</b></h1>
 <br />
 <p>
-    <a asp-action="Create" class="btn btn-primary" data-toggle="tooltip" title="Create New"><i class="fa-solid fa-plus"></i></a>
+    <a asp-action="Create" class="btn btn-primary" data-toggle="tooltip" title="Create New"><i class="fa-solid fa-plus"></i> Create New</a>
 </p>
 <br />
-<table class="table"  style="color: black; font-family: Arial; font-size: small">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IssueDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepairOrder)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Client)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vehicle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentMethod)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IssueDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RepairOrder.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vehicle.LicensePlate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentMethod)
-            </td>
-            <td>
-               <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning" data-toggle="tooltip" title="Edit"><i class="fa-solid fa-user-pen"></i></a> |
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info" data-toggle="tooltip" title="Details"><i class="fa-solid fa-bars"></i></a> |
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
-            </td>
-        </tr>
+<div class="row" style="color: black; font-family: Arial; font-size: small;">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title"><b>BILLINGS</b></h1>
+            </div>
+            <br />
+            <div>
+                <table id="MyTable" class="table table-hover table-striped">
+                    <thead style="text-transform: uppercase">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IssueDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RepairOrder)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Client)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nif)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Vehicle)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PaymentMethod)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IssueDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RepairOrder.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Client.FullName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nif)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Vehicle.LicensePlate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PaymentMethod)
+                                </td>
+                                <td style="text-align:right">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning" data-toggle="tooltip" title="Edit"><i class="fa-solid fa-user-pen"></i></a> |
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info" data-toggle="tooltip" title="Details"><i class="fa-solid fa-bars"></i></a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a> |
+                                    <a asp-action="Print" asp-route-id="@item.Id" class="btn btn-secondary" data-toggle="tooltip" title="Print"><i class="fa-solid fa-print"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* Load datatable css *@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
+
+@* Load datatable js *@
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#MyTable').DataTable();
+        });
+    </script>
 }
-    </tbody>
-</table>

@@ -21,5 +21,8 @@ namespace RepairshopWeb.Data.Entities
         [Display(Name = "Full Name")]
         public string FullName => $"{FirstName} {LastName}";
 
+        [Display(Name = "Select a role to the new user: ")]
+        public string Role { get; set; }
+
     }
 }

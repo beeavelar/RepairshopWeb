@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using RepairshopWeb.Data.Entities;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RepairshopWeb.Models
@@ -21,9 +23,6 @@ namespace RepairshopWeb.Models
         [Required]
         [MinLength(6)]
         public string Password { get; set; }
-
-        [Required]
-        public string Role { get; set; }
 
         [Required]
         [Compare("Password")]

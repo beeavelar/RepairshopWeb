@@ -11,7 +11,7 @@ namespace RepairshopWeb.Data.Entities
         public int Id { get; set; }
 
         [Display(Name = "Issue Date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm tt}", ApplyFormatInEditMode = false)]
         public DateTime IssueDate { get; set; }
 
         [Display(Name = "Repair Order ID")]
@@ -23,6 +23,9 @@ namespace RepairshopWeb.Data.Entities
 
         [Display(Name = "Client Name")]
         public int ClientId { get; set; }
+
+        [Display(Name = "Nif")]
+        public int Nif { get; set; }
 
         [ForeignKey("ClientId")]
         [Range(1, int.MaxValue, ErrorMessage = "You must select a client.")]
@@ -39,7 +42,8 @@ namespace RepairshopWeb.Data.Entities
         public string PaymentMethod { get; set; }
 
         [Display(Name = "Total To Pay")]
-        public RepairOrder TotalToPay { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C2}")]
+        public decimal TotalToPay { get; set; }
 
         public User User { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿@model RepairshopWeb.Data.Entities.Billing
 
 @{
-    ViewData["Title"] = "Createn new billing";
+    ViewData["Title"] = "Create new billing";
 }
 <br />
 <br />
@@ -40,7 +40,7 @@
             <div class="form-group">
                 <label asp-for="PaymentMethod" style="color: black; font-family: Arial; font-size: small"></label>
                 @{var payMethods = new string[] { "Cash", "Credit card", "MB WAY", "Bank transfer"};}
-                <ejs-combobox asp-for="PaymentMethod" id="speciality" dataSource="payMethods"></ejs-combobox>
+                <ejs-combobox asp-for="PaymentMethod" id="paymentmethod" dataSource="payMethods"></ejs-combobox>
                 <span asp-validation-for="PaymentMethod" class="text-danger"></span>
             </div>
             <div class="form-group">

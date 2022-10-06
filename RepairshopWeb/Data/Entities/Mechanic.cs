@@ -40,7 +40,7 @@ namespace RepairshopWeb.Data.Entities
         [Display(Name = "NISS")]
         public int? Niss { get; set; }
 
-        [Display(Name = "ID Number")]
+        [Display(Name = "ID Nº")]
         public string IdentityDocument { get; set; }
 
         public string Speciality { get; set; }
@@ -56,7 +56,7 @@ namespace RepairshopWeb.Data.Entities
            ? $"https://repairshopweb.azurewebsites.net/images/noimage.jpg"
            : $"https://repairshodebora.blob.core.windows.net/mechanics/{ImageId}";
 
-        [Display(Name = "Mechanic Name")]
+        [Display(Name = "Name")]
         public string FullName => $"{FirstName} {LastName}";
     }
 }

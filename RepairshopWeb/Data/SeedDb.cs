@@ -61,7 +61,7 @@ namespace RepairshopWeb.Data
             {
                 AddClient("Miguel", "Mendes", "miguel@gmail.com", 28373827, user);
                 AddClient("Pedro", "Rodrigues", "pedro@gmail.com", 27383728, user);
-                AddClient("Karen", "Borges", "karen@gmail.com", 27384738, user);
+                AddClient("Debora", "Avelar", "avelar.dbr@gmail.com", 27384738, user);
                 AddClient("Maria", "Lopes", "maria@gmail.com", 26374892, user);
                 AddClient("Renata", "Fernandes", "renata@gmail.com", 20394839, user);
                 AddClient("Amélie", "Poulain", "amelie@gmail.com", 26373849, user);
@@ -79,7 +79,7 @@ namespace RepairshopWeb.Data
             if (!_context.Receptionists.Any())
             {
                 AddReceptionist("Juliana", "Lopes", 938273829, 273625267, user);
-                AddReceptionist("Gabriela", "Brito", 938283728, 263762662, user);
+                AddReceptionist("Maria", "Rodrigues", 938283728, 263762662, user);
                 AddReceptionist("Gustavo", "Almeida", 938273827, 282736222, user);
                 await _context.SaveChangesAsync();
             }
@@ -91,15 +91,6 @@ namespace RepairshopWeb.Data
                 AddService("Troca de freios", 100, user);
                 await _context.SaveChangesAsync();
             }
-
-            //if (!_context.Vehicles.Any())
-            //{
-            //    AddVehicle("11-AA-11", user);
-            //    AddVehicle("22-BB-22", user);
-            //    AddVehicle("33-CC-33", user);
-            //    await _context.SaveChangesAsync();
-            //}
-
         }
         private void AddClient(string firstname, string lastname, string email, int nif, User user)
         {
@@ -145,14 +136,5 @@ namespace RepairshopWeb.Data
                 User = user
             });
         }
-
-        //private void AddVehicle(string licensePlate, User user)
-        //{
-        //    _context.Vehicles.Add(new Vehicle
-        //    {
-        //        LicensePlate = licensePlate,
-        //        User = user
-        //    });
-        //}
     }
 }

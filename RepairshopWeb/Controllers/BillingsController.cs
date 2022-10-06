@@ -15,14 +15,14 @@ namespace RepairshopWeb.Controllers
     public class BillingsController : Controller
     {
         private readonly DataContext _context;
-        private readonly IBillingRepository _vehicleRepository;
+        private readonly IBillingRepository _billingRepository;
         private readonly IUserHelper _userHelper;
 
         public BillingsController(DataContext context,
-            IBillingRepository vehicleRepository, IUserHelper userHelper)
+            IBillingRepository billingRepository, IUserHelper userHelper)
         {
             _context = context;
-            _vehicleRepository = vehicleRepository;
+            _billingRepository = billingRepository;
             _userHelper = userHelper;
         }
 
@@ -37,19 +37,16 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("BillingNotFound");
 
             var billing = await _context.Billings
                 .Include(b => b.Client)
                 .Include(b => b.RepairOrder)
                 .Include(b => b.Vehicle)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (billing == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("BillingNotFound");
 
             return View(billing);
         }
@@ -68,12 +65,12 @@ namespace RepairshopWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IssueDate,RepairOrderId,ClientId,VehicleId,PaymentMethod")] Billing billing)
+        public async Task<IActionResult> Create(Billing billing)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(billing);
-                await _context.SaveChangesAsync();
+                billing.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                await _billingRepository.CreateAsync(billing);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "FullName", billing.ClientId);
@@ -86,15 +83,13 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("BillingNotFound");
 
-            var billing = await _context.Billings.FindAsync(id);
+            var billing = await _billingRepository.GetByIdAsync(id.Value);
+
             if (billing == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("BillingNotFound");
+
             ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "FullName", billing.ClientId);
             ViewData["RepairOrderId"] = new SelectList(_context.RepairOrders, "Id", "Id", billing.RepairOrderId);
             ViewData["VehicleId"] = new SelectList(_context.Vehicles, "Id", "LicensePlate", billing.VehicleId);
@@ -106,30 +101,24 @@ namespace RepairshopWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IssueDate,RepairOrderId,ClientId,VehicleId,PaymentMethod")] Billing billing)
+        public async Task<IActionResult> Edit(int id, Billing billing)
         {
             if (id != billing.Id)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("BillingNotFound");
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(billing);
-                    await _context.SaveChangesAsync();
+                    billing.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                    await _billingRepository.UpdateAsync(billing);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BillingExists(billing.Id))
-                    {
-                        return NotFound();
-                    }
+                    if (!await _billingRepository.ExistAsync(billing.Id))
+                        return new NotFoundViewResult("BillingNotFound");
                     else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -143,9 +132,7 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("BillingNotFound");
 
             var billing = await _context.Billings
                 .Include(b => b.Client)
@@ -153,9 +140,7 @@ namespace RepairshopWeb.Controllers
                 .Include(b => b.Vehicle)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (billing == null)
-            {
-                return NotFound();
-            }
+                return new NotFoundViewResult("BillingNotFound");
 
             return View(billing);
         }
@@ -165,15 +150,14 @@ namespace RepairshopWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var billing = await _context.Billings.FindAsync(id);
-            _context.Billings.Remove(billing);
-            await _context.SaveChangesAsync();
+            var billing = await _billingRepository.GetByIdAsync(id);
+            await _billingRepository.DeleteAsync(billing);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BillingExists(int id)
+        public IActionResult BillingNotFound()
         {
-            return _context.Billings.Any(e => e.Id == id);
+            return View();
         }
     }
 }

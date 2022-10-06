@@ -47,6 +47,13 @@
 
         <a class="active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <a href="#services">Our Services</a>
+            <a href="#contact_us">Contact us</a>
+            <a href="#about">About</a>
+        }
+
         @if (this.User.Identity.IsAuthenticated)
         {
             <a class="active" asp-area="" asp-controller="Home" asp-action="BackOfficeIndex">Dashboard</a>
@@ -89,7 +96,6 @@
         </div>
     </header>
     <!-- end header inner -->
-
     <!--- RenderBody-->
     <div class="container">
         <main role="main" class="pb-3">
@@ -116,7 +122,7 @@
                         </ul>
                     </div>
                     <div class="col-md-12">
-                       <ul class="top_infomation">
+                        <ul class="top_infomation">
                             <li style="color: white"><b>WORK SCHEDULE:</b><br />From Monday to Friday<br />08:00 - 18:00<br /><br /><b>ADDRESS:</b><br />Rua Domingos Paiva, 44<br />2363-321 Lisboa</li>
                             <li> <a style="color:white;"><i class="fa fa-phone" aria-hidden="true"></i>Call Now +01 123467890</a></li>
                             <li> <a href="https://www.cinel.pt/appv2" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i> CINEL</a></li>

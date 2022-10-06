@@ -30,6 +30,7 @@ namespace RepairshopWeb.Controllers
             _converterHelper = converterHelper;
         }
 
+        //[AllowAnonymous]
         // GET: Mechanics
         public IActionResult Index()
         {
