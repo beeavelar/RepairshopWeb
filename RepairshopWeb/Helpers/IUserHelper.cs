@@ -15,6 +15,10 @@ namespace RepairshopWeb.Helpers
 
         Task LogoutAsync();
 
+        Task<bool> IsEmailConfirmedAsync(User user);
+
+        Task<IdentityResult> EmailConfirmAsync(User user, string token);
+
         Task<IdentityResult> UpdateUserAsync(User user);
 
         Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword);
@@ -30,6 +34,8 @@ namespace RepairshopWeb.Helpers
         Task<string> GeneratePasswordResetTokenAsync(User user);
 
         Task<IdentityResult> ResetPasswordAsync(User user, string token, string password);
+
+        Task<string> GenerateConfirmEmailTokenAsync(User user);
 
     }
 }

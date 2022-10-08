@@ -46,6 +46,5 @@ namespace RepairshopWeb.Data.Entities
         public decimal TotalToPay { get; set; }
 
         public User User { get; set; }
-
     }
 }

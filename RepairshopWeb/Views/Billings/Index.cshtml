@@ -36,13 +36,16 @@
                                 @Html.DisplayNameFor(model => model.Client)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Nif)
-                            </th>
-                            <th>
                                 @Html.DisplayNameFor(model => model.Vehicle)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.Nif)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.PaymentMethod)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TotalToPay)
                             </th>
                             <th></th>
                         </tr>
@@ -62,19 +65,22 @@
                                     @Html.DisplayFor(modelItem => item.Client.FullName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Nif)
+                                    @Html.DisplayFor(modelItem => item.Vehicle.LicensePlate)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Vehicle.LicensePlate)
+                                    @Html.DisplayFor(modelItem => item.Nif)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.PaymentMethod)
                                 </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalToPay)
+                                </td>
                                 <td style="text-align:right">
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning" data-toggle="tooltip" title="Edit"><i class="fa-solid fa-user-pen"></i></a> |
                                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info" data-toggle="tooltip" title="Details"><i class="fa-solid fa-bars"></i></a> |
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a> |
-                                    <a asp-action="Print" asp-route-id="@item.Id" class="btn btn-secondary" data-toggle="tooltip" title="Print"><i class="fa-solid fa-print"></i></a>
+                                    <a asp-action="Print" asp-route-id="@item.Id" class="btn btn-secondary" data-toggle="tooltip" title="Print"><i class="fa-solid fa-print"></i></a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a> 
                                 </td>
                             </tr>
                         }

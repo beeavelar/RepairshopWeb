@@ -29,27 +29,39 @@
             </div>
             <div class="form-group">
                 <label asp-for="RepairOrderId" style="color: black; font-family: Arial; font-size: small"></label>
-            	<select asp-for="RepairOrderId" asp-items="ViewBag.RepairOrderId" style= "width:100%; font-family: Arial; height: 30px"></select>
-            	<span asp-validation-for="RepairOrderId" class="text-danger"></span>
+                <select asp-for="RepairOrderId" asp-items="ViewBag.RepairOrderId" style="width:100%; font-family: Arial; height: 30px"></select>
+                <span asp-validation-for="RepairOrderId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ClientId" style="color: black; font-family: Arial; font-size: small"></label>
-            	<select asp-for="ClientId" asp-items="ViewBag.ClientId" style= "width:100%; font-family: Arial; height: 30px"></select>
-            	<span asp-validation-for="ClientId" class="text-danger"></span>
+                <select asp-for="ClientId" asp-items="ViewBag.ClientId" style="width:100%; font-family: Arial; height: 30px"></select>
+                <span asp-validation-for="ClientId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="VehicleId" style="color: black; font-family: Arial; font-size: small"></label>
-            	<select asp-for="VehicleId" asp-items="ViewBag.VehicleId" style= "width:100%; font-family: Arial; height: 30px"></select>
-            	<span asp-validation-for="VehicleId" class="text-danger"></span>
+                <select asp-for="VehicleId" asp-items="ViewBag.VehicleId" style="width:100%; font-family: Arial; height: 30px"></select>
+                <span asp-validation-for="VehicleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nif" style="color: black; font-family: Arial; font-size: small">NIF</label> <br />
+                <input asp-for="Nif" class="form-control" maxlength="9" minlength="9" style="color: black; font-family: Arial; font-size: small; font-weight: bold;" />
+                <span asp-validation-for="Nif" class="text-warning"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PaymentMethod" style="color: black; font-family: Arial; font-size: small"></label>
-                @{var payMethods = new string[] { "Cash", "Credit card", "MB WAY", "Bank transfer"};}
+                @{
+                    var payMethods = new string[] { "Cash", "Credit card", "MB WAY", "Bank transfer" };
+                }
                 <ejs-combobox asp-for="PaymentMethod" id="speciality" dataSource="payMethods"></ejs-combobox>
                 <span asp-validation-for="PaymentMethod" class="text-danger"></span>
             </div>
             <div class="form-group">
-               <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
+                <label asp-for="TotalToPay" class="control-label" style="color: black; font-family: Arial; font-size: small; font-weight: bold;"></label>
+                <input asp-for="TotalToPay" class="form-control" style="color: black; font-family: Arial; font-size: small" />
+                <span asp-validation-for="TotalToPay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
                 <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
             </div>
         </form>
@@ -57,41 +69,43 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
     @{
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
 
-        <script>
-            $(function() {
-                $("#datepicker").datetimepicker(
-                    {
-                        showClose: true,
-                        sideBySide: true,
-                        showClear: true,
-                        format: 'DD-MM-YYYY HH:mm',
+    <script>
+                    $(function() {
+                        $("#datepicker").datetimepicker(
+                            {
+                                showClose: true,
+                                sideBySide: true,
+                                showClear: true,
+                                format: 'DD-MM-YYYY HH:mm',
 
-                        locale: moment.locale('pt-Pt')
+                                locale: moment.locale('pt-Pt')
 
-                });
+                            });
 
-                $("#datepicker2").datetimepicker(
-                    {
-                        showClose: true,
-                        sideBySide: true,
-                        showClear: true,
-                        format: 'DD-MM-YYYY HH:mm',
+                        $("#datepicker2").datetimepicker(
+                            {
+                                showClose: true,
+                                sideBySide: true,
+                                showClear: true,
+                                format: 'DD-MM-YYYY HH:mm',
 
-                        locale: moment.locale('pt-Pt')
+                                locale: moment.locale('pt-Pt')
 
-                });
-            });
-        </script>
+                            });
+                    });
+    </script>
     }
-}
+    }

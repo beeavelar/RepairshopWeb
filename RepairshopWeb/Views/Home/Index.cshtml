@@ -118,47 +118,88 @@
         </div>
     </div>
 </div>
+<br />
+<br />
+<br />
+<br />
 <!-- end services -->
 <!-- choose -->
-<div class="choose">
+<div id="choose">
     <div class="container">
-        <div class="row grid">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="titlepage text_align_center">
-                            <h2><img src="images/heading.png" alt="#" />Why choose us?</h2>
-                            <br />
-                            <p style="color: black; text-align: center; font-size: medium">We have a team of highly qualified professionals and we are certified by the best auto repair centers.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <ul class="top_infomation">
-                            <li>
-                                <figure><img src="images/c1.png" alt="#" style="width: 180px; height: 180px" /></figure>
-                            </li>
-                            <li>
-                                <figure><img src="images/c2.png" alt="#" style="width: 180px; height: 180px" /></figure>
-                            </li>
-                            <li>
-                                <figure><img src="~/images/c3.png" alt="#" style="width: 180px; height: 180px" /></figure>
-                            </li>
-                            <li>
-                                <figure><img src="~/images/c5.png" alt="#" style="width: 180px; height: 160px" /></figure>
-                            </li>
-                        </ul>
-                        <ul class="top_infomation">
-
-                        </ul>
-                    </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="titlepage text_align_center">
+                    <h2><img src="images/heading.png" alt="#" />Why choose us?</h2>
+                    <br />
+                    <br />
+                    <p style="color: black; font-size:larger">Wé are certified by the best auto repair centers.</p>
                 </div>
+            </div>
+            <div class="col-md-12">
+                <ul class="top_infomation">
+                    <li>
+                        <figure><img src="images/c1.png" alt="#" style="width: 180px; height: 180px" /></figure>
+                    </li>
+                    <li>
+                        <figure><img src="images/c2.png" alt="#" style="width: 180px; height: 180px" /></figure>
+                    </li>
+                    <li>
+                        <figure><img src="~/images/c3.png" alt="#" style="width: 180px; height: 180px" /></figure>
+                    </li>
+                    <li>
+                        <figure><img src="~/images/c5.png" alt="#" style="width: 180px; height: 160px" /></figure>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
 <br />
 <br />
+<br />
+<br />
 <!-- end choose -->
+<!-- mechanics team -->
+<div id="mechanic">
+    <div class="container" style="align-content:center">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="titlepage text_align_center">
+                    <p style="color: black; font-size: larger">We have mechanics with the highest level of qualification and experience.</p>
+                </div>
+            </div>
+            @foreach (var item in Model)
+            {
+                <ul>
+                    <li>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6">
+                                    <div id="ho_heal" class="our_class">
+                                        <i class="d_no"><img class="card-img-top" src="@Url.Content(item.ImageFullPath)" alt="Photo" style="width: 80px; height: 80px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6">
+                                    <div id="ho_heal" class="our_class">
+                                        <h3>@Html.DisplayFor(modelItem => item.FullName)</h3>
+                                        <p>@Html.DisplayFor(modelItem => item.Speciality)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+<!-- end mechanics team -->
 <!-- customers -->
 <div class="customers">
     <div class="clients_bg">

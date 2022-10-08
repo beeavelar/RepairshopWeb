@@ -36,6 +36,7 @@ namespace RepairshopWeb
                 cfg.Password.RequireLowercase = false;
                 cfg.Password.RequireNonAlphanumeric = false;
                 cfg.Password.RequiredLength = 6; //Só vai exigir 6 caracteres
+                cfg.SignIn.RequireConfirmedEmail = true;
             })
             .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<DataContext>();

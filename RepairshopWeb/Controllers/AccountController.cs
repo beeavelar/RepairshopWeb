@@ -22,8 +22,8 @@ namespace RepairshopWeb.Controllers
         private readonly IConfiguration _configuration;
         private readonly IEmailHelper _emailHelper;
 
-        public AccountController(IUserHelper userHelper, 
-            IConfiguration configuration, 
+        public AccountController(IUserHelper userHelper,
+            IConfiguration configuration,
             IEmailHelper emailHelper)
         {
             _userHelper = userHelper;
@@ -34,7 +34,7 @@ namespace RepairshopWeb.Controllers
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("BackOfficeIndex", "Home");
+                return RedirectToAction("Index", "Home");
 
             return View();
         }
@@ -45,17 +45,24 @@ namespace RepairshopWeb.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _userHelper.LoginAsync(model);
+                var user = await _userHelper.GetUserByEmailAsync(model.Username);
+                var emailConfirmed = await _userHelper.IsEmailConfirmedAsync(user);
 
-                if (result.Succeeded)
+                if (result.Succeeded && emailConfirmed == true)
                 {
                     if (this.Request.Query.Keys.Contains("ReturnUrl"))
                         return Redirect(this.Request.Query["ReturnUrl"].First());
 
-                    return this.RedirectToAction("BackOfficeIndex", "Home");
+                    return this.RedirectToAction("Index", "Home");
+                }
+                else if (emailConfirmed == false)
+                {
+                    ViewBag.Message = "Unconfirmed e-mail.";
+                    return View(model);
                 }
             }
 
-            ViewBag.Message = "Failed to login! Please enter correct login and password."; 
+            ViewBag.Message = "Failed to login! Please enter correct login and password.";
             return View(model);
         }
 
@@ -72,6 +79,7 @@ namespace RepairshopWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterNewUserViewModel model)
         {
             if (ModelState.IsValid)
@@ -98,27 +106,48 @@ namespace RepairshopWeb.Controllers
                         return View(model);
                     }
 
-                    var loginViewModel = new LoginViewModel
-                    {
-                        Password = model.Password,
-                        RemenberMe = false,
-                        Username = model.Username
-                    };
+                    var token = await _userHelper.GenerateConfirmEmailTokenAsync(user);
+
+                    var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, email = model.Username }, Request.Scheme);
 
                     await _emailHelper.SendEmail($"{model.Username}", $"Welcome to RepairShop", $"Mr. /Ms. {user.FirstName} {user.LastName},<br/><br/> " +
                       $"Welcome to RepairShop!<br/><br/> Here's your login and password: <br/><br/> Login: {model.UserName}<br/>Password:{model.Password}" +
                         "<br/><br/>For your security it is recommended that you change your password.<br/>To do this go to: <b>My Account >> Change password</b>" +
+                        $"<br/><br/> " +
+                        $"To confirme your account click in this link: " +
+                       $"<a href = \"{confirmationLink}\">Account Confirmation</a>" +
                         "<br/><br/>Best regards, " +
                         "<br/>RepairShop");
 
                     ViewBag.Message = "User created successfully!";
                     return this.View();
                 }
-
             }
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string token, string email)
+        {
+            var user = await _userHelper.GetUserByEmailAsync(email);
+            if(user == null)
+            {
+                return View("Error");
+            }
+
+            if(token == String.Empty)
+            {
+                return View("Error");
+            }
+
+            await _userHelper.EmailConfirmAsync(user, token);
+            return View();
+        }
+
+        public IActionResult Error()
+        {
+            return View();
+        }
 
         public async Task<IActionResult> ChangeUser()
         {

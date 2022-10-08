@@ -87,5 +87,22 @@ namespace RepairshopWeb.Helpers
                 });
             }
         }
+
+        //Confirma se o email esta ou nao confirmado
+        public async Task<bool> IsEmailConfirmedAsync(User user)
+        {
+            return await _userManager.IsEmailConfirmedAsync(user);
+        }
+
+        //Faz a ação de confirmar o email
+        public async Task<IdentityResult> EmailConfirmAsync(User user, string token)
+        {
+            return await _userManager.ConfirmEmailAsync(user, token);
+        }
+
+        public async Task<string> GenerateConfirmEmailTokenAsync(User user)
+        {
+            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
     }
 }

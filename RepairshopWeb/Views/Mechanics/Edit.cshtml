@@ -65,8 +65,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Speciality" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
-                @{var specialities = new string[] { "Electrical and electronics", "Brakes", "Transmission systems", "Maintenance of light and heavy vehicles", "Automotive aesthetics"};}
-                <ejs-combobox asp-for="Speciality" id="speciality" dataSource="specialities" style="color: black; font-family: Arial; font-size: small"></ejs-combobox>
+                @{var specialities = new string[] { "Electrical system", "General mechanics", "Automotive aesthetics", "Air conditioning"};}
+                <ejs-combobox asp-for="Speciality" id="speciality" dataSource="specialities"></ejs-combobox>
                 <span asp-validation-for="Speciality" class="text-danger"></span>
             </div>
             <div class="form-group">
