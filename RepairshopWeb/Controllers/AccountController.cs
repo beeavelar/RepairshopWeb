@@ -21,14 +21,18 @@ namespace RepairshopWeb.Controllers
         private readonly IUserHelper _userHelper;
         private readonly IConfiguration _configuration;
         private readonly IEmailHelper _emailHelper;
+        private readonly IBlobHelper _blobHelper;
+        private readonly IConverterHelper _converterHelper;
 
         public AccountController(IUserHelper userHelper,
-            IConfiguration configuration,
-            IEmailHelper emailHelper)
+            IConfiguration configuration, IEmailHelper emailHelper,
+            IBlobHelper blobHelper, IConverterHelper converterHelper)
         {
             _userHelper = userHelper;
             _configuration = configuration;
             _emailHelper = emailHelper;
+            _blobHelper = blobHelper;
+            _converterHelper = converterHelper;
         }
 
         public IActionResult Login()
@@ -84,7 +88,15 @@ namespace RepairshopWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userHelper.GetUserByEmailAsync(model.Username);
+                Guid imageId = Guid.Empty;
+
+                if (model.ImageFile != null && model.ImageFile.Length > 0)
+                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "users");
+
+                var user = _converterHelper.ToUser(model, imageId, true);
+
+                await _userHelper.GetUserByEmailAsync(model.Username);
+
                 if (user == null)
                 {
                     user = new User
@@ -158,6 +170,7 @@ namespace RepairshopWeb.Controllers
             {
                 model.FirstName = user.FirstName;
                 model.LastName = user.LastName;
+               
             }
 
             return View(model);
@@ -174,6 +187,8 @@ namespace RepairshopWeb.Controllers
                 {
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
+
+
 
                     var response = await _userHelper.UpdateUserAsync(user);
 
@@ -214,7 +229,6 @@ namespace RepairshopWeb.Controllers
             }
             return View(model);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> CreateToken([FromBody] LoginViewModel model)

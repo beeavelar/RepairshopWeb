@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace RepairshopWeb.Models
 {
@@ -11,5 +12,8 @@ namespace RepairshopWeb.Models
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Display(Name = "Photo")]
+        public IFormFile ImageFile { get; set; }
     }
 }

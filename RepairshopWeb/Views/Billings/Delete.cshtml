@@ -40,15 +40,24 @@
         <dd class = "col-sm-9">
             @Html.DisplayFor(model => model.Vehicle.LicensePlate)
         </dd class>
-        <dd class = "col-sm-3">
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.Nif)
+        </dt>
+        <dd class = "col-sm-9">
             @Html.DisplayFor(model => model.Nif)
         </dd>
-        <dt class = "col-sm-9">
+        <dt class = "col-sm-3">
             @Html.DisplayNameFor(model => model.PaymentMethod)
         </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.PaymentMethod)
+        </dd>
         <dt class = "col-sm-3">
             @Html.DisplayNameFor(model => model.TotalToPay)
         </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.TotalToPay)
+        </dd>
     </dl>
     
     <form asp-action="Delete">

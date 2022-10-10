@@ -18,5 +18,9 @@ namespace RepairshopWeb.Helpers
 
         ReceptionistViewModel ToReceptionistViewModel(Receptionist receptionist);
 
+        User ToUser(RegisterNewUserViewModel model, Guid imageId, bool isNew);
+
+        RegisterNewUserViewModel ToUserViewModel(User user);
+
     }
 }

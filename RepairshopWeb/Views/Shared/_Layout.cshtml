@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/20.3.47/fluent.css" />
     <!-- Syncfusion ASP.NET Core controls scripts -->
     <script src="https://cdn.syncfusion.com/ej2/20.2.43/dist/ej2.min.js"></script>
+    <!-- Font Error Page  -->
+     <link href="https://fonts.googleapis.com/css?family=Raleway:500,800" rel="stylesheet">
 </head>
 <!-- body -->
 <body class="main-layout">
@@ -57,6 +59,8 @@
         @if (this.User.Identity.IsAuthenticated)
         {
             <a class="active" asp-area="" asp-controller="Home" asp-action="BackOfficeIndex">Dashboard</a>
+            <br /><br />
+            <a asp-area="" asp-controller="Account" asp-action="Register">New Account</a>
             <a asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
             <a asp-area="" asp-controller="Vehicles" asp-action="Index">Vehicles</a>
             <a asp-area="" asp-controller="Mechanics" asp-action="Index">Mechanics</a>
@@ -64,7 +68,7 @@
             <a asp-area="" asp-controller="Services" asp-action="Index">Services</a>
             <a asp-area="" asp-controller="RepairOrders" asp-action="Index">Repair Orders</a>
             <a asp-area="" asp-controller="Billings" asp-action="Index">Billing</a>
-            <a asp-area="" asp-controller="Account" asp-action="Register">New Account</a>
+            <br /><br />
             <a class="active" asp-area="" asp-controller="Account" asp-action="ChangeUser">My Account</a>
             <a class="active" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
         }
@@ -84,7 +88,8 @@
                 </div>
                 <div class="col-md-7 di_none">
                     <ul class="Informa_conta">
-                        <a asp-area="" asp-controller="Account" asp-action="ChangeUser" style="color: #656c9a; font-size:larger">@this.User.Identity.Name</a>
+                        <li><img src="@Url.Action("Register", "Account")" class="rounded-circle" style="width: 80px; height: 80px;" /></li>
+                        <a asp-area="" asp-controller="Account" asp-action="ChangeUser" style="color: #656c9a; font-size:larger;">@this.User.Identity.Name</a>
                     </ul>
                 </div>
                 <div class="col-xl-2 col-md-9 col-sm-9">

@@ -10,7 +10,7 @@
 <br />
 <br />
 <br />
-<h1><b>DETAILS</b></h1>
+<h1><b>BILLING DETAILS</b></h1>
 <hr />
 
 <div>
@@ -44,12 +44,21 @@
                 <dt class="col-sm-3">
                     @Html.DisplayNameFor(model => model.Nif)
                 </dt>
-                <dt class="col-sm-9">
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Nif)
+                </dd>
+                <dt class="col-sm-3">
                     @Html.DisplayNameFor(model => model.PaymentMethod)
                 </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.PaymentMethod)
+                </dd>
                 <dt class="col-sm-3">
                     @Html.DisplayNameFor(model => model.TotalToPay)
                 </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.TotalToPay)
+                </dd>
             </dl>
         </div>
     </div>

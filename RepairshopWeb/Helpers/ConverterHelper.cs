@@ -117,5 +117,29 @@ namespace RepairshopWeb.Helpers
             };
         }
 
+        public User ToUser(RegisterNewUserViewModel model, Guid imageId, bool isNew)
+        {
+            return new User
+            {
+                Id = isNew ? null : model.Id,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Role = model.Role,
+                ImageId = imageId,
+            };
+        }
+
+        public RegisterNewUserViewModel ToUserViewModel(User user)
+        {
+            return new RegisterNewUserViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Role = user.Role,
+                ImageId = user.ImageId,
+            };
+        }
+
     }
 }
