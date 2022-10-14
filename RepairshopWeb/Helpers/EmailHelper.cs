@@ -8,7 +8,7 @@ namespace RepairshopWeb.Helpers
     {
         public async Task SendEmail(string email, string subject, string message)
         {
-            var apiKey = "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";
+            var apiKey = "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";
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("cet69.repairshop@gmail.com", "RepairShop");
             var to = new EmailAddress(email);

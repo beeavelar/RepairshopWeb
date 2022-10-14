@@ -35,7 +35,8 @@
     <!-- Syncfusion ASP.NET Core controls scripts -->
     <script src="https://cdn.syncfusion.com/ej2/20.2.43/dist/ej2.min.js"></script>
     <!-- Font Error Page  -->
-     <link href="https://fonts.googleapis.com/css?family=Raleway:500,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500,800" rel="stylesheet">
+    <!-- Style -->
 </head>
 <!-- body -->
 <body class="main-layout">
@@ -54,13 +55,23 @@
             <a href="#services">Our Services</a>
             <a href="#contact_us">Contact us</a>
             <a href="#about">About</a>
+            <a class="active" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
         }
 
-        @if (this.User.Identity.IsAuthenticated)
+        @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Client"))
         {
-            <a class="active" asp-area="" asp-controller="Home" asp-action="BackOfficeIndex">Dashboard</a>
-            <br /><br />
-            <a asp-area="" asp-controller="Account" asp-action="Register">New Account</a>
+            <br />
+            <a asp-area="" asp-controller="RepairOrders" asp-action="Index">My Repairs</a>
+            <br />
+            <a class="active" asp-area="" asp-controller="Account" asp-action="ChangeUser">My Account</a>
+            <a class="active" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+        }
+
+        @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin") || this.User.IsInRole("Mechanic") || this.User.IsInRole("Receptionist"))
+        {
+            <a class="active" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+            <br />
+            <a asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
             <a asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
             <a asp-area="" asp-controller="Vehicles" asp-action="Index">Vehicles</a>
             <a asp-area="" asp-controller="Mechanics" asp-action="Index">Mechanics</a>
@@ -68,14 +79,33 @@
             <a asp-area="" asp-controller="Services" asp-action="Index">Services</a>
             <a asp-area="" asp-controller="RepairOrders" asp-action="Index">Repair Orders</a>
             <a asp-area="" asp-controller="Billings" asp-action="Index">Billing</a>
-            <br /><br />
+            <br />
             <a class="active" asp-area="" asp-controller="Account" asp-action="ChangeUser">My Account</a>
             <a class="active" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
         }
+
+        @*   @if (this.User.Identity.IsAuthenticated)
+        {
+        <a class="active" asp-area="" asp-controller="Home" asp-action="BackOfficeIndex">Dashboard</a>
+        <br />
+        <a asp-area="" asp-controller="Account" asp-action="Register">New Account</a>
+        <br />
+        <a asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
+        <a asp-area="" asp-controller="Vehicles" asp-action="Index">Vehicles</a>
+        <a asp-area="" asp-controller="Mechanics" asp-action="Index">Mechanics</a>
+        <a asp-area="" asp-controller="Receptionists" asp-action="Index">Receptionists</a>
+        <a asp-area="" asp-controller="Services" asp-action="Index">Services</a>
+        <a asp-area="" asp-controller="RepairOrders" asp-action="Index">Repair Orders</a>
+        <a asp-area="" asp-controller="Billings" asp-action="Index">Billing</a>
+        <br />
+        <br />
+        <a class="active" asp-area="" asp-controller="Account" asp-action="ChangeUser">My Account</a>
+        <a class="active" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+        }
         else
         {
-            <a class="active" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-        }
+        <a class="active" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+        }*@
     </div>
     <!-- header -->
     <header class="header-area" id="home">
@@ -88,8 +118,7 @@
                 </div>
                 <div class="col-md-7 di_none">
                     <ul class="Informa_conta">
-                        <li><img src="@Url.Action("Register", "Account")" class="rounded-circle" style="width: 80px; height: 80px;" /></li>
-                        <a asp-area="" asp-controller="Account" asp-action="ChangeUser" style="color: #656c9a; font-size:larger;">@this.User.Identity.Name</a>
+                        <li><a asp-area="" asp-controller="Account" asp-action="ChangeUser" style="color: #656c9a; font-size:larger;">@this.User.Identity.Name</a></li>
                     </ul>
                 </div>
                 <div class="col-xl-2 col-md-9 col-sm-9">
@@ -97,6 +126,7 @@
                         <li> <button class="openbtn" onclick="openNav()"><img src="~/images/menu_btn.png"></button></li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </header>

@@ -7,11 +7,11 @@
 <br />
 <br />
 <br />
-<h1 style="text-align: center;"><b>CHANGE USER DATA</b></h1>
+<h1 style="text-align: center;"><b>CHANGE YOUR USER DATA</b></h1>
 <br />
 <div class="row">
     <div class="col-md-4 offset-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
                 <label asp-for="FirstName" style="color: black; font-family: Arial; font-size: small">First Name</label> <br />
@@ -24,8 +24,13 @@
                 <span asp-validation-for="LastName" class="text-warning"></span>
             </div>
             <div class="form-group">
+                <label asp-for="ImageFile" style="color: black; font-family: Arial; font-size: small">Add profile photo</label>
+                <input asp-for="ImageFile" type="file" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
-                <a asp-action="ChangePassword" class="btn btn-success"><i class="fa-sharp fa-solid fa-key"></i> Change password</a>
+                <a asp-action="ChangePassword" class="btn btn-success"><i class="fa-sharp fa-solid fa-key"></i> Change your password</a>
             </div>
             <div class="text-success">@ViewBag.UserMessage</div>
         </form>

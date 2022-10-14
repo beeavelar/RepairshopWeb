@@ -28,8 +28,5 @@ namespace RepairshopWeb.Models
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "Photo")]
-        public IFormFile ImageFile { get; set; }
-
     }
 }

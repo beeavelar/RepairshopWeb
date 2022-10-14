@@ -37,6 +37,7 @@ namespace RepairshopWeb.Data
                     LastName = "Avelar",
                     Email = "debora.avelar.21695@formandos.cinel.pt",
                     UserName = "debora.avelar.21695@formandos.cinel.pt",
+                    Role = "Admin"
                 };
 
                 var result = await _userHelper.AddUserAsync(user, "123456");
@@ -45,9 +46,6 @@ namespace RepairshopWeb.Data
 
                 //Adicionar o role ao user
                 await _userHelper.AddUserToRoleAsync(user, "Admin");
-
-                //var token = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
-                //await _userHelper.ConfirmEmailAsync(user, token);
             }
 
             //Verifica se o user tem o role que quero verificar --> No caso o "AdmiN"

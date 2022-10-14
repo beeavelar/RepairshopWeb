@@ -25,10 +25,7 @@ namespace RepairshopWeb.Controllers
         {
             return View(_mechanicRepository.GetAll());
         }
-        public IActionResult BackOfficeIndex()
-        {
-            return View();
-        }
+
         public IActionResult About()
         {
             return View();

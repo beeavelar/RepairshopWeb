@@ -8,7 +8,7 @@
 <br />
 <br />
 <br />
-<h1 style="text-align: center;"><b>REGISTER NEW ACCOUNT</b></h1>
+<h1 style="text-align: center;"><b>REGISTER NEW USER ACCOUNT</b></h1>
 <br />
 <div class="row">
     <div class="col-md-4 offset-md-4">
@@ -61,11 +61,6 @@
                 }
                 <ejs-combobox asp-for="Role" id="role" dataSource="roles"></ejs-combobox>
                 <span asp-validation-for="Role" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageFile" style="color: black; font-family: Arial; font-size: small"></label>
-                <input asp-for="ImageFile" type="file" />
-                <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>

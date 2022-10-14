@@ -1,3 +1,16 @@
 ﻿@{
-    Layout = "_Layout";
+    //Layout = "_Layout";
+
+    string controller = Convert.ToString(Context.Request.HttpContext.Request.RouteValues["Controller"]);
+
+    if (controller == "Dashboard")
+    {
+        Layout = "_LayoutDashboard";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+    Layout = Layout;
+
 }

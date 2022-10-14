@@ -21,14 +21,6 @@ namespace RepairshopWeb.Data.Entities
         [Display(Name = "Select a role to the new user: ")]
         public string Role { get; set; }
 
-        [Display(Name = "Photo")]
-        public Guid ImageId { get; set; }
-
-        public string ImageFullPath => ImageId == Guid.Empty
-          ? $"https://repairshopweb.azurewebsites.net/images/noimage.jpg"
-          : $"https://repairshodebora.blob.core.windows.net/users/{ImageId}";
-
-
         [Display(Name = "Full Name")]
         public string FullName => $"{FirstName} {LastName}";
 

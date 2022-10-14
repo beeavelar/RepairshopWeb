@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
+using RepairshopWeb.Data.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace RepairshopWeb.Models
 {
-    public class ChangeUserViewModel
+    public class ChangeUserViewModel : User
     {
         [Required]
         [Display(Name = "First Name")]

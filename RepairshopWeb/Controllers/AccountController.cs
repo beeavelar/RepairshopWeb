@@ -88,14 +88,7 @@ namespace RepairshopWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                Guid imageId = Guid.Empty;
-
-                if (model.ImageFile != null && model.ImageFile.Length > 0)
-                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "users");
-
-                var user = _converterHelper.ToUser(model, imageId, true);
-
-                await _userHelper.GetUserByEmailAsync(model.Username);
+                var user  = await _userHelper.GetUserByEmailAsync(model.Username);
 
                 if (user == null)
                 {
@@ -143,14 +136,10 @@ namespace RepairshopWeb.Controllers
         {
             var user = await _userHelper.GetUserByEmailAsync(email);
             if(user == null)
-            {
                 return View("Error");
-            }
 
             if(token == String.Empty)
-            {
                 return View("Error");
-            }
 
             await _userHelper.EmailConfirmAsync(user, token);
             return View();
@@ -163,6 +152,13 @@ namespace RepairshopWeb.Controllers
 
         public async Task<IActionResult> ChangeUser()
         {
+            //Guid imageId = Guid.Empty;
+
+            //if (model.ImageFile != null && model.ImageFile.Length > 0)
+            //    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "users");
+
+            //var user = _converterHelper.ToUser(model, imageId, true);
+
             var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
             var model = new ChangeUserViewModel();
 
@@ -170,7 +166,6 @@ namespace RepairshopWeb.Controllers
             {
                 model.FirstName = user.FirstName;
                 model.LastName = user.LastName;
-               
             }
 
             return View(model);
@@ -187,8 +182,6 @@ namespace RepairshopWeb.Controllers
                 {
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
-
-
 
                     var response = await _userHelper.UpdateUserAsync(user);
 
