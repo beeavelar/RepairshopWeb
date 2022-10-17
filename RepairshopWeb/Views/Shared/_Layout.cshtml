@@ -36,15 +36,18 @@
     <script src="https://cdn.syncfusion.com/ej2/20.2.43/dist/ej2.min.js"></script>
     <!-- Font Error Page  -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:500,800" rel="stylesheet">
-    <!-- Style -->
 </head>
+
 <!-- body -->
 <body class="main-layout">
+
     <!-- loader  -->
     <div class="loader_bg">
         <div class="loader"><img src="~/images/loading.gif" alt="#" /></div>
     </div>
     <!-- end loader -->
+
+    <!-- sidepanel -->
     <div id="mySidepanel" class="sidepanel">
         <a class="closebtn" onclick="closeNav()" style="color:white;">×</a>
 
@@ -107,6 +110,8 @@
         <a class="active" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
         }*@
     </div>
+    <!-- end sidepanel -->
+
     <!-- header -->
     <header class="header-area" id="home">
         <div class="container-fluid">
@@ -130,7 +135,8 @@
             </div>
         </div>
     </header>
-    <!-- end header inner -->
+    <!-- end header -->
+
     <!--- RenderBody-->
     <div class="container">
         <main role="main" class="pb-3">
@@ -139,6 +145,7 @@
     </div>
     <!---------------->
 
+    <!-- footer -->
     <footer>
         <div class="footer">
             <div class="container">
@@ -192,6 +199,7 @@
         </div>
     </footer>
     <!-- end footer -->
+
     <!-- Javascript files-->
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
@@ -201,7 +209,12 @@
     <script src="~/js/custom.js"></script>
     <script src="https://kit.fontawesome.com/838122fc3c.js" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
-    <!-- Syncfusion ASP.NET Core Script Manager -->
+    <!-- end Javascript files-->
+
+    <!-- Syncfusion Script Manager -->
     <ejs-scripts></ejs-scripts>
+    <!-- end Syncfusion Script Manager -->
+
 </body>
+<!-- end body -->
 </html>
