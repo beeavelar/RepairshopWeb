@@ -2,7 +2,7 @@
 
 namespace RepairshopWeb.Controllers
 {
-    public class Dashboard : Controller
+    public class DashboardController : Controller
     {
         public IActionResult Index()
         {
