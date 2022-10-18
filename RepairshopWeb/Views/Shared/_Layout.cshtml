@@ -58,7 +58,7 @@
             <a href="#services">Our Services</a>
             <a href="#contact_us">Contact us</a>
             <a href="#about">About</a>
-            <a class="active" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+            <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
         }
 
         @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Client"))
@@ -72,43 +72,9 @@
 
         @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin") || this.User.IsInRole("Mechanic") || this.User.IsInRole("Receptionist"))
         {
-            <a class="active" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
-            <br />
-            <a asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
-            <a asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
-            <a asp-area="" asp-controller="Vehicles" asp-action="Index">Vehicles</a>
-            <a asp-area="" asp-controller="Mechanics" asp-action="Index">Mechanics</a>
-            <a asp-area="" asp-controller="Receptionists" asp-action="Index">Receptionists</a>
-            <a asp-area="" asp-controller="Services" asp-action="Index">Services</a>
-            <a asp-area="" asp-controller="RepairOrders" asp-action="Index">Repair Orders</a>
-            <a asp-area="" asp-controller="Billings" asp-action="Index">Billing</a>
-            <br />
-            <a class="active" asp-area="" asp-controller="Account" asp-action="ChangeUser">My Account</a>
+            <a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
             <a class="active" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
         }
-
-        @*   @if (this.User.Identity.IsAuthenticated)
-        {
-        <a class="active" asp-area="" asp-controller="Home" asp-action="BackOfficeIndex">Dashboard</a>
-        <br />
-        <a asp-area="" asp-controller="Account" asp-action="Register">New Account</a>
-        <br />
-        <a asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
-        <a asp-area="" asp-controller="Vehicles" asp-action="Index">Vehicles</a>
-        <a asp-area="" asp-controller="Mechanics" asp-action="Index">Mechanics</a>
-        <a asp-area="" asp-controller="Receptionists" asp-action="Index">Receptionists</a>
-        <a asp-area="" asp-controller="Services" asp-action="Index">Services</a>
-        <a asp-area="" asp-controller="RepairOrders" asp-action="Index">Repair Orders</a>
-        <a asp-area="" asp-controller="Billings" asp-action="Index">Billing</a>
-        <br />
-        <br />
-        <a class="active" asp-area="" asp-controller="Account" asp-action="ChangeUser">My Account</a>
-        <a class="active" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
-        }
-        else
-        {
-        <a class="active" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-        }*@
     </div>
     <!-- end sidepanel -->
 

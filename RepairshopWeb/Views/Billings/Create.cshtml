@@ -2,9 +2,8 @@
 
 @{
     ViewData["Title"] = "Create new billing";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<br />
-<br />
 <br />
 <h1 style="text-align: center;"><b>NEW BILLING</b></h1>
 <br />
@@ -13,7 +12,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="IssueDate" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="IssueDate" style="color: black; font-family: Arial; font-size:small;"></label>
                 <div class="input-group date" id="datepicker">
                     <input asp-for="IssueDate" type="text" class="form-control" value="" />
                     <span class="input-group-addon">
@@ -23,30 +22,30 @@
                 <span asp-validation-for="IssueDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RepairOrderId" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="RepairOrderId" style="color: black; font-family: Arial; font-size:small;"></label>
                 <select asp-for="RepairOrderId" asp-items="ViewBag.RepairOrderId" style="width:100%; font-family: Arial; height: 30px"></select>
                 <span asp-validation-for="RepairOrderId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClientId" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="ClientId" style="color: black; font-family: Arial; font-size:small;"></label>
                 <select asp-for="ClientId" asp-items="ViewBag.ClientId" style="width:100%; font-family: Arial; height: 30px"></select>
                 <span asp-validation-for="ClientId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="VehicleId" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="VehicleId" style="color: black; font-family: Arial; font-size:small;"></label>
                 <select asp-for="VehicleId" asp-items="ViewBag.VehicleId" style="width:100%; font-family: Arial; height: 30px"></select>
                 <span asp-validation-for="VehicleId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <div class="control-section">
                     <div class="control_wrapper TextBox-control-section">
-                        <ejs-maskedtextbox asp-for="Nif" id="nif" mask="000000000" placeholder="NIF" floatLabelType="Auto"></ejs-maskedtextbox>
+                        <ejs-maskedtextbox asp-for="Nif" id="nif" mask="000000000" placeholder="NIF" floatLabelType="Auto" style="color: black; font-family: Arial; font-size:medium;"></ejs-maskedtextbox>
                     </div>
                 </div>
                 <span asp-validation-for="Nif" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PaymentMethod" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="PaymentMethod" style="color: black; font-family: Arial; font-size:small;"></label>
                 @{
                     var payMethods = new string[] { "Cash", "Credit card", "MB WAY", "Bank transfer" };
                 }
@@ -54,8 +53,8 @@
                 <span asp-validation-for="PaymentMethod" class="text-danger"></span>
             </div>
             <div class="form-group">
-               <ejs-maskedtextbox asp-for="TotalToPay" id="totaltopay" placeholder="Total to pay" floatLabelType="Auto"></ejs-maskedtextbox>
-               <span asp-validation-for="TotalToPay" class="text-danger"></span>
+                <ejs-maskedtextbox asp-for="TotalToPay" id="totaltopay" placeholder="Total to pay" floatLabelType="Auto" style="color: black; font-family: Arial; font-size:medium;"></ejs-maskedtextbox>
+                <span asp-validation-for="TotalToPay" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
@@ -64,6 +63,7 @@
         </form>
     </div>
 </div>
+<br />
 
 @section Scripts {
     @{
@@ -71,39 +71,39 @@
     }
 
     @{
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
 
-    <script>
-                    $(function() {
-                        $("#datepicker").datetimepicker(
-                            {
-                                showClose: true,
-                                sideBySide: true,
-                                showClear: true,
-                                format: 'DD-MM-YYYY HH:mm',
+        <script>
+            $(function() {
+                $("#datepicker").datetimepicker(
+                    {
+                        showClose: true,
+                        sideBySide: true,
+                        showClear: true,
+                        format: 'DD-MM-YYYY HH:mm',
 
-                                locale: moment.locale('pt-Pt')
+                        locale: moment.locale('pt-Pt')
 
-                            });
-
-                        $("#datepicker2").datetimepicker(
-                            {
-                                showClose: true,
-                                sideBySide: true,
-                                showClear: true,
-                                format: 'DD-MM-YYYY HH:mm',
-
-                                locale: moment.locale('pt-Pt')
-
-                            });
                     });
-    </script>
+
+                $("#datepicker2").datetimepicker(
+                    {
+                        showClose: true,
+                        sideBySide: true,
+                        showClear: true,
+                        format: 'DD-MM-YYYY HH:mm',
+
+                        locale: moment.locale('pt-Pt')
+
+                    });
+            });
+        </script>
     }
     }
 

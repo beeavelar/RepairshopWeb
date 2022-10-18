@@ -2,18 +2,13 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <br />
+<h1 style="text-align: center;"><b>EDIT</b></h1>
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<h1><b>EDIT</b></h1>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -67,6 +62,7 @@
         </form>
     </div>
 </div>
+<br />
 
 @section Scripts {
     @{
@@ -74,38 +70,38 @@
     }
 
     @{
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
 
-    <script>
-                    $(function() {
-                        $("#datepicker").datetimepicker(
-                            {
-                                showClose: true,
-                                sideBySide: true,
-                                showClear: true,
-                                format: 'DD-MM-YYYY HH:mm',
+        <script>
+            $(function() {
+                $("#datepicker").datetimepicker(
+                    {
+                        showClose: true,
+                        sideBySide: true,
+                        showClear: true,
+                        format: 'DD-MM-YYYY HH:mm',
 
-                                locale: moment.locale('pt-Pt')
+                        locale: moment.locale('pt-Pt')
 
-                            });
-
-                        $("#datepicker2").datetimepicker(
-                            {
-                                showClose: true,
-                                sideBySide: true,
-                                showClear: true,
-                                format: 'DD-MM-YYYY HH:mm',
-
-                                locale: moment.locale('pt-Pt')
-
-                            });
                     });
-    </script>
+
+                $("#datepicker2").datetimepicker(
+                    {
+                        showClose: true,
+                        sideBySide: true,
+                        showClear: true,
+                        format: 'DD-MM-YYYY HH:mm',
+
+                        locale: moment.locale('pt-Pt')
+
+                    });
+            });
+        </script>
     }
     }
