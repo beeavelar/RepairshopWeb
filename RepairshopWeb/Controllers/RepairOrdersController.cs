@@ -87,18 +87,14 @@ namespace RepairshopWeb.Controllers
         //Confirm RepairOrder
         public async Task<IActionResult> ConfirmRepairOrder()
         {
-            try
-            {
+           
                 var response = await _repairOrderRepository.ConfirmRepairOrderAsync(this.User.Identity.Name);
                 if (response)
                     return RedirectToAction("Index");
 
                 return RedirectToAction("Create");
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            
+
         }
 
         //Get do Appointment - Faz aparecer a view

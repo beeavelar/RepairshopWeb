@@ -2,88 +2,96 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <br />
+<h1 style="text-align: center;"><b>EDIT MECHANIC</b></h1>
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<h1><b>EDIT MECHANIC</b></h1>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="ImageId" />
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
-                <input asp-for="FirstName" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
+                <label asp-for="FirstName" class="control-label" style="font-family: Arial; font-size: small;"></label>
+                <input asp-for="FirstName" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="LastName" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
-                <input asp-for="LastName" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
+                <label asp-for="LastName" class="control-label" style="font-family: Arial; font-size: small;"></label>
+                <input asp-for="LastName" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="Address" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
-                <input asp-for="Address" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
+                <label asp-for="Address" class="control-label" style="font-family: Arial; font-size: small;"></label>
+                <input asp-for="Address" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="PostalCode" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
-                <input asp-for="PostalCode" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
+                <label asp-for="PostalCode" class="control-label" style="font-family: Arial; font-size: small;"></label>
+                <input asp-for="PostalCode" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="PostalCode" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="Phone" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
-                <input asp-for="Phone" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
+                <label asp-for="Phone" class="control-label" style="font-family: Arial; font-size: small;"></label>
+                <input asp-for="Phone" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="Email" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
-                <input asp-for="Email" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
+                <label asp-for="Email" class="control-label" style="font-family: Arial; font-size: small;"></label>
+                <input asp-for="Email" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="Nif" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
-                <input asp-for="Nif" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
+                <label asp-for="Nif" class="control-label" style="font-family: Arial; font-size: small;"></label>
+                <input asp-for="Nif" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="Nif" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="Niss" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
-                <input asp-for="Niss" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
+                <label asp-for="Niss" class="control-label" style="font-family: Arial; font-size: small;"></label>
+                <input asp-for="Niss" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="Niss" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="IdentityDocument" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
-                <input asp-for="IdentityDocument" class="form-control" style="color: black; font-family: Arial; font-size: small" />
+                <label asp-for="IdentityDocument" class="control-label" style="font-family: Arial; font-size: small;"></label>
+                <input asp-for="IdentityDocument" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="IdentityDocument" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="Speciality" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="Speciality" class="control-label" style="font-family: Arial; font-size: small;"></label>
                 @{var specialities = new string[] { "Electrical system", "General mechanics", "Automotive aesthetics", "Air conditioning"};}
                 <ejs-combobox asp-for="Speciality" id="speciality" dataSource="specialities"></ejs-combobox>
                 <span asp-validation-for="Speciality" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="ImageFile" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="ImageFile" style="font-family: Arial; font-size: small;"></label>
                 <input asp-for="ImageFile" type="file" style="color: black; font-family: Arial; font-size: small"/>
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
                 <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
             </div>
+            <br />
         </form>
     </div>
      <div class="col-md-4">
             <img src="@Url.Content(Model.ImageFullPath)" alt="Photo" style="width:100px;height:150px;max-width:100%;height:auto">
     </div>
 </div>
+<br />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

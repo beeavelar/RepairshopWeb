@@ -15,7 +15,7 @@
             <div class="form-group">
                 <div class="control-section">
                     <div class="control_wrapper TextBox-control-section">
-                        <ejs-textbox asp-for="FirstName" id="firstname" placeholder="First Name" floatLabelType="Auto" style="color: black; font-family: Arial; font-size: medium; font-weight: bold;"></ejs-textbox>
+                        <ejs-textbox asp-for="FirstName" id="firstname" placeholder="First Name" floatLabelType="Auto"></ejs-textbox>
                     </div>
                 </div>
                 <span asp-validation-for="FirstName" class="text-danger"></span>
@@ -24,7 +24,7 @@
             <div class="form-group">
                 <div class="control-section">
                     <div class="control_wrapper TextBox-control-section">
-                        <ejs-textbox asp-for="LastName" id="lastname" placeholder="Last Name" floatLabelType="Auto" style="color: black; font-family: Arial; font-size: medium;"></ejs-textbox>
+                        <ejs-textbox asp-for="LastName" id="lastname" placeholder="Last Name" floatLabelType="Auto"></ejs-textbox>
                     </div>
                 </div>
                 <span asp-validation-for="LastName" class="text-danger"></span>
@@ -33,7 +33,7 @@
             <div class="form-group">
                 <div class="control-section">
                     <div class="control_wrapper TextBox-control-section">
-                        <ejs-textbox asp-for="UserName" id="username" placeholder="Username" floatLabelType="Auto" style="color: black; font-family: Arial; font-size: medium;"></ejs-textbox>
+                        <ejs-textbox asp-for="UserName" id="username" placeholder="Username" floatLabelType="Auto"></ejs-textbox>
                     </div>
                 </div>
                 <span asp-validation-for="Username" class="text-danger"></span>
@@ -42,7 +42,7 @@
             <div class="form-group">
                 <div class="control-section">
                     <div class="control_wrapper TextBox-control-section">
-                        <ejs-textbox asp-for="Password" id="password" type="password" placeholder="Password" floatLabelType="Auto" style="color: black; font-family: Arial; font-size: medium"></ejs-textbox>
+                        <ejs-textbox asp-for="Password" id="password" type="password" placeholder="Password" floatLabelType="Auto"></ejs-textbox>
                     </div>
                 </div>
                 <span asp-validation-for="Password" class="text-danger"></span>
@@ -51,14 +51,14 @@
             <div class="form-group">
                 <div class="control-section">
                     <div class="control_wrapper TextBox-control-section">
-                        <ejs-textbox asp-for="ConfirmPassword" id="confirmpassword" type="password" placeholder="Confirm Password" floatLabelType="Auto" style="color: black; font-family: Arial; font-size: medium;"></ejs-textbox>
+                        <ejs-textbox asp-for="ConfirmPassword" id="confirmpassword" type="password" placeholder="Confirm Password" floatLabelType="Auto"></ejs-textbox>
                     </div>
                 </div>
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <br/>
             <div class="form-group">
-                <label asp-for="Role" class="control-label" style="color: black; font-family: Arial; font-size:small;"></label>
+                <label asp-for="Role" class="control-label" style="font-family: Arial; font-size:small;"></label>
                 @{
                     var roles = new string[] { "Admin", "Client", " Receptionist", "Mechanic" };
                 }

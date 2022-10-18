@@ -2,18 +2,13 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <br />
+<h1 style="margin-left: 30px;"><b>RECEPTIONIST DETAILS</b></h1>
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<h1><b>RECEPTIONIST DETAILS</b></h1>
-<hr />
-<div>
-   <div class="row" style="color: black; font-family: Arial; font-size: medium">
+<div style="margin-left: 30px;">
+   <div class="row" style="font-family: Arial; font-size: medium;">
        <div class="col-md-8">
             <dl class="row">
                 <dt class = "col-sm-3">
@@ -70,8 +65,9 @@
        </div>
    </div>
 </div>
-
-<div>
+<br />
+<div style="margin-left: 30px;">
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning" data-toggle="tooltip" title="Edit"><i class="fa-solid fa-user-pen"></i></a> 
     <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
 </div>
+<br />

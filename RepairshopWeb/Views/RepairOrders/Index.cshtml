@@ -2,20 +2,14 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<br/>
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<p>
-    <a asp-action="Create" class="btn btn-primary" data-toggle="tooltip" title="Create New"><i class="fa-solid fa-plus"></i> Create New</a>
+<p style="margin-left: 20px;">
+    <a asp-action="Create" class="btn btn-primary" data-toggle="tooltip" title="Create New"><i class="fa-solid fa-plus"></i>  Create New</a>
 </p>
 <br />
-<div class="row" style="color: black; font-family: Arial; font-size: small;">
+<div class="row" style="font-family: Arial; font-size: small; margin-left: 10px;">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -24,7 +18,7 @@
             <br />
             <div>
                 <table id="MyTable" class="table table-hover table-striped">
-                    <thead style="text-transform: uppercase">
+                    <thead style="text-transform: uppercase;">
                         <tr>
                             <th>
                                 @Html.DisplayNameFor(model => model.Id)
@@ -59,7 +53,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.RepairStatus)
                             </th>
-                            <th width="30%"></th>
+                            <th width="20%"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,7 +93,6 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.RepairStatus)
                                 </td>
-
                                 <td style="text-align:right">
                                     <a asp-action="Appointment" asp-route-id="@item.Id" class="btn btn-info" id="btnCreateAppointment" data-toggle="tooltip" title="Appoitment"><i class="fa-solid fa-calendar-days"></i></a> |
                                     <a asp-action="DeleteRepairOrder" asp-route-id="@item.Id" class="btn btn-danger" id="btnDelete" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a> |
@@ -135,8 +128,6 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
 
 @section Scripts{
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             var id = 0;
@@ -153,6 +144,14 @@
             $("#btnYesDelete").click(function() {
                 window.location.href = "/RepairOrders/DeleteRepairOrder/" + id;
             });
+            $('#MyTable').DataTable();
+        });
+    </script>
+
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
             $('#MyTable').DataTable();
         });
     </script>

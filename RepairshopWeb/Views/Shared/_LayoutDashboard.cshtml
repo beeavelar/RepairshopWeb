@@ -29,9 +29,10 @@
         <!-- sidepanel -->
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
-                <a class="sidebar-brand" href="index.html">
+@*                <a class="sidebar-brand" href="index.html">
                     <span class="align-middle">REPAIRSHOP</span>
-                </a>
+                </a>*@
+                <a class="sidebar-brand" asp-area="" asp-controller="Home" asp-action="Index"><span class="align-middle">REPAIRSHOP</span></a>
 
                 <ul class="sidebar-nav">
                     <li class="sidebar-header">
@@ -80,12 +81,6 @@
 
                     <li class="sidebar-header">
                         Plugins & Addons
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="charts-chartjs.html">
-                            <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Charts</span>
-                        </a>
                     </li>
                 </ul>
             </div>
@@ -294,7 +289,7 @@
                 data: {
                     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                     datasets: [{
-                        label: "Sales ($)",
+                        label: "Sales (€)",
                         fill: true,
                         backgroundColor: gradient,
                         borderColor: window.theme.primary,
@@ -358,9 +353,9 @@
             new Chart(document.getElementById("chartjs-dashboard-pie"), {
                 type: "pie",
                 data: {
-                    labels: ["Chrome", "Firefox", "IE"],
+                    labels: ["Very happy", "Happy", "No comments", "Sad"],
                     datasets: [{
-                        data: [4306, 3801, 1689],
+                        data: [4306, 1081, 300, 15],
                         backgroundColor: [
                             window.theme.primary,
                             window.theme.warning,

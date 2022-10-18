@@ -1,22 +1,17 @@
 ﻿@model IEnumerable<RepairshopWeb.Data.Entities.RepairOrderDetailTemp>
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <br />
+<h1 style="margin-left: 20px;"><b>NEW REPAIR ORDER</b></h1>
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<h1><b>NEW REPAIR ORDER</b></h1>
-<br />
-<p>
+<p style="margin-left: 20px;">
 	<a asp-action="AddService" class="btn btn-success" data-toggle="tooltip" title="Add Service"><i class="fa-solid fa-plus"></i></a>
+    <a asp-action="ConfirmOrder" class="btn btn-primary" id="btnConfirm">Confirm Repair Order</a>
 </p>
 <br />
-<table class="table" style="color: black; font-family: Arial; font-size: small">
+<table  id="MyTable" class="table" style="font-family: Arial; font-size: small">
 	<thead style="text-transform: uppercase">
     	<tr>
             <th>
@@ -57,9 +52,8 @@
     	}
 	</tbody>
 </table>
-<p>
-    <a asp-action="ConfirmOrder" class="btn btn-primary" id="btnConfirm">Confirm</a>
-    <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i>Back</a>
+<p style="margin-left: 20px;">
+    <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
 </p>
 
 <div id="confirmDialog" class="modal fade">
@@ -96,6 +90,8 @@
     </div>
 </div>
 
+@* Load datatable css *@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
 
 @section Scripts{
     <script type="text/javascript">
@@ -125,6 +121,14 @@
             $("#btnYesDelete").click(function() {
                 window.location.href = "/RepairOrders/DeleteItem/" + id;
             });
+        });
+    </script>
+
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#MyTable').DataTable();
         });
     </script>
 }

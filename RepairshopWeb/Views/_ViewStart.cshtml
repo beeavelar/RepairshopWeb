@@ -1,20 +1,20 @@
 ﻿@{
-    //Layout = "_Layout";
+    Layout = "_Layout";
 
-    string controller = Convert.ToString(Context.Request.HttpContext.Request.RouteValues["Controller"]);
+    //string controller = Convert.ToString(Context.Request.HttpContext.Request.RouteValues["Controller"]);
 
-    if (controller == "Dashboard")
-    {
-        Layout = "_LayoutDashboard";
-    }
-    if (controller == "Errors")
-    {
-        Layout = "_LayoutError";
-    }
-    else
-    {
-        Layout = "_Layout";
-    }
-    Layout = Layout;
+    //if (controller == "Dashboard")
+    //{
+    //    Layout = "_LayoutDashboard";
+    //}
+    //if (controller == "Errors")
+    //{
+    //    Layout = "_LayoutError";
+    //}
+    //else
+    //{
+    //    Layout = "_Layout";
+    //}
+    //Layout = Layout;
 
 }

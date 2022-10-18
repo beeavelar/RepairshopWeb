@@ -2,50 +2,57 @@
 
 @{
     ViewData["Title"] = "Create new vehicle";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<br />
-<br />
 <br />
 <h1 style="text-align: center;"><b>NEW VEHICLE</b></h1>
 <br />
 <div class="row">
-    <div class="col-md-4 offset-md-4"d-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <ejs-maskedtextbox asp-for="LicensePlate" id="licenseplate" mask="00-AA-00" placeholder="License Plate" floatLabelType="Auto"></ejs-maskedtextbox>
                 <span asp-validation-for="LicensePlate" class="text-danger"></span>
             </div>
+             <br/>
             <div class="form-group">
-                <label asp-for="ClientId" style="color: black; font-family: Arial; font-size: small"></label><br />
-                <select asp-for="ClientId" asp-items="ViewBag.ClientId" style= "width:100%; font-family: Arial; height: 30px"></select>
+                <label asp-for="ClientId" style="font-family: Arial; font-size: small;"></label><br />
+                <select asp-for="ClientId" asp-items="ViewBag.ClientId" style= "width:100%; font-family: Arial; height: 30px;"></select>
                 <span asp-validation-for="ClientId" class="text-danger"></span>
             </div>
+             <br/>
             <div class="form-group">
                 <ejs-textbox asp-for="Brand" id="brand" placeholder="Brand" floatLabelType="Auto"></ejs-textbox>
                 <span asp-validation-for="Brand" class="text-danger"></span>
             </div>
+             <br/>
             <div class="form-group">
                 <ejs-textbox asp-for="VehicleModel" id="vehiclemodel" placeholder="Model" floatLabelType="Auto"></ejs-textbox>
                 <span asp-validation-for="VehicleModel" class="text-danger"></span>
             </div>
+             <br/>
             <div class="form-group">
-                <label asp-for="Color" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="Color" style="font-family: Arial; font-size: small;"></label>
                 @{var colors = new string[] { "Black", "Blue", "Red", "White", "Grey", "Silver", "Green", "Yellow"};}
                 <ejs-combobox asp-for="Color" id="color" dataSource="colors"></ejs-combobox>
                 <span asp-validation-for="Color" class="text-danger"></span>
             </div>
+             <br/>
             <div class="form-group">
                 <ejs-maskedtextbox asp-for="Year" id="year" mask="0000" placeholder="Year" floatLabelType="Auto"></ejs-maskedtextbox>
                 <span asp-validation-for="Year" class="text-danger"></span>
             </div>
+             <br/>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
                 <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
             </div>
+             <br/>
         </form>
     </div>
 </div>
+ <br/>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

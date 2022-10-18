@@ -2,20 +2,14 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<p>
-    <a asp-action="Create" class="btn btn-primary" data-toggle="tooltip" title="Create New"><i class="fa-solid fa-plus"></i></a>
+<p style="margin-left: 20px;">
+    <a asp-action="Create" class="btn btn-primary" data-toggle="tooltip" title="Create New"><i class="fa-solid fa-plus"></i>  Create New</a>
 </p>
 <br />
-<div class="row" style="color: black; font-family: Arial; font-size: small;">
+<div class="row" style="font-family: Arial; font-size: small; margin-left: 10px;">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -100,7 +94,7 @@
         </div>
     </div>
 </div>
-
+<br />
 
 @* Load datatable css *@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />

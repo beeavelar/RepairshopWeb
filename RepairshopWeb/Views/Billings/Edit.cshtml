@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <br />
-<h1 style="text-align: center;"><b>EDIT</b></h1>
+<h1 style="text-align: center;"><b>EDIT BILLING</b></h1>
 <br />
 <div class="row">
     <div class="col-md-4 offset-md-4">
@@ -13,7 +13,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="IssueDate" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="IssueDate" style="font-family: Arial; font-size: small"></label>
                 <div class="input-group date" id="datepicker">
                     <input asp-for="IssueDate" type="text" class="form-control" />
                     <span class="input-group-addon">
@@ -23,27 +23,27 @@
                 <span asp-validation-for="IssueDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RepairOrderId" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="RepairOrderId" style="font-family: Arial; font-size: small"></label>
                 <select asp-for="RepairOrderId" asp-items="ViewBag.RepairOrderId" style="width:100%; font-family: Arial; height: 30px"></select>
                 <span asp-validation-for="RepairOrderId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClientId" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="ClientId" style="font-family: Arial; font-size: small"></label>
                 <select asp-for="ClientId" asp-items="ViewBag.ClientId" style="width:100%; font-family: Arial; height: 30px"></select>
                 <span asp-validation-for="ClientId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="VehicleId" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="VehicleId" style="font-family: Arial; font-size: small"></label>
                 <select asp-for="VehicleId" asp-items="ViewBag.VehicleId" style="width:100%; font-family: Arial; height: 30px"></select>
                 <span asp-validation-for="VehicleId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Nif" style="color: black; font-family: Arial; font-size: small">NIF</label> <br />
+                <label asp-for="Nif" style="font-family: Arial; font-size: small">NIF</label> <br />
                 <input asp-for="Nif" class="form-control" maxlength="9" minlength="9" style="color: black; font-family: Arial; font-size: small; font-weight: bold;" />
                 <span asp-validation-for="Nif" class="text-warning"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PaymentMethod" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="PaymentMethod" style="font-family: Arial; font-size: small"></label>
                 @{
                     var payMethods = new string[] { "Cash", "Credit card", "MB WAY", "Bank transfer" };
                 }
@@ -51,8 +51,8 @@
                 <span asp-validation-for="PaymentMethod" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TotalToPay" class="control-label" style="color: black; font-family: Arial; font-size: small; font-weight: bold;"></label>
-                <input asp-for="TotalToPay" class="form-control" style="color: black; font-family: Arial; font-size: small" />
+                <label asp-for="TotalToPay" class="control-label" style="font-family: Arial; font-size: small; font-weight: bold;"></label>
+                <input asp-for="TotalToPay" class="form-control" style="font-family: Arial; font-size: small" />
                 <span asp-validation-for="TotalToPay" class="text-danger"></span>
             </div>
             <div class="form-group">

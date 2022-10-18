@@ -1,36 +1,34 @@
 ﻿@model RepairshopWeb.Models.AddItemViewModel
 @{
     ViewData["Title"] = "AddService";
+     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <br />
+<h1 style="text-align: center;"><b>ADD SERVICE</b></h1>
+<h4 style="text-align: center;"><b>To Repair Order</b></h4>
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<h1><b>ADD SERVICE</b></h1>
-<h4><b>To Repair Order</b></h4>
-<hr />
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-4 offset-md-4">
     	<form asp-action="AddService">
         	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
         	<div class="form-group">
-            	<label asp-for="ServiceId" style="color: black; font-family: Arial; font-size: small"></label>
-            	<select asp-for="ServiceId" asp-items="Model.Services" style= "width:100%; font-family: Arial; height: 30px"></select>
+            	<label asp-for="ServiceId" style="font-family: Arial; font-size: small;"></label>
+            	<select asp-for="ServiceId" asp-items="Model.Services" style= "width:100%; font-family: Arial; height: 30px;"></select>
             	<span asp-validation-for="ServiceId" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-            	<label asp-for="VehicleId" style="color: black; font-family: Arial; font-size: small"></label>
-            	<select asp-for="VehicleId" asp-items="Model.Vehicles" style= "width:100%; font-family: Arial; height: 30px"></select>
+            	<label asp-for="VehicleId" style="font-family: Arial; font-size: small;"></label>
+            	<select asp-for="VehicleId" asp-items="Model.Vehicles" style= "width:100%; font-family: Arial; height: 30px;"></select>
             	<span asp-validation-for="VehicleId" class="text-danger"></span>
         	</div>
+            <br />
             <div class="form-group">
-            	<label asp-for="MechanicId" style="color: black; font-family: Arial; font-size: small"></label>
-            	<select asp-for="MechanicId" asp-items="Model.Mechanics" style= "width:100%; font-family: Arial; height: 30px"></select>
+            	<label asp-for="MechanicId" style="font-family: Arial; font-size: small;"></label>
+            	<select asp-for="MechanicId" asp-items="Model.Mechanics" style= "width:100%; font-family: Arial; height: 30px;"></select>
             	<span asp-validation-for="MechanicId" class="text-danger"></span>
         	</div>
+            <br />
         	<div class="form-group">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
             	<a asp-action="Create" class="btn btn-success"><i class="fa-solid fa-angles-left"></i>Back</a>
@@ -38,6 +36,7 @@
     	</form>
 	</div>
 </div>
+<br />
 
 @section Scripts {
 	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

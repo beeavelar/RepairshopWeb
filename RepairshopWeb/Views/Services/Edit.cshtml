@@ -2,31 +2,28 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <br />
+<h1 style="text-align: center;"><b>EDIT SERVICE</b></h1>
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<h1><b>EDIT SERVICE</b></h1>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Description" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
-                <input asp-for="Description" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
+                <label asp-for="Description" class="control-label" style="font-family: Arial; font-size: small;"></label>
+                <input asp-for="Description" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="RepairPrice" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
-                <input asp-for="RepairPrice" class="form-control" style="color: black; font-family: Arial; font-size: small"/>
+                <label asp-for="RepairPrice" class="control-label" style="font-family: Arial; font-size: small;"></label>
+                <input asp-for="RepairPrice" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="RepairPrice" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
                 <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
@@ -34,6 +31,7 @@
         </form>
     </div>
 </div>
+<br />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

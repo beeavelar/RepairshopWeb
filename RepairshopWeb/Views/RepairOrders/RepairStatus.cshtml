@@ -2,34 +2,29 @@
 
 @{
     ViewData["Title"] = "Status";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<h1><b>REPAIR ORDER STATUS</b></h1>
+<h1 style="text-align: center;"><b>REPAIR ORDER STATUS</b></h1>
 <br />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-action="RepairStatus">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="RepairStatus" class="control-label" style="color: black; font-family: Arial; font-size: small"></label>
+                <label asp-for="RepairStatus" class="control-label" style="font-family: Arial; font-size: small"></label>
                 @{var status = new string[] { "Completed", "In process"};}
                 <ejs-combobox asp-for="RepairStatus" id="repairstatus" dataSource="status"></ejs-combobox>
                 <span asp-validation-for="RepairStatus" class="text-danger"></span>
             </div>
+            <br/>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
                 <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i>Back</a>
             </div>
+            <br/>
         </form>
     </div>
 </div>
-
+<br/>

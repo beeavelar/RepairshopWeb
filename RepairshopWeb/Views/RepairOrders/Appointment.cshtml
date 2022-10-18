@@ -2,19 +2,13 @@
 
 @{
     ViewData["Title"] = "Appointment";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<h1><b>APPOINTMENT</b></h1>
+<h1 style="text-align: center;"><b>APPOINTMENT</b></h1>
 <br />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-action="Appointment">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -28,7 +22,7 @@
                 </div>
                 <span asp-validation-for="RepairDate" class="text-danger"></span>
             </div>
-
+            <br/>
             <div class="form-group">
                 <label asp-for="AlertDate" class="control-label"></label>
                 <div class="input-group date" id="datepicker2">
@@ -39,7 +33,7 @@
                 </div>
                 <span asp-validation-for="AlertDate" class="text-danger"></span>
             </div>
-
+            <br/>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
                 <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i>Back</a>
@@ -47,6 +41,7 @@
         </form>
     </div>
 </div>
+<br/>
 
 @section Scripts {
     @{
