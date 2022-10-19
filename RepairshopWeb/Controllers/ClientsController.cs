@@ -46,7 +46,7 @@ namespace RepairshopWeb.Controllers
             return View(client);
         }
 
-        [Authorize(Roles = "Mechanic, Receptionist")]
+        [Authorize(Roles = "MECHANIC, RECEPTIONIST")]
         // GET: Clients/Create
         public IActionResult Create()
         {
@@ -77,7 +77,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Mechanic, Receptionist")]
+        [Authorize(Roles = "MECHANIC, RECEPTIONIST")]
         // GET: Clients/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -126,7 +126,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Mechanic, Receptionist")]
+        [Authorize(Roles = "MECHANIC, RECEPTIONIST")]
         // GET: Clients/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

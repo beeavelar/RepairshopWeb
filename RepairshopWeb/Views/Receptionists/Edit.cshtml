@@ -39,25 +39,25 @@
             <br />
             <div class="form-group">
                 <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" onkeypress="$(this).mask('000000000')" style="font-family: Arial; font-size: small;"/>
+                <input asp-for="Phone" type="number" class="form-control" onkeypress="$(this).mask('000000000')" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
                 <label asp-for="Email" class="control-label" style="font-family: Arial; font-size: small;"></label>
-                <input asp-for="Email" class="form-control" style="font-family: Arial; font-size: small;"/>
+                <input asp-for="Email" type="email" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
                 <label asp-for="Nif" class="control-label" style="font-family: Arial; font-size: small;"></label>
-                <input asp-for="Nif" class="form-control" style="font-family: Arial; font-size: small;"/>
+                <input asp-for="Nif" type="number" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="Nif" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
                 <label asp-for="Niss" class="control-label" style="font-family: Arial; font-size: small;"></label>
-                <input asp-for="Niss" class="form-control" style="font-family: Arial; font-size: small;"/>
+                <input asp-for="Niss" type="number" class="form-control" style="font-family: Arial; font-size: small;"/>
                 <span asp-validation-for="Niss" class="text-danger"></span>
             </div>
             <br />

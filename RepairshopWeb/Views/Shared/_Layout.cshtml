@@ -10,20 +10,20 @@
     <!-- site metas -->
     <title>Repairshop</title>
     <!-- bootstrap css -->
-    <link rel="stylesheet" href="~/WebApplication/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/WebApplication/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/WebApplicationlib/bootstrap-datepicker/css/bootstrap-datepicker.min.css" />
-    <link rel="stylesheet" href="~/WebApplication/lib/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
     <!-- font-awesome -->
-    <link rel="stylesheet" href="~/WebApplication/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
     <!-- style css -->
-    <link rel="stylesheet" href="~/WebApplication/css/style.css">
+    <link rel="stylesheet" href="~/css/style.css">
     <!-- Responsive-->
-    <link rel="stylesheet" href="~/WebApplication/css/responsive.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
     <!-- fevicon -->
-    <link href="~/WebApplication/images/logo.png" rel="shortcut icon" type="image/gif" />
+    <link href="~/images/logo.png" rel="shortcut icon" type="image/gif" />
     <!-- Tweaks for older IEs-->
-    <link rel="stylesheet" href="~/WebApplication/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
     <!--[if lt IE 9]>
@@ -61,16 +61,14 @@
             <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
         }
 
-        @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Client"))
+        @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("CLIENT"))
         {
-            <br />
             <a asp-area="" asp-controller="RepairOrders" asp-action="Index">My Repairs</a>
-            <br />
-            <a class="active" asp-area="" asp-controller="Account" asp-action="ChangeUser">My Account</a>
+            <a asp-area="" asp-controller="Account" asp-action="ChangeUser">My Account</a>
             <a class="active" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
         }
 
-        @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin") || this.User.IsInRole("Mechanic") || this.User.IsInRole("Receptionist"))
+        @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("ADMIN") || this.User.IsInRole("MECHANIC") || this.User.IsInRole("RECEPTIONIST"))
         {
             <a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
             <a class="active" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
@@ -84,7 +82,7 @@
             <div class="row d_flex">
                 <div class=" col-md-3 col-sm-3">
                     <div class="logo">
-                        <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/WebApplication/images/logo.png" alt="#" /></a>
+                        <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="#" /></a>
                     </div>
                 </div>
                 <div class="col-md-7 di_none">
@@ -94,10 +92,9 @@
                 </div>
                 <div class="col-xl-2 col-md-9 col-sm-9">
                     <ul class="email text_align_right">
-                        <li> <button class="openbtn" onclick="openNav()"><img src="~/WebApplication/images/menu_btn.png"></button></li>
+                        <li> <button class="openbtn" onclick="openNav()"><img src="~/images/menu_btn.png"></button></li>
                     </ul>
                 </div>
-
             </div>
         </div>
     </header>
@@ -118,7 +115,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="footer_logo">
-                            <img src="~/WebApplication/images/logo_foter.png">
+                            <img src="~/images/logo_foter.png">
                         </a>
                     </div>
                     <div class="col-md-12">
@@ -167,12 +164,12 @@
     <!-- end footer -->
 
     <!-- Javascript files-->
-    <script src="~/WebApplication/js/jquery.min.js"></script>
-    <script src="~/WebApplication/js/bootstrap.bundle.min.js"></script>
-    <script src="~/WebApplication/js/jquery-3.0.0.min.js"></script>
-    <script src="~/WebApplication/js/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/jquery-3.0.0.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
-    <script src="~/WebApplication/js/custom.js"></script>
+    <script src="~/js/custom.js"></script>
     <script src="https://kit.fontawesome.com/838122fc3c.js" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
     <!-- end Javascript files-->

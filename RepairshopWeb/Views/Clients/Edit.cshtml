@@ -39,19 +39,19 @@
             <br />
             <div class="form-group">
                 <label asp-for="Phone" style="font-family: Arial; font-size: small">Phone</label> <br />
-                <input asp-for="Phone" class="form-control" maxlength="9" minlength="9" style="font-family: Arial; font-size: small"/>
+                <input asp-for="Phone" type="number" class="form-control" maxlength="9" minlength="9" style="font-family: Arial; font-size: small"/>
                 <span asp-validation-for="Phone" class="text-warning"></span>
             </div>
             <br />
             <div class="form-group">
                 <label asp-for="Email" style="font-family: Arial; font-size: small">Email</label> <br />
-                <input asp-for="Email" class="form-control" style="font-family: Arial; font-size: small"/>
+                <input asp-for="Email" type="email" class="form-control" style="font-family: Arial; font-size: small"/>
                 <span asp-validation-for="Email" class="text-warning"></span>
             </div>
             <br />
             <div class="form-group">
                 <label asp-for="Nif" style="font-family: Arial; font-size: small">NIF</label> <br />
-                <input asp-for="Nif" class="form-control" maxlength="9" minlength="9" style="font-family: Arial; font-size: small"/>
+                <input asp-for="Nif" type="number" class="form-control" maxlength="9" minlength="9" style="font-family: Arial; font-size: small"/>
                 <span asp-validation-for="Nif" class="text-warning"></span>
             </div>
             <br />

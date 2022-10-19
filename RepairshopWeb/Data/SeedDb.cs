@@ -23,10 +23,10 @@ namespace RepairshopWeb.Data
         {
             await _context.Database.MigrateAsync(); //Quando corre o seed corre tbm as migrações automaticamente
 
-            await _userHelper.CheckRoleAsync("Admin");
-            await _userHelper.CheckRoleAsync("Client");
-            await _userHelper.CheckRoleAsync("Mechanic");
-            await _userHelper.CheckRoleAsync("Receptionist");
+            await _userHelper.CheckRoleAsync("ADMIN");
+            await _userHelper.CheckRoleAsync("CLIENT");
+            await _userHelper.CheckRoleAsync("MECHANIC");
+            await _userHelper.CheckRoleAsync("RECEPTIONIST");
 
             var user = await _userHelper.GetUserByEmailAsync("debora.avelar.21695@formandos.cinel.pt");
             if (user == null)
@@ -37,7 +37,7 @@ namespace RepairshopWeb.Data
                     LastName = "Avelar",
                     Email = "debora.avelar.21695@formandos.cinel.pt",
                     UserName = "debora.avelar.21695@formandos.cinel.pt",
-                    Role = "Admin"
+                    Role = "ADMIN"
                 };
 
                 var result = await _userHelper.AddUserAsync(user, "123456");
@@ -45,15 +45,18 @@ namespace RepairshopWeb.Data
                     throw new InvalidOperationException("Could not create the user in seeder.");
 
                 //Adicionar o role ao user
-                await _userHelper.AddUserToRoleAsync(user, "Admin");
+                await _userHelper.AddUserToRoleAsync(user, "ADMIN");
+
+                var token = await _userHelper.GenerateConfirmEmailTokenAsync(user);
+                await _userHelper.EmailConfirmAsync(user, token);
             }
 
             //Verifica se o user tem o role que quero verificar --> No caso o "AdmiN"
-            var isInRole = await _userHelper.IsUserInRoleAsync(user, "Admin");
+            var isInRole = await _userHelper.IsUserInRoleAsync(user, "ADMIN");
 
             //Se o user não tem a permissão Admin, adiciona ele no Admin
             if (!isInRole)
-                await _userHelper.AddUserToRoleAsync(user, "Admin");
+                await _userHelper.AddUserToRoleAsync(user, "ADMIN");
 
             if (!_context.Clients.Any())
             {

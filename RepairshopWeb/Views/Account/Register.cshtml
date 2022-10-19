@@ -60,7 +60,7 @@
             <div class="form-group">
                 <label asp-for="Role" class="control-label" style="font-family: Arial; font-size:small;"></label>
                 @{
-                    var roles = new string[] { "Admin", "Client", " Receptionist", "Mechanic" };
+                    var roles = new string[] { "ADMIN", "CLIENT", "RECEPTIONIST", "MECHANIC" };
                 }
                 <ejs-combobox asp-for="Role" id="role" dataSource="roles"></ejs-combobox>
                 <span asp-validation-for="Role" class="text-danger"></span>
@@ -71,6 +71,7 @@
                 <a asp-controller="Account" asp-action="Login" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
             </div>
         </form>
+        <br/>
         <div class="text-success">
             <p style="color: red; font-family: Arial; font-size: medium; text-align:center">
                 @ViewBag.Message

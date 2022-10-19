@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -57,6 +58,21 @@ namespace RepairshopWeb
             services.AddDbContext<DataContext>(cfg =>
             {
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //})
+            //.AddCookie(options =>
+            //{
+            //    options.LoginPath = "/account/google-login";
+            //});
+
+            services.AddAuthentication().AddGoogle(opts =>
+            {
+                opts.ClientId = Configuration["Google:ClientId"];
+                opts.ClientSecret = Configuration["Google:ClientSecret"];
             });
 
             services.AddTransient<SeedDb>();

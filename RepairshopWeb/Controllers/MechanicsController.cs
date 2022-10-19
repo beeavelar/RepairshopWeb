@@ -51,7 +51,7 @@ namespace RepairshopWeb.Controllers
             return View(mechanic);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         // GET: Mechanics/Create
         public IActionResult Create()
         {
@@ -82,7 +82,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         // GET: Mechanics/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -130,7 +130,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         // GET: Mechanics/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

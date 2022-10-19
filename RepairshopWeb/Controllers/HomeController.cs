@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Models;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace RepairshopWeb.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -21,6 +23,7 @@ namespace RepairshopWeb.Controllers
             _mechanicRepository = mechanicRepository;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_mechanicRepository.GetAll());
