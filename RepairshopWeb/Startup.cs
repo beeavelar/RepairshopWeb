@@ -97,6 +97,8 @@ namespace RepairshopWeb
 
             services.AddScoped<IRepairOrderRepository, RepairOrderRepository>();
 
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+
             services.AddScoped<IBillingRepository, BillingRepository>();
 
             services.ConfigureApplicationCookie(options =>

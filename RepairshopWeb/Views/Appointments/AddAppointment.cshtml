@@ -1,28 +1,27 @@
-﻿@model RepairshopWeb.Models.AppointmentViewModel
-
+﻿@model RepairshopWeb.Models.AddAppointmentViewModel
 @{
-    ViewData["Title"] = "Appointment";
+    ViewData["Title"] = "AddAppointment";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
+
 <br />
-<h1 style="text-align: center;"><b>APPOINTMENT</b></h1>
+<h1 style="text-align: center;"><b>ADD APPOINTMENT</b></h1>
 <br />
 <div class="row">
     <div class="col-md-4 offset-md-4">
-        <form asp-action="Appointment">
+        <form asp-action="AddAppointment">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="RepairDate" class="control-label"></label>
+                <label asp-for="AppointmentDate" class="control-label"></label>
                 <div class="input-group date" id="datepicker">
-                    <input asp-for="RepairDate" type="text" class="form-control" />
+                    <input asp-for="AppointmentDate" type="text" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
-                <span asp-validation-for="RepairDate" class="text-danger"></span>
+                <span asp-validation-for="AppointmentDate" class="text-danger"></span>
             </div>
-            <br/>
+            <br />
             <div class="form-group">
                 <label asp-for="AlertDate" class="control-label"></label>
                 <div class="input-group date" id="datepicker2">
@@ -33,18 +32,32 @@
                 </div>
                 <span asp-validation-for="AlertDate" class="text-danger"></span>
             </div>
-            <br/>
+            <br />
+            <div class="form-group">
+                <label asp-for="ClientId" style="font-family: Arial; font-size: small;"></label>
+                <select asp-for="ClientId" asp-items="Model.Clients" style="width:100%; font-family: Arial; height: 30px;"></select>
+                <span asp-validation-for="ClientId" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="VehicleId" style="font-family: Arial; font-size: small;"></label>
+                <select asp-for="VehicleId" asp-items="Model.Vehicles" style="width:100%; font-family: Arial; height: 30px;"></select>
+                <span asp-validation-for="VehicleId" class="text-danger"></span>
+            </div>
+            <br />
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
-                <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i>Back</a>
+                <a asp-action="Create" class="btn btn-success"><i class="fa-solid fa-angles-left"></i>Back</a>
             </div>
         </form>
     </div>
 </div>
-<br/>
+<br />
 
 @section Scripts {
     @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -61,22 +74,18 @@
                         sideBySide: true,
                         showClear: true,
                         format: 'DD-MM-YYYY HH:mm',
-
                         locale: moment.locale('pt-Pt')
-
-                });
-
+                    });
                 $("#datepicker2").datetimepicker(
                     {
                         showClose: true,
                         sideBySide: true,
                         showClear: true,
                         format: 'DD-MM-YYYY HH:mm',
-
                         locale: moment.locale('pt-Pt')
-
-                });
+                    });
             });
         </script>
     }
-    }
+}
+

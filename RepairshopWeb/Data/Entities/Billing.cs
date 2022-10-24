@@ -14,7 +14,7 @@ namespace RepairshopWeb.Data.Entities
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm tt}", ApplyFormatInEditMode = false)]
         public DateTime IssueDate { get; set; }
 
-        [Display(Name = "Repair Order ID")]
+        [Display(Name = "R.O Number")]
         public int RepairOrderId { get; set; }
 
         [ForeignKey("RepairOrderId")]

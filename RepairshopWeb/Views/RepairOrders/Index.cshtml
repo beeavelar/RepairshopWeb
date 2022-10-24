@@ -6,7 +6,7 @@
 }
 <br />
 <p style="margin-left: 20px;">
-    <a asp-action="Create" class="btn btn-primary" data-toggle="tooltip" title="Create New"><i class="fa-solid fa-plus"></i>  Create New</a>
+    <a asp-action="Create" class="btn btn-primary" data-toggle="tooltip" title="Create New"><i class="fa-solid fa-plus"></i>  Create New R.O</a>
 </p>
 <br />
 <div class="row" style="font-family: Arial; font-size: small; margin-left: 10px;">
@@ -30,19 +30,13 @@
                                 </th>
                             }
                             <th>
-                                @Html.DisplayNameFor(model => model.RepairOrderDate)
+                                @Html.DisplayNameFor(model => model.Date)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Vehicle.LicensePlate)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.TotalServicesToDo)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Appointment)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.AlertDate)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.TotalToPay)
@@ -70,19 +64,13 @@
                                     </th>
                                 }
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.RepairOrderDate)
+                                    @Html.DisplayFor(modelItem => item.Date)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Vehicle.LicensePlate)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TotalServicesToDo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Appointment)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.AlertDate)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TotalToPay)
@@ -94,9 +82,8 @@
                                     @Html.DisplayFor(modelItem => item.RepairStatus)
                                 </td>
                                 <td style="text-align:right">
-                                    <a asp-action="Appointment" asp-route-id="@item.Id" class="btn btn-info" id="btnCreateAppointment" data-toggle="tooltip" title="Appoitment"><i class="fa-solid fa-calendar-days"></i></a> |
-                                    <a asp-action="DeleteRepairOrder" asp-route-id="@item.Id" class="btn btn-danger" id="btnDelete" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a> |
-                                    <a asp-action="RepairStatus" asp-route-id="@item.Id" class="btn btn-warning" id="btnChangeStatus" data-toggle="tooltip" title="Change Repair Status"><i class="fa-solid fa-calendar-check"></i></a>
+                                    <a asp-action="RepairStatus" asp-route-id="@item.Id" class="btn btn-warning" id="btnChangeStatus" data-toggle="tooltip" title="Change Repair Status"><i class="fa-solid fa-calendar-check"></i></a> |
+                                    <a asp-action="DeleteRepairOrder" asp-route-id="@item.Id" class="btn btn-danger" id="btnDelete" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
                                 </td>
                             </tr>
                         }
@@ -106,6 +93,10 @@
         </div>
     </div>
 </div>
+<p style="margin-left: 20px;">
+    <a  asp-controller="Appointments" asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
+</p>
+<br/>
 
 <div id="deleteDialog" class="modal fade">
     <div class="modal-dialog modal-sm">

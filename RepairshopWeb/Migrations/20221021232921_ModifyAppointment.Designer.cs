@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepairshopWeb.Data;
 
 namespace RepairshopWeb.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221021232921_ModifyAppointment")]
+    partial class ModifyAppointment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,9 +208,6 @@ namespace RepairshopWeb.Migrations
                     b.Property<DateTime?>("AppointmentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("AppointmentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
@@ -216,8 +215,6 @@ namespace RepairshopWeb.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppointmentId");
 
                     b.HasIndex("ClientId");
 
@@ -792,10 +789,6 @@ namespace RepairshopWeb.Migrations
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.AppointmentDetail", b =>
                 {
-                    b.HasOne("RepairshopWeb.Data.Entities.Appointment", null)
-                        .WithMany("Items")
-                        .HasForeignKey("AppointmentId");
-
                     b.HasOne("RepairshopWeb.Data.Entities.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
@@ -1007,11 +1000,6 @@ namespace RepairshopWeb.Migrations
                     b.Navigation("Client");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("RepairshopWeb.Data.Entities.Appointment", b =>
-                {
-                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Client", b =>

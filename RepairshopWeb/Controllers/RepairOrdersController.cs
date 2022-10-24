@@ -47,7 +47,7 @@ namespace RepairshopWeb.Controllers
             {
                 Services = _serviceRepository.GetComboServices(),
                 Vehicles = _vehicleRepository.GetComboVehicles(),
-                Mechanics = _mechanicRepository.GetComboMechanics(),
+                Mechanics = _mechanicRepository.GetComboMechanics()
             };
             return View(model);
         }
@@ -58,7 +58,7 @@ namespace RepairshopWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _repairOrderRepository.AddItemToOrderAsync(model, this.User.Identity.Name);
+                await _repairOrderRepository.AddItemToRepairOrderAsync(model, this.User.Identity.Name);
                 return RedirectToAction("Create");
             }
             return View(model);
@@ -87,44 +87,11 @@ namespace RepairshopWeb.Controllers
         //Confirm RepairOrder
         public async Task<IActionResult> ConfirmRepairOrder()
         {
-                var response = await _repairOrderRepository.ConfirmRepairOrderAsync(this.User.Identity.Name);
-                if (response)
-                    return RedirectToAction("Index", "RepairOrders");
-
-                return RedirectToAction("Create", "RepairOrders");
-        }
-
-        //Get do Appointment - Faz aparecer a view
-        public async Task<IActionResult> Appointment(int? id)
-        {
-            if (id == null)
-                return new NotFoundViewResult("ItemNotFound");
-
-            var repairOrder = await _repairOrderRepository.GetRepairOrderAsync(id.Value);
-
-            if (repairOrder == null)
-                return new NotFoundViewResult("ItemNotFound");
-
-            var model = new AppointmentViewModel
-            {
-                Id = repairOrder.Id,
-                RepairDate = DateTime.Today,
-                AlertDate = DateTime.Today
-            };
-
-            return View(model);
-        }
-
-        //Post do Appointment - grava as informações
-        [HttpPost]
-        public async Task<IActionResult> Appointment(AppointmentViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                await _repairOrderRepository.AppointementRepairOrder(model);
+            var response = await _repairOrderRepository.ConfirmRepairOrderAsync(this.User.Identity.Name);
+            if (response)
                 return RedirectToAction("Index");
-            }
-            return View();
+
+            return RedirectToAction("Create");
         }
 
         //Get do Repair Order Status - Faz aparecer a view

@@ -71,6 +71,7 @@
         @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("ADMIN") || this.User.IsInRole("MECHANIC") || this.User.IsInRole("RECEPTIONIST"))
         {
             <a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+            <a asp-area="" asp-controller="Account" asp-action="ChangeUser">My Account</a>
             <a class="active" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
         }
     </div>
@@ -87,7 +88,7 @@
                 </div>
                 <div class="col-md-7 di_none">
                     <ul class="Informa_conta">
-                        <li><a asp-area="" asp-controller="Account" asp-action="ChangeUser" style="color: #656c9a; font-size:larger;">@this.User.Identity.Name</a></li>
+                        <li asp-area="" asp-controller="Account" asp-action="ChangeUser" style="color: #656c9a; font-size:larger;">@this.User.Identity.Name</li>
                     </ul>
                 </div>
                 <div class="col-xl-2 col-md-9 col-sm-9">

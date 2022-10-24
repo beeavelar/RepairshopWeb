@@ -41,5 +41,12 @@ namespace RepairshopWeb.Data.Entities
         public ICollection<RepairOrder> RepairOrders { get; set; }
 
         public ICollection<Billing> Billings { get; set; }
+
+        public ICollection<Appointment> Appointments { get; set; }
+
+        public ICollection<AppointmentDetail> AppointmentDetails { get; set; }
+
+        public AppointmentDetailTemp AppointmentDetailTemp { get; set; }
+
     }
 }

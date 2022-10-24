@@ -29,8 +29,8 @@
         <!-- sidepanel -->
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
-@*                <a class="sidebar-brand" href="index.html">
-                    <span class="align-middle">REPAIRSHOP</span>
+                @*                <a class="sidebar-brand" href="index.html">
+                <span class="align-middle">REPAIRSHOP</span>
                 </a>*@
                 <a class="sidebar-brand" asp-area="" asp-controller="Home" asp-action="Index"><span class="align-middle">REPAIRSHOP</span></a>
 
@@ -41,10 +41,6 @@
 
                     <li class="sidebar-item active">
                         <a class="sidebar-link" asp-area="" asp-controller="Dashboard" asp-action="Index"><i class="align-middle" data-feather="sliders"></i><span class="align-middle">Dashboard</span></a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" asp-area="" asp-controller="Account" asp-action="ChangeUser"><i class="align-middle" data-feather="user"></i><span class="align-middle">My Account</span></a>
                     </li>
 
                     <li class="sidebar-item">
@@ -72,15 +68,11 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" asp-area="" asp-controller="RepairOrders" asp-action="Index"><i class="align-middle" data-feather="list"></i><span class="align-middle">Repair Orders</span></a>
+                        <a class="sidebar-link" asp-area="" asp-controller="Appointments" asp-action="Index"><i class="align-middle" data-feather="calendar"></i><span class="align-middle">Appointments & Billings</span></a>
                     </li>
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" asp-area="" asp-controller="Billings" asp-action="Index"><i class="align-middle" data-feather="dollar-sign"></i><span class="align-middle">Billings</span></a>
-                    </li>
-
-                    <li class="sidebar-header">
-                        Plugins & Addons
                     </li>
                 </ul>
             </div>
@@ -238,12 +230,7 @@
                                 <img src="~/Dashboard/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="ChangeUser"><i class="align-middle me-1" data-feather="user"></i>My Account</a>
-                                <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-                                <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
-                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="ChangeUser">@this.User.Identity.Name</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                             </div>
                         </li>

@@ -45,6 +45,8 @@ namespace RepairshopWeb.Data.Entities
 
         public ICollection<Billing> Billings { get; set; }
 
+        public ICollection<Appointment> Appointments { get; set; }
+
         public User User { get; set; }
 
         public string ImageFullPath => ImageId == Guid.Empty

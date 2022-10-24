@@ -1,56 +1,57 @@
-﻿@model IEnumerable<RepairshopWeb.Data.Entities.RepairOrderDetailTemp>
+﻿@model IEnumerable<RepairshopWeb.Data.Entities.AppointmentDetailTemp>
+
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <br />
-<h1 style="margin-left: 20px;"><b>NEW REPAIR ORDER</b></h1>
+<h1 style="margin-left: 20px;"><b>NEW APPOINTMENT</b></h1>
 <br />
 <p style="margin-left: 20px;">
-	<a asp-action="AddService" class="btn btn-success" data-toggle="tooltip"><i class="fa-solid fa-plus"></i>Add Service</a>
-    <a asp-action="ConfirmRepairOrder" class="btn btn-primary" id="btnConfirm">Confirm</a>
+    <a asp-action="AddAppointment" class="btn btn-success" data-toggle="tooltip"><i class="fa-solid fa-plus"></i>Add Appointment</a>
+    <a asp-action="ConfirmAppointment" class="btn btn-primary" id="btnConfirm">Confirm</a>
 </p>
 <br />
-<table  id="MyTable" class="table" style="font-family: Arial; font-size: small">
-	<thead style="text-transform: uppercase">
-    	<tr>
+<table id="MyTable" class="table" style="font-family: Arial; font-size: small">
+    <thead style="text-transform: uppercase">
+        <tr>
             <th>
-            	@Html.DisplayNameFor(model => model.Vehicle.LicensePlate)
-        	</th>
-        	<th>
-            	@Html.DisplayNameFor(model => model.Service.Description)
-        	</th>
+                @Html.DisplayNameFor(model => model.AppointmentDate)
+            </th>
             <th>
-            	@Html.DisplayNameFor(model => model.Mechanic.FullName)
-        	</th>
-        	<th>
-            	@Html.DisplayNameFor(model => model.RepairPrice)
-        	</th>
-        	<th></th>
-    	</tr>
-	</thead>
-	<tbody>
-    	@foreach (var item in Model)
-    	{
-        	<tr>
+                @Html.DisplayNameFor(model => model.AlertDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
                 <td>
-                	@Html.DisplayFor(modelItem => item.Vehicle.LicensePlate)
-            	</td>
-            	<td>
-                	@Html.DisplayFor(modelItem => item.Service.Description)
-            	</td>
+                    @Html.DisplayFor(modelItem => item.AppointmentDate)
+                </td>
                 <td>
-                	@Html.DisplayFor(modelItem => item.Mechanic.FullName)
-            	</td>
-            	<td>
-                	@Html.DisplayFor(modelItem => item.RepairPrice)
-            	</td>
-            	<td id="@item.Id">
-                	<a asp-action="DeleteItem" asp-route-id="@item.Id" class="btn btn-danger" id="btnDeleteItem" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
-            	</td>
-        	</tr>
-    	}
-	</tbody>
+                    @Html.DisplayFor(modelItem => item.AlertDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vehicle.LicensePlate)
+                </td>
+                <td id="@item.Id">
+                    <a asp-action="DeleteItem" asp-route-id="@item.Id" class="btn btn-danger" id="btnDeleteItem" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 <p style="margin-left: 20px;">
     <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
@@ -95,7 +96,7 @@
 
 @section Scripts{
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function() {
             var id = 0;
             $("#btnConfirm").click(function() {
                 $("#confirmDialog").modal("show");
@@ -110,7 +111,7 @@
             });
             $("a[id*=btnDeleteItem]").click(function() {
                 debugger;
-                id=$(this).parent()[0].id;
+                id = $(this).parent()[0].id;
                 $("#deleteDialog").modal("show");
                 return false;
             });
@@ -132,4 +133,5 @@
         });
     </script>
 }
+
 

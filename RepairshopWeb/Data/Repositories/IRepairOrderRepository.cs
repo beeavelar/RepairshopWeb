@@ -15,15 +15,13 @@ namespace RepairshopWeb.Data.Repositories
         Task<IQueryable<RepairOrderDetailTemp>> GetDetailsTempsAsync(string userName);
 
         //Método que adiciona o item a Repair Order TDetail emp
-        Task AddItemToOrderAsync(AddItemViewModel model, string userName);
+        Task AddItemToRepairOrderAsync(AddItemViewModel model, string userName);
 
         //Método para deletar Services da Repair Order Detail Temp
         Task DeleteDetailTempAsync(int id);
 
         //Método para confirmar a Repair Order
         Task<bool> ConfirmRepairOrderAsync(string userName);
-
-        Task AppointementRepairOrder(AppointmentViewModel model);
 
         Task StatusRepairOrder(RepairOrderStatusViewModel model);
 

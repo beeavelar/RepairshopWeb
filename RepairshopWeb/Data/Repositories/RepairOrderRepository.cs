@@ -19,7 +19,7 @@ namespace RepairshopWeb.Data.Repositories
             _userHelper = userHelper;
         }
 
-        public async Task AddItemToOrderAsync(AddItemViewModel model, string userName)
+        public async Task AddItemToRepairOrderAsync(AddItemViewModel model, string userName)
         {
             var user = await _userHelper.GetUserByEmailAsync(userName);
             if (user == null)
@@ -49,7 +49,7 @@ namespace RepairshopWeb.Data.Repositories
                     Service = service,
                     RepairPrice = service.RepairPrice,
                     Mechanic = mechanic,
-                    User = user,
+                    User = user
                 };
                 _context.RepairOrderDetailsTemp.Add(repairOrderDetailTemp);
             }
@@ -87,7 +87,7 @@ namespace RepairshopWeb.Data.Repositories
             //Passa as informações do RepairOrderDetail para RepairOrder
             var repairOrder = new RepairOrder
             {
-                RepairOrderDate = DateTime.Now,
+                Date = DateTime.Now,
                 VehicleId = details[0].VehicleId,
                 User = user,
                 Items = details
@@ -139,13 +139,13 @@ namespace RepairshopWeb.Data.Repositories
             if (user == null)
                 return null;
 
-            if (await _userHelper.IsUserInRoleAsync(user, "Admin")) //Se o user for o Admin, buscar todas as RepairOrders
+            if (await _userHelper.IsUserInRoleAsync(user, "ADMIN")) //Se o user for o Admin, buscar todas as RepairOrders
             {
                 return _context.RepairOrders
                     .Include(ro => ro.Items)
                     .ThenInclude(s => s.Service)
                     .Include(v => v.Vehicle)
-                    .OrderByDescending(ro => ro.RepairOrderDate);
+                    .OrderByDescending(ro => ro.Date);
             }
 
             return _context.RepairOrders //Se não for Admin, buscar as RepairOrders do user(cliente) que estiver logado
@@ -153,19 +153,9 @@ namespace RepairshopWeb.Data.Repositories
                 .ThenInclude(s => s.Service)
                 .Include(v => v.Vehicle)
                 .Where(ro => ro.User == user) //onde o User for igual ao user
-                .OrderByDescending(ro => ro.RepairOrderDate);
+                .OrderByDescending(ro => ro.Date);
         }
-        public async Task AppointementRepairOrder(AppointmentViewModel model)
-        {
-            var repairOrder = await _context.RepairOrders.FindAsync(model.Id);
-            if (repairOrder == null)
-                return;
 
-            repairOrder.Appointment = model.RepairDate;
-            repairOrder.AlertDate = model.AlertDate;
-            _context.RepairOrders.Update(repairOrder);
-            await _context.SaveChangesAsync();
-        }
         public async Task StatusRepairOrder(RepairOrderStatusViewModel model)
         {
             var repairOrder = await _context.RepairOrders.FindAsync(model.Id);

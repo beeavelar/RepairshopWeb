@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepairshopWeb.Data;
 
 namespace RepairshopWeb.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221021153102_AddAppointmentAndModifyRepairOrder")]
+    partial class AddAppointmentAndModifyRepairOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,82 +184,11 @@ namespace RepairshopWeb.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("RepairOrderId")
-                        .IsUnique()
-                        .HasFilter("[RepairOrderId] IS NOT NULL");
-
                     b.HasIndex("UserId");
 
                     b.HasIndex("VehicleId");
 
                     b.ToTable("Appointments");
-                });
-
-            modelBuilder.Entity("RepairshopWeb.Data.Entities.AppointmentDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("AlertDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("AppointmentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("AppointmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VehicleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppointmentId");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("VehicleId");
-
-                    b.ToTable("AppointmentDetails");
-                });
-
-            modelBuilder.Entity("RepairshopWeb.Data.Entities.AppointmentDetailTemp", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("AlertDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("AppointmentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("VehicleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("VehicleId")
-                        .IsUnique();
-
-                    b.ToTable("AppointmentDetailTemps");
                 });
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Billing", b =>
@@ -767,10 +698,6 @@ namespace RepairshopWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RepairshopWeb.Data.Entities.RepairOrder", "RepairOrder")
-                        .WithOne("Appointment")
-                        .HasForeignKey("RepairshopWeb.Data.Entities.Appointment", "RepairOrderId");
-
                     b.HasOne("RepairshopWeb.Data.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
@@ -778,56 +705,6 @@ namespace RepairshopWeb.Migrations
                     b.HasOne("RepairshopWeb.Data.Entities.Vehicle", "Vehicle")
                         .WithMany("Appointments")
                         .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-
-                    b.Navigation("RepairOrder");
-
-                    b.Navigation("User");
-
-                    b.Navigation("Vehicle");
-                });
-
-            modelBuilder.Entity("RepairshopWeb.Data.Entities.AppointmentDetail", b =>
-                {
-                    b.HasOne("RepairshopWeb.Data.Entities.Appointment", null)
-                        .WithMany("Items")
-                        .HasForeignKey("AppointmentId");
-
-                    b.HasOne("RepairshopWeb.Data.Entities.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RepairshopWeb.Data.Entities.Vehicle", "Vehicle")
-                        .WithMany("AppointmentDetails")
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Vehicle");
-                });
-
-            modelBuilder.Entity("RepairshopWeb.Data.Entities.AppointmentDetailTemp", b =>
-                {
-                    b.HasOne("RepairshopWeb.Data.Entities.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RepairshopWeb.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.HasOne("RepairshopWeb.Data.Entities.Vehicle", "Vehicle")
-                        .WithOne("AppointmentDetailTemp")
-                        .HasForeignKey("RepairshopWeb.Data.Entities.AppointmentDetailTemp", "VehicleId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -1009,11 +886,6 @@ namespace RepairshopWeb.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RepairshopWeb.Data.Entities.Appointment", b =>
-                {
-                    b.Navigation("Items");
-                });
-
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Client", b =>
                 {
                     b.Navigation("Appointments");
@@ -1030,8 +902,6 @@ namespace RepairshopWeb.Migrations
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.RepairOrder", b =>
                 {
-                    b.Navigation("Appointment");
-
                     b.Navigation("Billing");
 
                     b.Navigation("Items");
@@ -1039,10 +909,6 @@ namespace RepairshopWeb.Migrations
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Vehicle", b =>
                 {
-                    b.Navigation("AppointmentDetails");
-
-                    b.Navigation("AppointmentDetailTemp");
-
                     b.Navigation("Appointments");
 
                     b.Navigation("Billings");

@@ -10,5 +10,7 @@ namespace RepairshopWeb.Data.Repositories
     {
         public IQueryable GetAllWithUsers();
 
+        IEnumerable<SelectListItem> GetComboClients();
+
     }
 }
