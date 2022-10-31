@@ -122,7 +122,7 @@ namespace RepairshopWeb.Data.Repositories
             return _context.Appointments.Include(a => a.User);
         }
 
-        public async Task<Appointment> GetAppointmentAsync(int id)
+        public async Task<Appointment> GetAppointmentByIdAsync(int id)
         {
             return await _context.Appointments.FindAsync(id);
         }
@@ -165,6 +165,5 @@ namespace RepairshopWeb.Data.Repositories
                .Include(c => c.Client)
                .Where(app => app.User == user);
         }
-
     }
 }

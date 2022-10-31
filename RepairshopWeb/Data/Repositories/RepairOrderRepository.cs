@@ -56,7 +56,7 @@ namespace RepairshopWeb.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> ConfirmRepairOrderAsync(string userName)
+        public async Task<bool> ConfirmRepairOrderAsync(string userName, int appointmentId)
         {
             var user = await _userHelper.GetUserByEmailAsync(userName);
             if (user == null)
@@ -89,6 +89,7 @@ namespace RepairshopWeb.Data.Repositories
             {
                 Date = DateTime.Now,
                 VehicleId = details[0].VehicleId,
+                AppointmentId = appointmentId,
                 User = user,
                 Items = details
             };
@@ -167,7 +168,7 @@ namespace RepairshopWeb.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<RepairOrder> GetRepairOrderAsync(int id)
+        public async Task<RepairOrder> GetRepairOrderByIdAsync(int id)
         {
             return await _context.RepairOrders.FindAsync(id);
         }

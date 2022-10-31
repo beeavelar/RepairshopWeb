@@ -60,15 +60,6 @@ namespace RepairshopWeb
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //})
-            //.AddCookie(options =>
-            //{
-            //    options.LoginPath = "/account/google-login";
-            //});
-
             services.AddAuthentication().AddGoogle(opts =>
             {
                 opts.ClientId = Configuration["Google:ClientId"];

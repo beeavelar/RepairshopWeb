@@ -42,9 +42,11 @@ namespace RepairshopWeb.Data.Entities
         [Required]
         public User User { get; set; }
 
-        public Appointment Appointment { get; set; }
-
+        [Display(Name = "Appointment Id")]
         public int AppointmentId { get; set; }
+
+        [ForeignKey("AppointmentId")]
+        public Appointment Appointment { get; set; }
 
         public IEnumerable<RepairOrderDetail> Items { get; set; } //Aqui que faz a ligação com a tabela de RepairOrder - Ligação de 1 para muitos - 1 RepairOrder tem vários itens
 

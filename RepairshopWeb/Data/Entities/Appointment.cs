@@ -25,12 +25,6 @@ namespace RepairshopWeb.Data.Entities
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm tt}", ApplyFormatInEditMode = false)]
         public DateTime? AlertDate { get; set; }
 
-        [Display(Name = "R.O Number")]
-        public int? RepairOrderId { get; set; }
-
-        [ForeignKey("RepairOrderId")]
-        public RepairOrder RepairOrder { get; set; }
-
         [Display(Name = "Client")]
         public int ClientId { get; set; }
 
@@ -42,6 +36,8 @@ namespace RepairshopWeb.Data.Entities
 
         [ForeignKey("VehicleId")]
         public Vehicle Vehicle { get; set; }
+
+        public RepairOrder RepairOrder { get; set; }
 
         [Required]
         public User User { get; set; }

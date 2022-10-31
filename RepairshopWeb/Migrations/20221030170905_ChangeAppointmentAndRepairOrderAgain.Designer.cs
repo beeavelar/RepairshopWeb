@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepairshopWeb.Data;
 
 namespace RepairshopWeb.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221030170905_ChangeAppointmentAndRepairOrderAgain")]
+    partial class ChangeAppointmentAndRepairOrderAgain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,6 +171,9 @@ namespace RepairshopWeb.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("RepairOrderId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -178,6 +183,10 @@ namespace RepairshopWeb.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("RepairOrderId")
+                        .IsUnique()
+                        .HasFilter("[RepairOrderId] IS NOT NULL");
 
                     b.HasIndex("UserId");
 
@@ -458,9 +467,6 @@ namespace RepairshopWeb.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AppointmentId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -480,9 +486,6 @@ namespace RepairshopWeb.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppointmentId")
-                        .IsUnique();
 
                     b.HasIndex("MechanicId");
 
@@ -766,6 +769,11 @@ namespace RepairshopWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("RepairshopWeb.Data.Entities.RepairOrder", "RepairOrder")
+                        .WithOne("Appointment")
+                        .HasForeignKey("RepairshopWeb.Data.Entities.Appointment", "RepairOrderId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("RepairshopWeb.Data.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
@@ -777,6 +785,8 @@ namespace RepairshopWeb.Migrations
                         .IsRequired();
 
                     b.Navigation("Client");
+
+                    b.Navigation("RepairOrder");
 
                     b.Navigation("User");
 
@@ -893,12 +903,6 @@ namespace RepairshopWeb.Migrations
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.RepairOrder", b =>
                 {
-                    b.HasOne("RepairshopWeb.Data.Entities.Appointment", "Appointment")
-                        .WithOne("RepairOrder")
-                        .HasForeignKey("RepairshopWeb.Data.Entities.RepairOrder", "AppointmentId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("RepairshopWeb.Data.Entities.Mechanic", null)
                         .WithMany("RepairOrders")
                         .HasForeignKey("MechanicId");
@@ -912,8 +916,6 @@ namespace RepairshopWeb.Migrations
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Appointment");
 
                     b.Navigation("User");
 
@@ -1013,8 +1015,6 @@ namespace RepairshopWeb.Migrations
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Appointment", b =>
                 {
                     b.Navigation("Items");
-
-                    b.Navigation("RepairOrder");
                 });
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.Client", b =>
@@ -1033,6 +1033,8 @@ namespace RepairshopWeb.Migrations
 
             modelBuilder.Entity("RepairshopWeb.Data.Entities.RepairOrder", b =>
                 {
+                    b.Navigation("Appointment");
+
                     b.Navigation("Billing");
 
                     b.Navigation("Items");

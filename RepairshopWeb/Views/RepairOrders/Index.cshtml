@@ -6,7 +6,7 @@
 }
 <br />
 <p style="margin-left: 20px;">
-    <a asp-action="Create" class="btn btn-primary" data-toggle="tooltip" title="Create New"><i class="fa-solid fa-plus"></i>  Create New R.O</a>
+    <a asp-action="Create" asp-route-id="@ViewBag.Appointment" class="btn btn-primary" data-toggle="tooltip" title="Create New"><i class="fa-solid fa-plus"></i>  Create New R.O</a>
 </p>
 <br />
 <div class="row" style="font-family: Arial; font-size: small; margin-left: 10px;">
@@ -45,6 +45,9 @@
                                 @Html.DisplayNameFor(model => model.PaymentState)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.AppointmentId)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.RepairStatus)
                             </th>
                             <th width="20%"></th>
@@ -79,6 +82,9 @@
                                     @Html.DisplayFor(modelItem => item.PaymentState)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.AppointmentId)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.RepairStatus)
                                 </td>
                                 <td style="text-align:right">
@@ -94,9 +100,9 @@
     </div>
 </div>
 <p style="margin-left: 20px;">
-    <a  asp-controller="Appointments" asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
+    <a asp-controller="Appointments" asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
 </p>
-<br/>
+<br />
 
 <div id="deleteDialog" class="modal fade">
     <div class="modal-dialog modal-sm">

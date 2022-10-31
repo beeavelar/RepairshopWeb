@@ -59,8 +59,11 @@ namespace RepairshopWeb.Controllers
                 {
                     if (this.Request.Query.Keys.Contains("ReturnUrl"))
                         return Redirect(this.Request.Query["ReturnUrl"].First());
+                    
+                    if (this.User.IsInRole("ADMIN") || this.User.IsInRole("MECHANIC") || this.User.IsInRole("RECEPTIONIST"))
+                        return this.RedirectToAction("Index", "Dashboard");
 
-                    return this.RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 else if (emailConfirmed == false)
                 {

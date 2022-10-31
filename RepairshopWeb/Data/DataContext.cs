@@ -41,6 +41,7 @@ namespace RepairshopWeb.Data
             builder.Entity<Appointment>().HasOne(x => x.Vehicle).WithMany(x => x.Appointments).OnDelete(DeleteBehavior.NoAction); //O agendamento possui um veiculo com muitos agendamentos
             builder.Entity<AppointmentDetail>().HasOne(x => x.Vehicle).WithMany(x => x.AppointmentDetails).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<AppointmentDetailTemp>().HasOne(x => x.Vehicle).WithOne(x => x.AppointmentDetailTemp).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Appointment>().HasOne(x => x.RepairOrder).WithOne(x => x.Appointment).OnDelete(DeleteBehavior.NoAction);
             base.OnModelCreating(builder);
         }
     }

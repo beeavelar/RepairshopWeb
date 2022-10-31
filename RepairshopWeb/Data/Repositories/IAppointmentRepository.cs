@@ -25,7 +25,7 @@ namespace RepairshopWeb.Data.Repositories
         //Método para confirmar o Appointment
         Task<bool> ConfirmAppointmentAsync(string userName);
 
-        Task<Appointment> GetAppointmentAsync(int id);  //Buscar os Appointments por id
+        Task<Appointment> GetAppointmentByIdAsync(int id);  //Buscar os Appointments por id
 
         //Método para deletar o appointment 
         Task DeleteAppointmentAsync(int id);

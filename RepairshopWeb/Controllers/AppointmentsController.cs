@@ -29,7 +29,6 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> Index()
         {
             var model = await _appointmentRepository.GetAppointmentAsync(this.User.Identity.Name);
-            //var appointment = new List<Appointment>();
             return View(model);
         }
 

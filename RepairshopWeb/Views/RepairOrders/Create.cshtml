@@ -7,8 +7,8 @@
 <h1 style="margin-left: 20px;"><b>NEW REPAIR ORDER</b></h1>
 <br />
 <p style="margin-left: 20px;">
-	<a asp-action="AddService" class="btn btn-success" data-toggle="tooltip"><i class="fa-solid fa-plus"></i>Add Service</a>
-    <a asp-action="ConfirmRepairOrder" class="btn btn-primary" id="btnConfirm">Confirm</a>
+	<a asp-action="AddService" asp-route-id="@ViewBag.Appointment" class="btn btn-success" data-toggle="tooltip"><i class="fa-solid fa-plus"></i>Add Service</a>
+    <a asp-action="ConfirmRepairOrder" asp-route-id="@ViewBag.Appointment" class="btn btn-primary" id="btnConfirm">Confirm</a>
 </p>
 <br />
 <table  id="MyTable" class="table" style="font-family: Arial; font-size: small">

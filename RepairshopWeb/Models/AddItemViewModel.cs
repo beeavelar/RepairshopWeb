@@ -18,6 +18,8 @@ namespace RepairshopWeb.Models
         [Range(1, int.MaxValue, ErrorMessage = "You must select a mechanic.")]
         public int MechanicId { get; set; }
 
+        public int AppointmentId { get; set; }
+
         public IEnumerable<SelectListItem> Services { get; set; }
 
         public IEnumerable<SelectListItem> Vehicles { get; set; }

@@ -21,11 +21,11 @@ namespace RepairshopWeb.Data.Repositories
         Task DeleteDetailTempAsync(int id);
 
         //Método para confirmar a Repair Order
-        Task<bool> ConfirmRepairOrderAsync(string userName);
+        Task<bool> ConfirmRepairOrderAsync(string userName, int appointmentId);
 
         Task StatusRepairOrder(RepairOrderStatusViewModel model);
 
-        Task<RepairOrder> GetRepairOrderAsync(int id);  //Buscar as RO por id
+        Task<RepairOrder> GetRepairOrderByIdAsync(int id);  //Buscar as RO por id
 
         //Método para deletar a Repair Order 
         Task DeleteRepairOrderAsync(int id);

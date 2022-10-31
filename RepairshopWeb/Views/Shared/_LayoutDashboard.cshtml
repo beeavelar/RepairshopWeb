@@ -26,7 +26,7 @@
 <!-- body -->
 <body>
     <div class="wrapper">
-        <!-- sidepanel -->
+        <!-- sidebar -->
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
                 @*                <a class="sidebar-brand" href="index.html">
@@ -77,7 +77,7 @@
                 </ul>
             </div>
         </nav>
-        <!-- end sidepanel -->
+        <!-- end sidebar -->
 
         <div class="main">
 
@@ -238,9 +238,11 @@
                 </div>
             </nav>
             <!-- end header -->
-            <!--- RenderBody-->
+
+            <!-- RenderBody -->
             @RenderBody()
-            <!---------------->
+            <!-- end RenderBody -->
+
             <!-- footer -->
             <footer class="footer">
                 <div class="container-fluid">
@@ -258,10 +260,8 @@
     </div>
 
     <!-- javascript files-->
-    <!-- Javascript files-->
     <script src="https://kit.fontawesome.com/838122fc3c.js" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
-    <!-- end Javascript files-->
 
     <script src="~/Dashboard/js/app.js"></script>
     <script>
