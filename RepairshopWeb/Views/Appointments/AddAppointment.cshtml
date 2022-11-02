@@ -46,7 +46,7 @@
             </div>
             <br />
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
+                <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
                 <a asp-action="Create" class="btn btn-success"><i class="fa-solid fa-angles-left"></i>Back</a>
             </div>
         </form>
@@ -55,37 +55,39 @@
 <br />
 
 @section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+    <script>
+        $(function() {
+            $("#datepicker").datetimepicker(
+                {
+                    showClose: true,
+                    sideBySide: true,
+                    showClear: true,
+                    format: 'DD-MM-YYYY HH:mm',
+                    locale: moment.locale('pt-Pt')
+                });
+
+            $("#datepicker2").datetimepicker(
+                {
+                    showClose: true,
+                    sideBySide: true,
+                    showClear: true,
+                    format: 'DD-MM-YYYY HH:mm',
+                    locale: moment.locale('pt-Pt')
+                });
+
+        });
+    </script>
+
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
-
-        <script>
-            $(function() {
-                $("#datepicker").datetimepicker(
-                    {
-                        showClose: true,
-                        sideBySide: true,
-                        showClear: true,
-                        format: 'DD-MM-YYYY HH:mm',
-                        locale: moment.locale('pt-Pt')
-                    });
-                $("#datepicker2").datetimepicker(
-                    {
-                        showClose: true,
-                        sideBySide: true,
-                        showClear: true,
-                        format: 'DD-MM-YYYY HH:mm',
-                        locale: moment.locale('pt-Pt')
-                    });
-            });
-        </script>
     }
-}
+    }
 

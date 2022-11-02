@@ -1,15 +1,17 @@
 ﻿@model RepairshopWeb.Data.Entities.Vehicle
-
 @{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+    ViewData["Title"] = "EditClient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
+<br />
+<br />
 <br />
 <h1 style="text-align: center;"><b>EDIT VEHICLE</b></h1>
 <br />
 <div class="row">
     <div class="col-md-4 offset-md-4">
-        <form asp-action="Edit">
+        <form asp-action="EditClient">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -17,41 +19,37 @@
                 <input asp-for="LicensePlate" class="form-control" mask="00-AA-00" maxlength="8" style="font-family: Arial; font-size: small;" />
                 <span asp-validation-for="LicensePlate" class="text-danger"></span>
             </div>
-            <br />
             <div class="form-group">
                 <label asp-for="ClientId" class="control-label" style="font-family: Arial; font-size: small;"></label>
                 <select asp-for="ClientId" class="form-control" asp-items="ViewBag.ClientId" style="font-family: Arial; font-size: small;"></select>
                 <span asp-validation-for="ClientId" class="text-danger"></span>
             </div>
-            <br />
             <div class="form-group">
                 <label asp-for="Brand" class="control-label" style="font-family: Arial; font-size: small;"></label>
-                <input asp-for="Brand" class="form-control" style="font-family: Arial; font-size: small;"/>
+                <input asp-for="Brand" class="form-control" style="font-family: Arial; font-size: small;" />
                 <span asp-validation-for="Brand" class="text-danger"></span>
             </div>
-            <br />
             <div class="form-group">
                 <label asp-for="VehicleModel" class="control-label" style="font-family: Arial; font-size: small;"></label>
-                <input asp-for="VehicleModel" class="form-control" style="font-family: Arial; font-size: small;"/>
+                <input asp-for="VehicleModel" class="form-control" style="font-family: Arial; font-size: small;" />
                 <span asp-validation-for="VehicleModel" class="text-danger"></span>
             </div>
-            <br />
             <div class="form-group">
                 <label asp-for="Color" class="control-label" style="font-family: Arial; font-size: small;"></label>
-                @{var colors = new string[] { "Black", "Blue", "Red", "White", "Grey", "Silver", "Green", "Yellow"};}
+                @{
+                    var colors = new string[] { "Black", "Blue", "Red", "White", "Grey", "Silver", "Green", "Yellow" };
+                }
                 <ejs-combobox asp-for="Color" id="color" dataSource="colors" style="font-family: Arial; font-size: small;"></ejs-combobox>
                 <span asp-validation-for="Color" class="text-danger"></span>
             </div>
-            <br />
             <div class="form-group">
                 <label asp-for="Year" class="control-label" style="font-family: Arial; font-size: small;"></label>
-                <input asp-for="Year" type="number" class="form-control" style="font-family: Arial; font-size: small;"/>
+                <input asp-for="Year" type="number" class="form-control" style="font-family: Arial; font-size: small;" />
                 <span asp-validation-for="Year" class="text-danger"></span>
             </div>
-            <br />
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
-                <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
+                <a asp-action="IndexClient" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
             </div>
             <br />
         </form>
@@ -60,5 +58,8 @@
 <br />
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+

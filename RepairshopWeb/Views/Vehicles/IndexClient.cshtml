@@ -1,15 +1,18 @@
 ﻿@model IEnumerable<RepairshopWeb.Data.Entities.Vehicle>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+    ViewData["Title"] = "IndexClient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
-<p style="margin-left: 20px;">
-    <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create New</a>
-</p>
 <br />
-<div class="row" style="font-family: Arial; font-size: small; margin-left: 10px; margin-right: 10px;">
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="row" style="font-family: Arial; font-size: small; margin-left: 10px;">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -64,9 +67,7 @@
                                     @Html.DisplayFor(modelItem => item.Year)
                                 </td>
                                 <td style="text-align:right">
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning" data-toggle="tooltip" title="Edit"> <i class="fa-solid fa-pen-to-square"></i></a> |
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info" data-toggle="tooltip" title="Details"><i class="fa-solid fa-bars"></i></a> |
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
+                                    <a asp-action="EditClient" asp-route-id="@item.Id" class="btn btn-warning" data-toggle="tooltip" title="Edit"> <i class="fa-solid fa-pen-to-square"></i></a>
                                 </td>
                             </tr>
                         }
@@ -76,6 +77,9 @@
         </div>
     </div>
 </div>
+<p style="margin-left: 20px;">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
+</p>
 <br />
 
 @* Load datatable css *@

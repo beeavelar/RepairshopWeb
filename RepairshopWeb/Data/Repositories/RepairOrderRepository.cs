@@ -112,10 +112,15 @@ namespace RepairshopWeb.Data.Repositories
 
         public async Task DeleteRepairOrderAsync(int id)
         {
+            var repairOrderDetails = await _context.RepairOrderDetails.Where(x => x.RepairOrderId == id).ToListAsync();
+            if (repairOrderDetails == null)
+                return;
+
             var repairOrder = await _context.RepairOrders.FindAsync(id);
             if (repairOrder == null)
                 return;
 
+            _context.RepairOrderDetails.RemoveRange(repairOrderDetails);
             _context.RepairOrders.Remove(repairOrder);
             await _context.SaveChangesAsync();
         }
@@ -149,7 +154,16 @@ namespace RepairshopWeb.Data.Repositories
                     .OrderByDescending(ro => ro.Date);
             }
 
-            return _context.RepairOrders //Se não for Admin, buscar as RepairOrders do user(cliente) que estiver logado
+            if (await _userHelper.IsUserInRoleAsync(user, "CLIENT"))
+            {
+                return _context.RepairOrders
+                    .Include(ro => ro.Items)
+                    .ThenInclude(s => s.Service)
+                    .Include(v => v.Vehicle)
+                    .OrderByDescending(ro => ro.Date);
+            }
+
+            return _context.RepairOrders //Se não for Admin, buscar as RepairOrders do user que estiver logado
                 .Include(ro => ro.Items)
                 .ThenInclude(s => s.Service)
                 .Include(v => v.Vehicle)

@@ -91,6 +91,8 @@ namespace RepairshopWeb.Data.Repositories
                 Items = details
             };
 
+            appointment.IsActive = true;
+
             await CreateAsync(appointment);
             _context.AppointmentDetailsTemp.RemoveRange(appointmentTemps);
             await _context.SaveChangesAsync();
@@ -113,7 +115,8 @@ namespace RepairshopWeb.Data.Repositories
             if (appointment == null)
                 return;
 
-            _context.Appointments.Remove(appointment);
+            appointment.IsActive = false;
+            _context.Appointments.Update(appointment);
             await _context.SaveChangesAsync();
         }
 
@@ -142,6 +145,7 @@ namespace RepairshopWeb.Data.Repositories
                     .Include(ro => ro.RepairOrder)
                     .Include(v => v.Vehicle)
                     .Include(c => c.Client)
+                    .Where(app => app.IsActive)
                     .OrderByDescending(app => app.Date);
             }
 
@@ -150,7 +154,7 @@ namespace RepairshopWeb.Data.Repositories
                 .Include(ro => ro.RepairOrder)
                 .Include(c => c.Client)
                 .Include(v => v.Vehicle)
-                .Where(app => app.User == user) //onde o User for igual ao user
+                .Where(app => app.User == user && app.IsActive) //onde o User for igual ao user
                 .OrderByDescending(app => app.Date);
         }
 
@@ -164,6 +168,17 @@ namespace RepairshopWeb.Data.Repositories
                .Include(v => v.Vehicle)
                .Include(c => c.Client)
                .Where(app => app.User == user);
+        }
+
+        public async Task StatusAppointment(AppointmentStatusViewModel model)
+        {
+            var appointment = await _context.Appointments.FindAsync(model.Id);
+            if (appointment == null)
+                return;
+
+            appointment.AppointmentStatus = model.AppointmentStatus;
+            _context.Appointments.Update(appointment);
+            await _context.SaveChangesAsync();
         }
     }
 }

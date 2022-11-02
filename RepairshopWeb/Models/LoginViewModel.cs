@@ -11,7 +11,6 @@ namespace RepairshopWeb.Models
         [Required]
         [MinLength(6)]
         public string Password { get; set; }
-
         public bool RemenberMe { get; set; }
     }
 }

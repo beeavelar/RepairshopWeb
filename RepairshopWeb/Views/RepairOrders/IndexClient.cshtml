@@ -1,19 +1,20 @@
-﻿@model IEnumerable<RepairshopWeb.Data.Entities.Appointment>
+﻿@model IEnumerable<RepairshopWeb.Data.Entities.RepairOrder>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+    ViewData["Title"] = "IndexClient";
+     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
-<p style="margin-left: 20px;">
-    <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-plus"></i>  Create New</a>
-</p>
 <br />
-<div class="row" style="font-family: Arial; font-size: small; margin-left: 10px; margin-right: 10px;">
+<br />
+<br />
+<br />
+<br />
+<div class="row" style="font-family: Arial; font-size: small; margin-left: 10px;">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h1 class="panel-title"><b>APPOINTMENTS</b></h1>
+                <h1 class="panel-title"><b>REPAIR ORDERS</b></h1>
             </div>
             <br />
             <div>
@@ -23,7 +24,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Id)
                             </th>
-                            @if (this.User.IsInRole("ADMIN"))
+                            @if (this.User.IsInRole("Admin"))
                             {
                                 <th>
                                     @Html.DisplayNameFor(model => model.User.FullName)
@@ -33,21 +34,20 @@
                                 @Html.DisplayNameFor(model => model.Date)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.AppointmentDate)
+                                @Html.DisplayNameFor(model => model.Vehicle.LicensePlate)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.AlertDate)
+                                @Html.DisplayNameFor(model => model.TotalServicesToDo)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Client)
+                                @Html.DisplayNameFor(model => model.TotalToPay)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Vehicle)
+                                @Html.DisplayNameFor(model => model.PaymentState)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.AppointmentStatus)
+                                @Html.DisplayNameFor(model => model.RepairStatus)
                             </th>
-                            <th width="20%"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,7 +57,7 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Id)
                                 </td>
-                                @if (this.User.IsInRole("ADMIN"))
+                                @if (this.User.IsInRole("Admin"))
                                 {
                                     <th>
                                         @Html.DisplayFor(modelItem => item.User.FullName)
@@ -67,24 +67,19 @@
                                     @Html.DisplayFor(modelItem => item.Date)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.AppointmentDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.AlertDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Client.FullName)
-                                </td>
-                                <td>
                                     @Html.DisplayFor(modelItem => item.Vehicle.LicensePlate)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.AppointmentStatus)
+                                    @Html.DisplayFor(modelItem => item.TotalServicesToDo)
                                 </td>
-                                <td style="text-align:right">
-                                    <a asp-action="AppointmentStatus" asp-route-id="@item.Id" class="btn btn-warning" id="btnChangeStatus" data-toggle="tooltip" title="Change Appointment Status"><i class="fa-solid fa-calendar-check"></i></a> |
-                                    <a asp-controller="RepairOrders" asp-action="Index" asp-route-id="@item.Id" class="btn btn-primary" id="btnCreate" data-toggle="tooltip" title="Create Repair Order"><i class="fa-sharp fa-solid fa-list-check"></i></a> |
-                                    <a asp-action="DeleteAppointments" asp-route-id="@item.Id" class="btn btn-danger" id="btnDelete" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalToPay)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PaymentState)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RepairStatus)
                                 </td>
                             </tr>
                         }
@@ -94,13 +89,16 @@
         </div>
     </div>
 </div>
+<p style="margin-left: 20px;">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
+</p>
 <br />
 
 @* Load datatable css *@
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
 
-@* Load datatable js *@
 @section Scripts{
+
     <script src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
@@ -109,6 +107,4 @@
         });
     </script>
 }
-
-
 

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>Repairshop</title>
+    <title>RepairShop</title>
     <!-- bootstrap css -->
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -63,7 +63,8 @@
 
         @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("CLIENT"))
         {
-            <a asp-area="" asp-controller="RepairOrders" asp-action="Index">My Repairs</a>
+            <a asp-area="" asp-controller="Vehicles" asp-action="IndexClient">Vehicles</a>
+            <a asp-area="" asp-controller="RepairOrders" asp-action="IndexClient">Repair Orders</a>
             <a asp-area="" asp-controller="Account" asp-action="ChangeUser">My Account</a>
             <a class="active" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
         }

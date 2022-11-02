@@ -1,22 +1,23 @@
-﻿@model RepairshopWeb.Models.RepairOrderStatusViewModel
+﻿@model RepairshopWeb.Models.AppointmentStatusViewModel
 
 @{
-    ViewData["Title"] = "Status";
+    ViewData["Title"] = "AppointmentStatus";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
+
 <br />
-<h1 style="text-align: center;"><b>REPAIR ORDER STATUS</b></h1>
+<h1 style="text-align: center;"><b>APPOINTMENT STATUS</b></h1>
 <br />
 <div class="row">
     <div class="col-md-4 offset-md-4">
-        <form asp-action="RepairStatus">
+        <form asp-action="AppointmentStatus">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="RepairStatus" class="control-label" style="font-family: Arial; font-size: small"></label>
-                @{var status = new string[] { "Completed", "In process", "Pending cancellation"};}
-                <ejs-combobox asp-for="RepairStatus" id="repairstatus" dataSource="status"></ejs-combobox>
-                <span asp-validation-for="RepairStatus" class="text-danger"></span>
+                <label asp-for="AppointmentStatus" class="control-label" style="font-family: Arial; font-size: small"></label>
+                @{var status = new string[] { "Confirmed", "Not confirmed"};}
+                <ejs-combobox asp-for="AppointmentStatus" id="appointmentstatus" dataSource="status"></ejs-combobox>
+                <span asp-validation-for="AppointmentStatus" class="text-danger"></span>
             </div>
             <br/>
             <div class="form-group">
@@ -28,3 +29,4 @@
     </div>
 </div>
 <br/>
+

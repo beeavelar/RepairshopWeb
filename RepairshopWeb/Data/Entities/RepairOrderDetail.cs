@@ -30,5 +30,10 @@ namespace RepairshopWeb.Data.Entities
         [DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal RepairPrice { get; set; }
 
+        public int RepairOrderId { get; set; }
+
+        [ForeignKey("RepairOrderId")]
+        public RepairOrder RepairOrder { get; set; }
+
     }
 }

@@ -6,10 +6,10 @@
 }
 <br />
 <p style="margin-left: 20px;">
-    <a asp-action="Create" class="btn btn-primary" data-toggle="tooltip" title="Create New"><i class="fa-solid fa-user-plus"></i>  Create New</a>
+    <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i>  Create New</a>
 </p>
 <br />
-<div class="row" style="font-family: Arial; font-size: smaller; margin-left: 10px;">
+<div class="row" style="font-family: Arial; font-size: smaller; margin-left: 10px; margin-right: 10px;">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -103,12 +103,12 @@
 <br />
 
 @* Load datatable css *@
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" />
 
 @* Load datatable js *@
 @section Scripts{
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#MyTable').DataTable();

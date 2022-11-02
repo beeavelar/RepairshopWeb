@@ -75,6 +75,16 @@ namespace RepairshopWeb.Controllers
             return RedirectToAction("Create");
         }
 
+        //Delete Repair Order from RepoairOrders --> After confirm
+        public async Task<IActionResult> DeleteAppointments(int? id)
+        {
+            if (id == null)
+                return new NotFoundViewResult("ItemNotFound");
+
+            await _appointmentRepository.DeleteAppointmentAsync(id.Value);
+            return RedirectToAction("Index");
+        }
+
         //Confirm Appointment
         public async Task<IActionResult> ConfirmAppointment()
         {
@@ -82,6 +92,38 @@ namespace RepairshopWeb.Controllers
             if (response)
                 return RedirectToAction("Index");
             return RedirectToAction("Create");
+        }
+
+        //Get do Appointment Status - Faz aparecer a view
+        public async Task<IActionResult> AppointmentStatus(int? id)
+        {
+            if (id == null)
+                return new NotFoundViewResult("ItemNotFound");
+
+            var appointment = await _appointmentRepository.GetAppointmentByIdAsync(id.Value);
+
+            if (appointment == null)
+                return new NotFoundViewResult("ItemNotFound");
+
+            var model = new AppointmentStatusViewModel
+            {
+                Id = appointment.Id,
+                AppointmentStatus = appointment.AppointmentStatus
+            };
+
+            return View(model);
+        }
+
+        //Post do Appointment Status - grava as informações
+        [HttpPost]
+        public async Task<IActionResult> AppointmentStatus(AppointmentStatusViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _appointmentRepository.StatusAppointment(model);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
         public IActionResult ItemNotFound()

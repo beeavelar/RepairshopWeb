@@ -37,6 +37,11 @@ namespace RepairshopWeb.Data.Entities
         [ForeignKey("VehicleId")]
         public Vehicle Vehicle { get; set; }
 
+        [Display(Name = "Appointment Status")]
+        public string AppointmentStatus { get; set; }
+
+        public bool IsActive { get; set; }
+
         public RepairOrder RepairOrder { get; set; }
 
         [Required]

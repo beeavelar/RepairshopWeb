@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +6,6 @@ using Microsoft.IdentityModel.Tokens;
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
-using SendGrid;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -59,8 +55,11 @@ namespace RepairshopWeb.Controllers
                 {
                     if (this.Request.Query.Keys.Contains("ReturnUrl"))
                         return Redirect(this.Request.Query["ReturnUrl"].First());
-                    
-                    if (this.User.IsInRole("ADMIN") || this.User.IsInRole("MECHANIC") || this.User.IsInRole("RECEPTIONIST"))
+
+                    //if (model.Role == "ADMIN" || model.Role == "MECHANIC" || model.Role == "RECEPTIONIST")
+                    //    return this.RedirectToAction("Index", "Dashboard");
+
+                    if (user.Role is "ADMIN" || user.Role is "MECHANIC" || user.Role is "RECEPTIONIST")
                         return this.RedirectToAction("Index", "Dashboard");
 
                     return RedirectToAction("Index", "Home");
@@ -94,7 +93,7 @@ namespace RepairshopWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user  = await _userHelper.GetUserByEmailAsync(model.Username);
+                var user = await _userHelper.GetUserByEmailAsync(model.Username);
 
                 if (user == null)
                 {
@@ -141,10 +140,10 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> ConfirmEmail(string token, string email)
         {
             var user = await _userHelper.GetUserByEmailAsync(email);
-            if(user == null)
+            if (user == null)
                 return View("Error");
 
-            if(token == String.Empty)
+            if (token == String.Empty)
                 return View("Error");
 
             await _userHelper.EmailConfirmAsync(user, token);
@@ -332,32 +331,6 @@ namespace RepairshopWeb.Controllers
 
             this.ViewBag.Message = "User not found!";
             return View(model);
-        }
-
-        //Login with Google
-
-        [Route("google-login")]
-        public IActionResult GoogleLogin()
-        {
-            var properties = new AuthenticationProperties { RedirectUri = Url.Action("GoogleResponse") };
-            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
-        }
-
-        [Route("google-response")]
-        public async Task<IActionResult> GoogleResponse()
-        {
-            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-            var claims = result.Principal.Identities
-                .FirstOrDefault().Claims.Select(claim => new
-                {
-                    claim.Issuer,
-                    claim.OriginalIssuer,
-                    claim.Type,
-                    claim.Value
-                });
-
-            return Json(claims);
         }
 
         public IActionResult NotAuthorized()

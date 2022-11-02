@@ -45,6 +45,13 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> IndexClient()
+        {
+            var model = await _repairOrderRepository.GetRepairOrderAsync(this.User.Identity.Name);
+            return View(model);
+        }
+
+
         //[Authorize(Roles = "Mechanic, Receptionist")]
         //Create do Repair Order
         public async Task<IActionResult> Create(int? id)
@@ -90,6 +97,7 @@ namespace RepairshopWeb.Controllers
             return RedirectToAction("Create");
         }
 
+        [Authorize(Roles = "ADMIN")]
         //Delete Repair Order from RepoairOrders --> After confirm
         public async Task<IActionResult> DeleteRepairOrder(int? id)
         {

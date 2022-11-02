@@ -34,6 +34,12 @@ namespace RepairshopWeb.Controllers
             return View(vehicle);
         }
 
+        public IActionResult IndexClient()
+        {
+            var vehicle = _context.Vehicles.Include(c => c.Client).ToList();
+            return View(vehicle);
+        }
+
         // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -147,6 +153,53 @@ namespace RepairshopWeb.Controllers
             await _vehicleRepository.DeleteAsync(vehcile);
             return RedirectToAction(nameof(Index));
         }
+
+        //[Authorize(Roles = "Mechanic, Receptionist")]
+        // GET: Vehicles/Edit/5
+        public async Task<IActionResult> EditClient(int? id)
+        {
+            if (id == null)
+                return new NotFoundViewResult("VehicleNotFound");
+
+            var vehicle = await _vehicleRepository.GetByIdAsync(id.Value);
+
+            if (vehicle == null)
+                return new NotFoundViewResult("VehicleNotFound");
+
+            ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "FullName", vehicle.ClientId);
+            return View(vehicle);
+        }
+
+        // POST: Vehicles/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditClient(int id, Vehicle vehicle)
+        {
+            if (id != vehicle.Id)
+                return new NotFoundViewResult("VehicleNotFound");
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    vehicle.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                    await _vehicleRepository.UpdateAsync(vehicle);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!await _vehicleRepository.ExistAsync(vehicle.Id))
+                        return new NotFoundViewResult("VehicleNotFound");
+                    else
+                        throw;
+                }
+                return RedirectToAction(nameof(IndexClient));
+            }
+            ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "FullName", vehicle.ClientId);
+            return View(vehicle);
+        }
+
 
         public IActionResult VehicleNotFound()
         {

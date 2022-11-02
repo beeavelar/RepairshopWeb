@@ -29,5 +29,7 @@ namespace RepairshopWeb.Data.Repositories
 
         //Método para deletar o appointment 
         Task DeleteAppointmentAsync(int id);
+
+        Task StatusAppointment(AppointmentStatusViewModel model);
     }
 }
