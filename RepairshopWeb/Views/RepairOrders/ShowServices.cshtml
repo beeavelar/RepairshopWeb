@@ -1,20 +1,15 @@
-﻿@model IEnumerable<RepairshopWeb.Data.Entities.AppointmentDetailTemp>
+﻿@model IEnumerable<RepairshopWeb.Models.ServiceViewModel>
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "ShowServices";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<br />
-<p style="margin-left: 20px;">
-    <a asp-action="AddAppointment" class="btn btn-success"><i class="fa-solid fa-plus"></i> Add Appointment</a>
-    <a asp-action="ConfirmAppointment" class="btn btn-primary" id="btnConfirm">Confirm</a>
-</p>
 <br />
 <div class="row" style="font-family: Arial; font-size: small; margin-left: 10px; margin-right: 10px;">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h1 class="panel-title"><b>NEW APPOINTMENT</b></h1>
+                <h1 class="panel-title"><b>SERVICES TO DO</b></h1>
             </div>
             <br />
             <div>
@@ -22,18 +17,11 @@
                     <thead style="text-transform: uppercase">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.AppointmentDate)
+                                @Html.DisplayNameFor(model => model.Id)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.AlertDate)
+                                @Html.DisplayNameFor(model => model.Description)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Client)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Vehicle)
-                            </th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,19 +29,10 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.AppointmentDate)
+                                    @Html.DisplayFor(modelItem => item.Id)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.AlertDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Client.FullName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Vehicle.LicensePlate)
-                                </td>
-                                <td id="@item.Id">
-                                    <a asp-action="DeleteItem" asp-route-id="@item.Id" class="btn btn-danger" id="btnDeleteItem" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
+                                    @Html.DisplayFor(modelItem => item.Description)
                                 </td>
                             </tr>
                         }
@@ -81,6 +60,7 @@
             $('#MyTable').DataTable();
         });
     </script>
-    }
+
+}
 
 

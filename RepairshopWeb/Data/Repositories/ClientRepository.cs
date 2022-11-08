@@ -36,5 +36,11 @@ namespace RepairshopWeb.Data.Repositories
             });
             return list;
         }
+
+        public async Task<Client> GetClient(string email)
+        {
+            return await _context.Clients
+                .FirstOrDefaultAsync(c => c.Email == email);
+        }
     }
 }

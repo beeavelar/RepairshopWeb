@@ -23,12 +23,9 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Id)
                             </th>
-                            @if (this.User.IsInRole("ADMIN"))
-                            {
-                                <th>
-                                    @Html.DisplayNameFor(model => model.User.FullName)
-                                </th>
-                            }
+                            <th>
+                                @Html.DisplayNameFor(model => model.User.FullName)
+                            </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Date)
                             </th>
@@ -50,7 +47,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.RepairStatus)
                             </th>
-                            <th width="20%"></th>
+                            <th width="25%"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,12 +57,9 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Id)
                                 </td>
-                                @if (this.User.IsInRole("ADMIN"))
-                                {
-                                    <th>
-                                        @Html.DisplayFor(modelItem => item.User.FullName)
-                                    </th>
-                                }
+                                <th>
+                                    @Html.DisplayFor(modelItem => item.User.FullName)
+                                </th>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Date)
                                 </td>
@@ -89,8 +83,9 @@
                                 </td>
                                 <td style="text-align:right">
                                     <a asp-action="RepairStatus" asp-route-id="@item.Id" class="btn btn-warning" id="btnChangeStatus" data-toggle="tooltip" title="Change Repair Status"><i class="fa-solid fa-calendar-check"></i></a> |
+                                    <a asp-action="ShowServices" asp-route-id="@item.Id" class="btn btn-info" id="btnShowServices" data-toggle="tooltip" title="Show Services to Do"><i class="fa-sharp fa-solid fa-list"></i></a> |
                                     <a asp-action="IssueInvoice" asp-route-id="@item.Id" class="btn btn-secondary" id="btnIssueInvoice" data-toggle="tooltip" title="Issue Invoice"><i class="fa-solid fa-file-invoice-dollar"></i></a> |
-                                    <a asp-action="DeleteRepairOrder" asp-route-id="@item.Id" class="btn btn-danger" id="btnDelete" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
+                                    <a asp-action="DeleteRepairOrder" asp-route-id="@item.Id" class="btn btn-danger" id="btnDeleteItem" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
                                 </td>
                             </tr>
                         }
@@ -142,7 +137,6 @@
             $("#btnYesDelete").click(function() {
                 window.location.href = "/RepairOrders/DeleteRepairOrder/" + id;
             });
-            $('#MyTable').DataTable();
         });
     </script>
 

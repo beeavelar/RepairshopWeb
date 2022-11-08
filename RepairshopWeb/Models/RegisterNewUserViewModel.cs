@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using RepairshopWeb.Data.Entities;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RepairshopWeb.Models
 {
@@ -28,5 +29,6 @@ namespace RepairshopWeb.Models
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
+        public bool IsClient { get; set; }
     }
 }

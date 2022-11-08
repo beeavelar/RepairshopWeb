@@ -29,7 +29,6 @@ namespace RepairshopWeb.Data.Entities
 
         [ForeignKey("VehicleId")]
         public Vehicle Vehicle { get; set; }
-
         public User User { get; set; }
     }
 }

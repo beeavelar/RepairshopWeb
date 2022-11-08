@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RepairshopWeb.Data.Entities;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace RepairshopWeb.Controllers
 {
@@ -18,7 +17,7 @@ namespace RepairshopWeb.Controllers
 
         public AppointmentsController(IAppointmentRepository appointmentRepository,
            IClientRepository clientRepository,
-           IVehicleRepository vehicleRepository,IRepairOrderRepository repairOrderRepository)
+           IVehicleRepository vehicleRepository, IRepairOrderRepository repairOrderRepository)
         {
             _appointmentRepository = appointmentRepository;
             _clientRepository = clientRepository;
@@ -75,6 +74,7 @@ namespace RepairshopWeb.Controllers
             return RedirectToAction("Create");
         }
 
+        [Authorize(Roles = "ADMIN")]
         //Delete Repair Order from RepoairOrders --> After confirm
         public async Task<IActionResult> DeleteAppointments(int? id)
         {

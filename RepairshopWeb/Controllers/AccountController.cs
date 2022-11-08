@@ -1,17 +1,18 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using RepairshopWeb.Data.Entities;
-using RepairshopWeb.Helpers;
-using RepairshopWeb.Models;
-using System;
+﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using RepairshopWeb.Data.Entities;
+using RepairshopWeb.Data.Repositories;
+using RepairshopWeb.Helpers;
+using RepairshopWeb.Models;
 
 namespace RepairshopWeb.Controllers
 {
@@ -22,16 +23,18 @@ namespace RepairshopWeb.Controllers
         private readonly IEmailHelper _emailHelper;
         private readonly IBlobHelper _blobHelper;
         private readonly IConverterHelper _converterHelper;
+        private readonly IClientRepository _clientRepository;
 
         public AccountController(IUserHelper userHelper,
             IConfiguration configuration, IEmailHelper emailHelper,
-            IBlobHelper blobHelper, IConverterHelper converterHelper)
+            IBlobHelper blobHelper, IConverterHelper converterHelper, IClientRepository clientRepository)
         {
             _userHelper = userHelper;
             _configuration = configuration;
             _emailHelper = emailHelper;
             _blobHelper = blobHelper;
             _converterHelper = converterHelper;
+            _clientRepository = clientRepository;
         }
 
         public IActionResult Login()
@@ -129,7 +132,23 @@ namespace RepairshopWeb.Controllers
                         "<br/><br/>Best regards, " +
                         "<br/>RepairShop");
 
-                    ViewBag.Message = "User created successfully!";
+
+                    //Se a flag IsCliet é true entao procurar o client pelo email. Achou o cliente, pegar os dados vindos do form Register e criar um user novo, 
+                    //Fazer um update no client passando o id do user criado para o client
+
+                    if (model.IsClient) //Se a checkbox esta selecionada
+                    {
+                        var client = await _userHelper.GetClientByUserEmail(model.Username); //Procura o cliente pelo email
+
+                        if (client is not null) //Verifica se o email foi guardado na variavel
+                        {
+                            client.UserClientId = user.Id;
+
+                            await _clientRepository.UpdateAsync(client); //Atualiza o User com o email do cliente
+                        }
+                    }
+
+                    ViewBag.Message = "User created successfully! A confirmation email has been sent.";
                     return this.View();
                 }
             }
@@ -149,7 +168,6 @@ namespace RepairshopWeb.Controllers
             await _userHelper.EmailConfirmAsync(user, token);
             return View();
         }
-
         public IActionResult Error()
         {
             return View();
@@ -157,13 +175,6 @@ namespace RepairshopWeb.Controllers
 
         public async Task<IActionResult> ChangeUser()
         {
-            //Guid imageId = Guid.Empty;
-
-            //if (model.ImageFile != null && model.ImageFile.Length > 0)
-            //    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "users");
-
-            //var user = _converterHelper.ToUser(model, imageId, true);
-
             var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
             var model = new ChangeUserViewModel();
 

@@ -38,5 +38,7 @@ namespace RepairshopWeb.Helpers
 
         Task<string> GenerateConfirmEmailTokenAsync(User user);
 
+        Task<Client> GetClientByUserEmail(string email);
+
     }
 }

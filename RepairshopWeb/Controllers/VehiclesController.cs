@@ -36,7 +36,8 @@ namespace RepairshopWeb.Controllers
 
         public IActionResult IndexClient()
         {
-            var vehicle = _context.Vehicles.Include(c => c.Client).ToList();
+            var email = User.Identity.Name;
+            var vehicle = _context.Vehicles.Include(c => c.Client).Where(v => v.Client.Email == email).ToList();
             return View(vehicle);
         }
 

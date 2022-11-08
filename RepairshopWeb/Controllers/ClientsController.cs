@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepairshopWeb.Controllers
 {

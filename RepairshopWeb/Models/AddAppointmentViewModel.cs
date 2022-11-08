@@ -21,6 +21,8 @@ namespace RepairshopWeb.Models
         [Range(1, int.MaxValue, ErrorMessage = "You must select a service.")]
         public int ClientId { get; set; }
 
+        public Guid UserId { get; set; }
+
         [Display(Name = "Vehicle")]
         [Range(1, int.MaxValue, ErrorMessage = "You must select a vehicle.")]
         public int VehicleId { get; set; }

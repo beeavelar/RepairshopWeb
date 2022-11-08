@@ -26,7 +26,7 @@ namespace RepairshopWeb.Data.Repositories
                 return;
 
             var service = await _context.Services.FindAsync(model.ServiceId);
-            if(service == null)
+            if (service == null)
                 return;
 
             var vehicle = await _context.Vehicles.FindAsync(model.VehicleId);
@@ -41,7 +41,7 @@ namespace RepairshopWeb.Data.Repositories
                 .Where(rodt => rodt.User == user && rodt.Service == service && rodt.Vehicle == vehicle && rodt.Mechanic == mechanic)
                 .FirstOrDefaultAsync();
 
-            if(repairOrderDetailTemp == null)
+            if (repairOrderDetailTemp == null)
             {
                 repairOrderDetailTemp = new RepairOrderDetailTemp
                 {
@@ -128,7 +128,7 @@ namespace RepairshopWeb.Data.Repositories
         public async Task<IQueryable<RepairOrderDetailTemp>> GetDetailsTempsAsync(string userName)
         {
             var user = await _userHelper.GetUserByEmailAsync(userName);
-            if (user==null)
+            if (user == null)
                 return null;
 
             return _context.RepairOrderDetailsTemp
@@ -156,11 +156,17 @@ namespace RepairshopWeb.Data.Repositories
 
             if (await _userHelper.IsUserInRoleAsync(user, "CLIENT"))
             {
+                var client = await _userHelper.GetClientByUserEmail(user.Email);
+
                 return _context.RepairOrders
+                    .Include(ro => ro.Appointment)
+                    .ThenInclude(app => app.Client)
                     .Include(ro => ro.Items)
                     .ThenInclude(s => s.Service)
                     .Include(v => v.Vehicle)
+                    .Where(ro => ro.Appointment.ClientId == client.Id)
                     .OrderByDescending(ro => ro.Date);
+                    
             }
 
             return _context.RepairOrders //Se não for Admin, buscar as RepairOrders do user que estiver logado

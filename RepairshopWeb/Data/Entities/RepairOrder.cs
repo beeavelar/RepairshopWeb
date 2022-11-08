@@ -42,7 +42,7 @@ namespace RepairshopWeb.Data.Entities
         [Required]
         public User User { get; set; }
 
-        [Display(Name = "Appointment Id")]
+        [Display(Name = "Appoin. Id")]
         public int AppointmentId { get; set; }
 
         [ForeignKey("AppointmentId")]

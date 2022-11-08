@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using RepairshopWeb.Data.Entities;
+using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,13 +12,15 @@ namespace RepairshopWeb.Helpers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IClientRepository _clientRepository;
 
         public UserHelper (UserManager<User> userManager, SignInManager<User> signInManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager, IClientRepository clientRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _clientRepository = clientRepository;
         }
         public async Task<IdentityResult> AddUserAsync(User user, string password)
         {
@@ -104,6 +107,11 @@ namespace RepairshopWeb.Helpers
         public async Task<string> GenerateConfirmEmailTokenAsync(User user)
         {
             return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
+
+        public async Task<Client> GetClientByUserEmail(string email)
+        {
+            return await _clientRepository.GetClient(email);
         }
     }
 }

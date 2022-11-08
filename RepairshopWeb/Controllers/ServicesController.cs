@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Helpers;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +14,8 @@ namespace RepairshopWeb.Controllers
         private readonly IServiceRepository _serviceRepository;
         private readonly IUserHelper _userHelper;
 
-        public ServicesController(IServiceRepository serviceRepository, IUserHelper userHelper)
+        public ServicesController(IServiceRepository serviceRepository, 
+            IUserHelper userHelper)
         {
             _serviceRepository = serviceRepository;
             _userHelper = userHelper;
@@ -101,7 +101,6 @@ namespace RepairshopWeb.Controllers
                     if (!await _serviceRepository.ExistAsync(service.Id))
                         return new NotFoundViewResult("ServiceNotFound");
                     else
-
                         throw;
                 }
                 return RedirectToAction(nameof(Index));

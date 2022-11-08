@@ -23,12 +23,11 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Id)
                             </th>
-                            @if (this.User.IsInRole("ADMIN"))
-                            {
-                                <th>
-                                    @Html.DisplayNameFor(model => model.User.FullName)
-                                </th>
-                            }
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.User.FullName)
+                            </th>
+
                             <th>
                                 @Html.DisplayNameFor(model => model.Date)
                             </th>
@@ -57,12 +56,10 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Id)
                                 </td>
-                                @if (this.User.IsInRole("ADMIN"))
-                                {
-                                    <th>
-                                        @Html.DisplayFor(modelItem => item.User.FullName)
-                                    </th>
-                                }
+
+                                <th>
+                                    @Html.DisplayFor(modelItem => item.User.FullName)
+                                </th>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Date)
                                 </td>
