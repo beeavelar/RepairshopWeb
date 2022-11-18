@@ -62,7 +62,6 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
-
         //[Authorize(Roles = "Mechanic, Receptionist")]
         //Create do Repair Order
         public async Task<IActionResult> Create(int? id)
@@ -165,6 +164,40 @@ namespace RepairshopWeb.Controllers
 
         //Get do Repair Order Show Services - Faz aparecer a view
         public async Task<IActionResult> ShowServices(int? id)
+        {
+            //Verifica se o id da RO selecionada existe
+            if (id == null)
+                return new NotFoundViewResult("ItemNotFound");
+
+            //Guarda o id da RO
+            var repairOrder = await _repairOrderRepository.GetRepairOrderByIdAsync(id.Value);
+
+            //Verifica se guardou o id da RO
+            if (repairOrder == null)
+                return new NotFoundViewResult("ItemNotFound");
+
+            //Inner join da tabela Services com a tabela RepairOrderDetails e com a tabela repair orders--> selecionar os serviços 
+            var services = _context.Services;
+            var details = _context.RepairOrderDetails;
+            var ro = _context.RepairOrders;
+
+            var model =
+                from service in services
+                join detail in details
+                on service.Id equals detail.ServiceId
+                join repairorder in ro
+                on detail.RepairOrderId equals repairorder.Id
+                where repairorder.Id == id
+                select new ServiceViewModel
+                {
+                    Id = service.Id,
+                    Description = service.Description,
+                };
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> ShowServicesClient(int? id)
         {
             //Verifica se o id da RO selecionada existe
             if (id == null)

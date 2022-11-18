@@ -14,7 +14,5 @@ namespace RepairshopWeb.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Photo")]
-        public IFormFile ImageFile { get; set; }
     }
 }

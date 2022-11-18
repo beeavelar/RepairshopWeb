@@ -1,0 +1,70 @@
+﻿@model IEnumerable<RepairshopWeb.Models.ServiceViewModel>
+
+@{
+    ViewData["Title"] = "ShowServices";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="row" style="font-family: Arial; font-size: small; margin-left: 10px; margin-right: 10px;">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title"><b>SERVICES TO DO</b></h1>
+            </div>
+            <br />
+            <div>
+                <table id="MyTable" class="table table-hover table-striped">
+                    <thead style="text-transform: uppercase">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br />
+                <p style="margin-left: 10px;">
+                    <a asp-action="IndexClient" class="btn btn-success"><i class="fa-solid fa-angles-left"></i> Back</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+@* Load datatable css *@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
+
+@section Scripts{
+
+    <script src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#MyTable').DataTable();
+        });
+    </script>
+
+}

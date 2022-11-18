@@ -59,9 +59,6 @@ namespace RepairshopWeb.Controllers
                     if (this.Request.Query.Keys.Contains("ReturnUrl"))
                         return Redirect(this.Request.Query["ReturnUrl"].First());
 
-                    //if (model.Role == "ADMIN" || model.Role == "MECHANIC" || model.Role == "RECEPTIONIST")
-                    //    return this.RedirectToAction("Index", "Dashboard");
-
                     if (user.Role is "ADMIN" || user.Role is "MECHANIC" || user.Role is "RECEPTIONIST")
                         return this.RedirectToAction("Index", "Dashboard");
 
@@ -132,19 +129,15 @@ namespace RepairshopWeb.Controllers
                         "<br/><br/>Best regards, " +
                         "<br/>RepairShop");
 
-
-                    //Se a flag IsCliet é true entao procurar o client pelo email. Achou o cliente, pegar os dados vindos do form Register e criar um user novo, 
-                    //Fazer um update no client passando o id do user criado para o client
-
-                    if (model.IsClient) //Se a checkbox esta selecionada
+                    if (model.IsClient)
                     {
-                        var client = await _userHelper.GetClientByUserEmail(model.Username); //Procura o cliente pelo email
+                        var client = await _userHelper.GetClientByUserEmail(model.Username);
 
-                        if (client is not null) //Verifica se o email foi guardado na variavel
+                        if (client is not null)
                         {
                             client.UserClientId = user.Id;
 
-                            await _clientRepository.UpdateAsync(client); //Atualiza o User com o email do cliente
+                            await _clientRepository.UpdateAsync(client);
                         }
                     }
 
@@ -294,7 +287,7 @@ namespace RepairshopWeb.Controllers
                 var user = await _userHelper.GetUserByEmailAsync(model.Email);
                 if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, "The email doesn't correspont to a registered user.");
+                    ModelState.AddModelError(string.Empty, "The e-mail doesn't correspont to a registered user.");
                     return View(model);
                 }
 
@@ -309,7 +302,7 @@ namespace RepairshopWeb.Controllers
                         "<br/><br/>Best regards, " +
                         "<br/>RepairShop");
 
-                this.ViewBag.Message = "The instructions to recover your password has been sent to your email.";
+                this.ViewBag.Message = "The instructions to reset your password has been sent to your email.";
 
                 return this.View();
             }

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using RepairshopWeb.Data;
-using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RepairshopWeb.Controllers
 {
@@ -70,7 +66,7 @@ namespace RepairshopWeb.Controllers
                 Guid imageId = Guid.Empty;
 
                 if (model.ImageFile != null && model.ImageFile.Length > 0)
-                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "mechanics");
+                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "photos");
 
                 var mechanic = _converterHelper.ToMechanic(model, imageId, true);
 
@@ -111,7 +107,7 @@ namespace RepairshopWeb.Controllers
                     Guid imageId = model.ImageId;
 
                     if (model.ImageFile != null && model.ImageFile.Length > 0)
-                        imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "mechanics");
+                        imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "photos");
 
                     var mechanic = _converterHelper.ToMechanic(model, imageId, false);
 

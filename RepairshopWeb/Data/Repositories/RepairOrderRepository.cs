@@ -3,6 +3,7 @@ using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -196,6 +197,18 @@ namespace RepairshopWeb.Data.Repositories
         public IQueryable GetAllWithUsers()
         {
             return _context.RepairOrders.Include(ro => ro.User);
+        }
+
+        public async Task<IEnumerable<RepairOrder>> GetAllRepairOrders()
+        {
+            var repairOrder = await _context.RepairOrders
+               .Include(ro => ro.Vehicle)
+               .Include(ro => ro.Items)
+               .ThenInclude(s => s.Service)
+               .OrderByDescending(ro => ro.Id)
+               .ToListAsync();
+
+            return repairOrder;
         }
     }
 }

@@ -69,7 +69,7 @@ namespace RepairshopWeb.Controllers
                 Guid imageId = Guid.Empty;
 
                 if (model.ImageFile != null && model.ImageFile.Length > 0)
-                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "receptionist");
+                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "photos");
 
                 var receptionist = _converterHelper.ToReceptionist(model, imageId, true);
 
@@ -110,7 +110,7 @@ namespace RepairshopWeb.Controllers
                     Guid imageId = model.ImageId;
 
                     if (model.ImageFile != null && model.ImageFile.Length > 0)
-                        imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "receptionists");
+                        imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "photos");
 
                     var receptionist = _converterHelper.ToReceptionist(model, imageId, false);
 

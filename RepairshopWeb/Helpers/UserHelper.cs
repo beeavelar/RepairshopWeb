@@ -2,7 +2,6 @@
 using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Models;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RepairshopWeb.Helpers
@@ -14,7 +13,7 @@ namespace RepairshopWeb.Helpers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IClientRepository _clientRepository;
 
-        public UserHelper (UserManager<User> userManager, SignInManager<User> signInManager,
+        public UserHelper(UserManager<User> userManager, SignInManager<User> signInManager,
             RoleManager<IdentityRole> roleManager, IClientRepository clientRepository)
         {
             _userManager = userManager;

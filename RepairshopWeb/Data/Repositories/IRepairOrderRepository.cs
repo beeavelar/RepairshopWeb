@@ -1,6 +1,7 @@
 ﻿using RepairshopWeb.Data.Entities;
 using RepairshopWeb.Data.Repository;
 using RepairshopWeb.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,5 +32,7 @@ namespace RepairshopWeb.Data.Repositories
         Task DeleteRepairOrderAsync(int id);
 
         public IQueryable GetAllWithUsers();
+
+        Task<IEnumerable<RepairOrder>> GetAllRepairOrders();
     }
 }

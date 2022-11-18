@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using RepairshopWeb.Data.Entities;
-using System.Collections.Generic;
+﻿using RepairshopWeb.Data.Entities;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RepairshopWeb.Models
 {
@@ -18,7 +14,7 @@ namespace RepairshopWeb.Models
         public string LastName { get; set; }
 
         [Required]
-        [DataType(DataType.EmailAddress)] 
+        [DataType(DataType.EmailAddress)]
         public string Username { get; set; }
 
         [Required]

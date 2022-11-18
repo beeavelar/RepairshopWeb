@@ -46,7 +46,7 @@ namespace RepairshopWeb.Controllers
             return View(client);
         }
 
-        [Authorize(Roles = "MECHANIC, RECEPTIONIST")]
+        //[Authorize(Roles = "MECHANIC, RECEPTIONIST")]
         // GET: Clients/Create
         public IActionResult Create()
         {
@@ -65,7 +65,7 @@ namespace RepairshopWeb.Controllers
                 Guid imageId = Guid.Empty;
 
                 if (model.ImageFile != null && model.ImageFile.Length > 0)
-                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "clients");
+                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "photos");
 
                 var client = _converterHelper.ToClient(model, imageId, true);
 
@@ -77,7 +77,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "MECHANIC, RECEPTIONIST")]
+        //[Authorize(Roles = "MECHANIC, RECEPTIONIST")]
         // GET: Clients/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -107,7 +107,7 @@ namespace RepairshopWeb.Controllers
                     Guid imageId = model.ImageId;
 
                     if (model.ImageFile != null && model.ImageFile.Length > 0)
-                        imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "clients");
+                        imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "photos");
 
                     var client = _converterHelper.ToClient(model, imageId, false);
 

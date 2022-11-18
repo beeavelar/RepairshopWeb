@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using RepairshopWeb.Data.Entities
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -222,7 +223,7 @@
                             </a>
 
                             <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                                <img src="~/Dashboard/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+                                 <span class="text-dark">Hello!</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="ChangeUser">@this.User.Identity.Name</a>

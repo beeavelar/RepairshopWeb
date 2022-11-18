@@ -53,8 +53,8 @@ namespace RepairshopWeb.Data.Entities
         public ICollection<RepairOrder> RepairOrders { get; set; }
 
         public string ImageFullPath => ImageId == Guid.Empty
-           ? $"https://repairshopweb.azurewebsites.net/images/noimage.jpg"
-           : $"https://repairshodebora.blob.core.windows.net/mechanics/{ImageId}";
+          ? $"https://repairshopweb.azurewebsites.net/images/noimage.jpg"
+          : $"https://repairshopweb.azurewebsites.net/photos/{ImageId}";
 
         [Display(Name = "Name")]
         public string FullName => $"{FirstName} {LastName}";

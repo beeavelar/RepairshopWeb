@@ -51,7 +51,7 @@ namespace RepairshopWeb.Data
                 await _userHelper.EmailConfirmAsync(user, token);
             }
 
-            //Verifica se o user tem o role que quero verificar --> No caso o "AdmiN"
+            //Verifica se o user tem o role que quero verificar --> No caso o "ADMIN"
             var isInRole = await _userHelper.IsUserInRoleAsync(user, "ADMIN");
 
             //Se o user não tem a permissão Admin, adiciona ele no Admin
