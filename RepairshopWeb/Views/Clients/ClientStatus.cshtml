@@ -1,0 +1,31 @@
+﻿@model RepairshopWeb.Models.ClientStatusViewModel
+
+@{
+    ViewData["Title"] = "ClientStatus";
+}
+
+<br />
+<h1 style="text-align: center;"><b>CLIENT STATUS</b></h1>
+<br />
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <form asp-action="ClientStatus">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ClientStatus" class="control-label" style="font-family: Arial; font-size: small"></label>
+                @{var status = new string[] { "User", "Need user"};}
+                <ejs-combobox asp-for="ClientStatus" id="clientstatus" dataSource="status"></ejs-combobox>
+                <span asp-validation-for="ClientStatus" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>
+                <a asp-action="Index" class="btn btn-success"><i class="fa-solid fa-angles-left"></i>Back</a>
+            </div>
+            <br/>
+        </form>
+    </div>
+</div>
+<br/>
+

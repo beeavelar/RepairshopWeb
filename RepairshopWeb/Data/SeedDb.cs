@@ -60,11 +60,8 @@ namespace RepairshopWeb.Data
 
             if (!_context.Clients.Any())
             {
-                AddClient("Miguel", "Mendes", "miguel@gmail.com", 28373827, user);
                 AddClient("Pedro", "Rodrigues", "pedro@gmail.com", 27383728, user);
                 AddClient("Debora", "Avelar", "avelar.dbr@gmail.com", 27384738, user);
-                AddClient("Maria", "Lopes", "maria@gmail.com", 26374892, user);
-                AddClient("Renata", "Fernandes", "renata@gmail.com", 20394839, user);
                 AddClient("Amélie", "Poulain", "amelie@gmail.com", 26373849, user);
                 await _context.SaveChangesAsync();
             }
@@ -72,8 +69,6 @@ namespace RepairshopWeb.Data
             if (!_context.Mechanics.Any())
             {
                 AddMechanic("João António", "Sanches", 928372829, 29384736, user);
-                AddMechanic("Lindovaldo", "Silva", 92837282, 28374837, user);
-                AddMechanic("Cleyton", "Sousa", 92937483, 28392837, user);
                 await _context.SaveChangesAsync();
             }
 
@@ -81,7 +76,6 @@ namespace RepairshopWeb.Data
             {
                 AddReceptionist("Juliana", "Lopes", 938273829, 273625267, user);
                 AddReceptionist("Maria", "Rodrigues", 938283728, 263762662, user);
-                AddReceptionist("Gustavo", "Almeida", 938273827, 282736222, user);
                 await _context.SaveChangesAsync();
             }
 

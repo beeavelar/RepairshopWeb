@@ -159,6 +159,7 @@ namespace RepairshopWeb.Controllers
                 return View("Error");
 
             await _userHelper.EmailConfirmAsync(user, token);
+            await _userHelper.LogoutAsync();
             return View();
         }
         public IActionResult Error()

@@ -121,24 +121,6 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
 
 @section Scripts{
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var id = 0;
-            $("a[id*=btnDeleteItem]").click(function() {
-                debugger;
-                id = $(this).parent()[0].id;
-                $("#deleteDialog").modal("show");
-                return false;
-            });
-            $("#btnNoDelete").click(function() {
-                $("#deleteDialog").modal("hide");
-                return false;
-            });
-            $("#btnYesDelete").click(function() {
-                window.location.href = "/RepairOrders/DeleteRepairOrder/" + id;
-            });
-        });
-    </script>
 
     <script src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

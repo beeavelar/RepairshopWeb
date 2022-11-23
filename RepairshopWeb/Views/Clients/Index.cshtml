@@ -42,7 +42,10 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.ImageId)
                             </th>
-                            <th width="20%"></th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ClientStatus)
+                            </th>
+                            <th width="30%"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,9 +73,13 @@
                                 <td>
                                     <img src="@Url.Content(item.ImageFullPath)" alt="Photo" style="width:100px;height:150px;max-width:100%;height:auto">
                                 </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ClientStatus)
+                                </td>
                                 <td style="text-align:right">
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning" data-toggle="tooltip" title="Edit"><i class="fa-solid fa-user-pen"></i></a> |
                                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info" data-toggle="tooltip" title="Details"><i class="fa-solid fa-bars"></i></a> |
+                                    <a asp-action="ClientStatus" asp-route-id="@item.Id" class="btn btn-warning" id="btnClientStatus" data-toggle="tooltip" title="Client Status"><i class="fa-solid fa-calendar-check"></i></a> |
                                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
                                 </td>
                             </tr>

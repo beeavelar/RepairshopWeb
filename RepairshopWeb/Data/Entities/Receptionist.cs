@@ -49,7 +49,7 @@ namespace RepairshopWeb.Data.Entities
 
         public string ImageFullPath => ImageId == Guid.Empty
           ? $"https://repairshopweb.azurewebsites.net/images/noimage.jpg"
-          : $"https://repairshopweb.azurewebsites.net/photos/{ImageId}";
+          : $"https://repairshopapp.blob.core.windows.net/photos/{ImageId}";
 
         public string FullName => $"{FirstName} {LastName}";
     }

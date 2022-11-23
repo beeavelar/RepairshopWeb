@@ -12,15 +12,17 @@ namespace RepairshopWeb.Controllers
     {
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IClientRepository _clientRepository;
+        private readonly IEmailHelper _emailHelper;
         private readonly IVehicleRepository _vehicleRepository;
         private readonly IRepairOrderRepository _repairOrderRepository;
 
         public AppointmentsController(IAppointmentRepository appointmentRepository,
-           IClientRepository clientRepository,
+           IClientRepository clientRepository, IEmailHelper emailHelper,
            IVehicleRepository vehicleRepository, IRepairOrderRepository repairOrderRepository)
         {
             _appointmentRepository = appointmentRepository;
             _clientRepository = clientRepository;
+            _emailHelper = emailHelper;
             _vehicleRepository = vehicleRepository;
             _repairOrderRepository = repairOrderRepository;
         }
@@ -89,8 +91,17 @@ namespace RepairshopWeb.Controllers
         public async Task<IActionResult> ConfirmAppointment()
         {
             var response = await _appointmentRepository.ConfirmAppointmentAsync(this.User.Identity.Name);
-            if (response)
+            if (response.IsSuccess)
+            {
+                await _emailHelper.SendEmail(response.Email, $"RepairShop - Appointment", $"Mr. /Ms. {response.ClientName}<br/><br/> " +
+                    $"You have a new appointment with Repairshop!<br/><br/> " +
+                    $"Date: {response.AppointmentDate}<br/>Vehicle:{response.VehiclePlate}" +
+                      "<br/><br/>Best regards, " +
+                      "<br/>RepairShop");
+
                 return RedirectToAction("Index");
+            }
+
             return RedirectToAction("Create");
         }
 

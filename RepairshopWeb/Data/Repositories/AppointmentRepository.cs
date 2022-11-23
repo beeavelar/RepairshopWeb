@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RepairshopWeb.Data.Entities;
+using RepairshopWeb.Data.Repositories.DataTransferObjects;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
 using System;
@@ -53,11 +54,11 @@ namespace RepairshopWeb.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> ConfirmAppointmentAsync(string userName)
+        public async Task<AppointmentDetailsDto> ConfirmAppointmentAsync(string userName)
         {
             var user = await _userHelper.GetUserByEmailAsync(userName);
             if (user == null)
-                return false;
+                return new AppointmentDetailsDto { IsSuccess = false};
 
             var appointmentTemps = await _context.AppointmentDetailsTemp
                 .Include(adt => adt.Client)
@@ -66,7 +67,7 @@ namespace RepairshopWeb.Data.Repositories
                 .ToListAsync();
 
             if (appointmentTemps == null || appointmentTemps.Count == 0)
-                return false;
+                return new AppointmentDetailsDto { IsSuccess = false };
 
             //Passa as informações do AppointmentDetailTemp para AppointmentDetail
             var details = appointmentTemps.Select(ad => new AppointmentDetail
@@ -96,7 +97,7 @@ namespace RepairshopWeb.Data.Repositories
             await CreateAsync(appointment);
             _context.AppointmentDetailsTemp.RemoveRange(appointmentTemps);
             await _context.SaveChangesAsync();
-            return true;
+            return new AppointmentDetailsDto { IsSuccess = true, ClientName = details[0].Client.FullName, Email = details[0].Client.Email, VehiclePlate = details[0].Vehicle.LicensePlate, AppointmentDate = details[0].AppointmentDate };
         }
 
         public async Task DeleteDetailTempAsync(int id)

@@ -62,16 +62,27 @@ namespace RepairshopWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                Guid imageId = Guid.Empty;
+                var clientEmail = await _clientRepository.GetClient(model.Email);
 
-                if (model.ImageFile != null && model.ImageFile.Length > 0)
-                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "photos");
+                if (clientEmail is null)
+                {
+                    Guid imageId = Guid.Empty;
 
-                var client = _converterHelper.ToClient(model, imageId, true);
+                    if (model.ImageFile != null && model.ImageFile.Length > 0)
+                        imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "photos");
 
-                client.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                    var client = _converterHelper.ToClient(model, imageId, true);
 
-                await _clientRepository.CreateAsync(client);
+                    client.User = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+
+                    await _clientRepository.CreateAsync(client);
+                }
+                else
+                {
+                    ViewBag.Message = "User already exists.";
+                    return View(model);
+                }
+                    
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
@@ -126,7 +137,6 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "MECHANIC, RECEPTIONIST")]
         // GET: Clients/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -149,6 +159,37 @@ namespace RepairshopWeb.Controllers
             var client = await _clientRepository.GetByIdAsync(id);
             await _clientRepository.DeleteAsync(client);
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> ClientStatus(int? id)
+        {
+            if (id == null)
+                return new NotFoundViewResult("ClientNotFound");
+
+            var client = await _clientRepository.GetClientByIdAsync(id.Value);
+
+            if (client == null)
+                return new NotFoundViewResult("ClientNotFound");
+
+            var model = new ClientStatusViewModel
+            {
+                Id = client.Id,
+                ClientStatus = client.ClientStatus
+            };
+
+            return View(model);
+        }
+
+        //Post do Appointment Status - grava as informações
+        [HttpPost]
+        public async Task<IActionResult> ClientStatus(ClientStatusViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _clientRepository.StatusClient(model);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
         public IActionResult ClientNotFound()
         {

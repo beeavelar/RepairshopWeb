@@ -1,4 +1,5 @@
 ﻿using RepairshopWeb.Data.Entities;
+using RepairshopWeb.Data.Repositories.DataTransferObjects;
 using RepairshopWeb.Data.Repository;
 using RepairshopWeb.Models;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace RepairshopWeb.Data.Repositories
         Task DeleteDetailTempAsync(int id);
 
         //Método para confirmar o Appointment
-        Task<bool> ConfirmAppointmentAsync(string userName);
+        Task<AppointmentDetailsDto> ConfirmAppointmentAsync(string userName);
 
         Task<Appointment> GetAppointmentByIdAsync(int id);  //Buscar os Appointments por id
 

@@ -41,6 +41,9 @@ namespace RepairshopWeb.Data.Entities
         [Display(Name = "Photo")]
         public Guid ImageId { get; set; }
 
+        [Display(Name = "Client Status")]
+        public string ClientStatus { get; set; }
+
         public ICollection<Vehicle> Vehicles { get; set; }
 
         public ICollection<Billing> Billings { get; set; }
