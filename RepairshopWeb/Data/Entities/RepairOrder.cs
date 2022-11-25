@@ -50,5 +50,6 @@ namespace RepairshopWeb.Data.Entities
 
         public IEnumerable<RepairOrderDetail> Items { get; set; } //Aqui que faz a ligação com a tabela de RepairOrder - Ligação de 1 para muitos - 1 RepairOrder tem vários itens
 
+        public bool IsBilling { get; set; }
     }
 }

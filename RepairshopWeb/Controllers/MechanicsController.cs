@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using RepairshopWeb.Data;
 using RepairshopWeb.Data.Repositories;
 using RepairshopWeb.Helpers;
 using RepairshopWeb.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,14 +15,16 @@ namespace RepairshopWeb.Controllers
 {
     public class MechanicsController : Controller
     {
+        private readonly DataContext _context;
         private readonly IMechanicRepository _mechanicRepository;
         private readonly IUserHelper _userHelper;
         private readonly IBlobHelper _blobHelper;
         private readonly IConverterHelper _converterHelper;
 
-        public MechanicsController(IMechanicRepository mechanicRepository,
+        public MechanicsController(DataContext context, IMechanicRepository mechanicRepository,
             IUserHelper userHelper, IBlobHelper blobHelper, IConverterHelper converterHelper)
         {
+            _context = context;
             _mechanicRepository = mechanicRepository;
             _userHelper = userHelper;
             _blobHelper = blobHelper;

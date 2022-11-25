@@ -16,7 +16,7 @@ namespace RepairshopWeb.Controllers.API
         }
 
         [HttpGet]
-        public IActionResult GetClients()
+        public IActionResult GetReceptionists()
         {
             return Ok(_receptionistRepository.GetAllWithUsers());
         }

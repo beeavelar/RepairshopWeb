@@ -61,7 +61,7 @@ namespace RepairshopWeb.Data
             if (!_context.Clients.Any())
             {
                 AddClient("Pedro", "Rodrigues", "pedro@gmail.com", 27383728, user);
-                AddClient("Debora", "Avelar", "avelar.dbr@gmail.com", 27384738, user);
+                AddClient("Debora", "Avelar", "debs@gmail.com", 27384738, user);
                 AddClient("Amélie", "Poulain", "amelie@gmail.com", 26373849, user);
                 await _context.SaveChangesAsync();
             }

@@ -19,7 +19,7 @@ namespace RepairshopWeb.Controllers.API
         }
 
         [HttpGet]
-        public IActionResult GetClients()
+        public IActionResult GetServices()
         {
             return Ok(_serviceRepository.GetAllWithUsers());
         }

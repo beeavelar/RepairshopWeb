@@ -82,7 +82,6 @@ namespace RepairshopWeb.Controllers
             return View(vehicle);
         }
 
-        //[Authorize(Roles = "Mechanic, Receptionist")]
         // GET: Vehicles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -128,7 +127,6 @@ namespace RepairshopWeb.Controllers
             return View(vehicle);
         }
 
-        //[Authorize(Roles = "Mechanic, Receptionist")]
         // GET: Vehicles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -155,7 +153,6 @@ namespace RepairshopWeb.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //[Authorize(Roles = "Mechanic, Receptionist")]
         // GET: Vehicles/Edit/5
         public async Task<IActionResult> EditClient(int? id)
         {
@@ -200,7 +197,6 @@ namespace RepairshopWeb.Controllers
             ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "FullName", vehicle.ClientId);
             return View(vehicle);
         }
-
 
         public IActionResult VehicleNotFound()
         {

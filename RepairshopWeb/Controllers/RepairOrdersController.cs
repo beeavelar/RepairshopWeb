@@ -197,7 +197,7 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> ShowServicesClient(int? id)
+        public async Task<IActionResult> ShowServicesIndexDash(int? id)
         {
             //Verifica se o id da RO selecionada existe
             if (id == null)
@@ -231,76 +231,39 @@ namespace RepairshopWeb.Controllers
             return View(model);
         }
 
-        //public async Task<IActionResult> IssueInvoice(int? id)
-        //{
-        //    if (id == null)
-        //        return new NotFoundViewResult("ItemNotFound");
+        public async Task<IActionResult> ShowServicesClient(int? id)
+        {
+            //Verifica se o id da RO selecionada existe
+            if (id == null)
+                return new NotFoundViewResult("ItemNotFound");
 
-        //    var repairOrder = await _repairOrderRepository.GetRepairOrderByIdAsync(id.Value);
+            //Guarda o id da RO
+            var repairOrder = await _repairOrderRepository.GetRepairOrderByIdAsync(id.Value);
 
-        //    if (repairOrder == null)
-        //        return new NotFoundViewResult("ItemNotFound");
+            //Verifica se guardou o id da RO
+            if (repairOrder == null)
+                return new NotFoundViewResult("ItemNotFound");
 
-        //    return View();
-        //}
+            //Inner join da tabela Services com a tabela RepairOrderDetails e com a tabela repair orders--> selecionar os serviços 
+            var services = _context.Services;
+            var details = _context.RepairOrderDetails;
+            var ro = _context.RepairOrders;
 
-        //public async Task<IActionResult> IssueInvoice(BillingViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            await _emailHelper.SendEmail($"{model.Email}", $"Welcome to RepairShop", $"Dear Sr.(a) {model.Client},<br/><br/> " +
-        //              $"We thank you for your preference. Your invoice is attached." +
-        //                "<br/><br/>Best regards, " +
-        //                "<br/>RepairShop");
-        //        }
-        //        catch (Exception ex)
-        //        {
+            var model =
+                from service in services
+                join detail in details
+                on service.Id equals detail.ServiceId
+                join repairorder in ro
+                on detail.RepairOrderId equals repairorder.Id
+                where repairorder.Id == id
+                select new ServiceViewModel
+                {
+                    Id = service.Id,
+                    Description = service.Description,
+                };
 
-        //        }
-        //    }
-
-        //    ViewBag.Message = "The invoice was send!";
-        //    return this.View();
-        //}
-
-        //public IActionResult CreatePDF(BillingViewModel model)
-        //{
-        //    //Pasta onde está o template
-        //    var _template = @"C:\Projetos\RepairshopWeb\InvoiceTemplate.pdf";
-
-        //    //Pasta onde os pdfs criados serão guardados
-        //    string _folderToNewPdf = @"C:\Projetos\RepairshopWeb\Invoices\";
-        //    Guid _id = Guid.NewGuid();
-        //    _pdfName = _id + ".pdf";
-        //    _newPdf = _folderToNewPdf + _pdfName;
-
-        //    //Criando o pdf
-        //    if (File.Exists(_template)) //Verificação se o template existe na pasta Tempates
-        //    {
-        //        //Leitura do InvoiceTemplate.pdf
-        //        PdfReader _pdfreader = new PdfReader(_template);
-
-        //        PdfStamper _pdfStamper = new PdfStamper(_pdfreader, new FileStream(_newPdf, FileMode.Create));
-
-        //        AcroFields _fields = _pdfStamper.AcroFields;
-
-        //        //Escrevendo nos campos do PDF template
-        //        _fields.SetField("id", model.Id.ToString());
-        //        _fields.SetField("date", DateTime.Now.ToShortDateString());
-        //        _fields.SetField("clientname", model.Client.ToString());
-        //        _fields.SetField("nif", model.Nif.ToString());
-        //        _fields.SetField("paymenttype", model.PaymentMethod.ToString());
-        //        //_fields.SetField("repair", cb_repair.Text);
-        //        //_fields.SetField("repairprice", model.TotalToPay + " €");
-        //        _fields.SetField("total", model.TotalToPay.ToString() + " €");
-
-        //        _pdfStamper.Close();
-        //    }
-
-        //    return View();
-        //}
+            return View(model);
+        }
 
         public IActionResult ItemNotFound()
         {

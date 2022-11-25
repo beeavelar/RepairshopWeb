@@ -19,5 +19,7 @@ namespace RepairshopWeb.Data.Repositories
         Task<Client> GetClientByIdAsync(int id);  //Buscar os clients por id
 
         Task StatusClient(ClientStatusViewModel model);
+
+        Task<Client> GetClientById(int id);
     }
 }

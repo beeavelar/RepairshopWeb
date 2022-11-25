@@ -14,9 +14,9 @@ namespace RepairshopWeb.Controllers.API
         {
             _repairOrderRepository = repairOrderRepository;
         }
-
+        
         [HttpGet]
-        public IActionResult GetRepairOrdes()
+        public IActionResult GetRepairOrders()
         {
             return Ok(_repairOrderRepository.GetAllWithUsers());
         }

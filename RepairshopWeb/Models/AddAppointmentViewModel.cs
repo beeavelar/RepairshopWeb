@@ -10,11 +10,11 @@ namespace RepairshopWeb.Models
         public int Id { get; set; }
 
         [Display(Name = "Appointment Date")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm tt}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy HH:mm tt}", ApplyFormatInEditMode = false)]
         public DateTime AppointmentDate { get; set; }
 
         [Display(Name = "Alert Appoin. Date")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm tt}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy HH:mm tt}", ApplyFormatInEditMode = false)]
         public DateTime AlertDate { get; set; }
 
         [Display(Name = "Client")]

@@ -91,61 +91,70 @@ namespace RepairshopWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterNewUserViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = await _userHelper.GetUserByEmailAsync(model.Username);
-
-                if (user == null)
+                if (ModelState.IsValid)
                 {
-                    user = new User
+                    var user = await _userHelper.GetUserByEmailAsync(model.Username);
+
+                    if (user == null)
                     {
-                        FirstName = model.FirstName,
-                        LastName = model.LastName,
-                        Email = model.Username,
-                        Role = model.Role,
-                        UserName = model.Username
-                    };
-
-                    var result = await _userHelper.AddUserAsync(user, model.Password);
-
-                    await _userHelper.AddUserToRoleAsync(user, model.Role);
-
-                    if (result != IdentityResult.Success)
-                    {
-                        ModelState.AddModelError(string.Empty, "The user couldn´t be created.");
-                        return View(model);
-                    }
-
-                    var token = await _userHelper.GenerateConfirmEmailTokenAsync(user);
-
-                    var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, email = model.Username }, Request.Scheme);
-
-                    await _emailHelper.SendEmail($"{model.Username}", $"Welcome to RepairShop", $"Mr. /Ms. {user.FirstName} {user.LastName},<br/><br/> " +
-                      $"Welcome to RepairShop!<br/><br/> Here's your login and password: <br/><br/> Login: {model.UserName}<br/>Password:{model.Password}" +
-                        "<br/><br/>For your security it is recommended that you change your password.<br/>To do this go to: <b>My Account >> Change password</b>" +
-                        $"<br/><br/> " +
-                        $"To confirme your account click in this link: " +
-                       $"<a href = \"{confirmationLink}\">Account Confirmation</a>" +
-                        "<br/><br/>Best regards, " +
-                        "<br/>RepairShop");
-
-                    if (model.IsClient)
-                    {
-                        var client = await _userHelper.GetClientByUserEmail(model.Username);
-
-                        if (client is not null)
+                        user = new User
                         {
-                            client.UserClientId = user.Id;
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
+                            Email = model.Username,
+                            Role = model.Role,
+                            UserName = model.Username
+                        };
 
-                            await _clientRepository.UpdateAsync(client);
+                        var result = await _userHelper.AddUserAsync(user, model.Password);
+
+                        await _userHelper.AddUserToRoleAsync(user, model.Role);
+
+                        if (result != IdentityResult.Success)
+                        {
+                            ModelState.AddModelError(string.Empty, "The user couldn´t be created.");
+                            return View(model);
                         }
-                    }
 
-                    ViewBag.Message = "User created successfully! A confirmation email has been sent.";
-                    return this.View();
+                        var token = await _userHelper.GenerateConfirmEmailTokenAsync(user);
+
+                        var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, email = model.Username }, Request.Scheme);
+
+                        await _emailHelper.SendEmail($"{model.Username}", $"Welcome to RepairShop", $"Mr. /Ms. {user.FirstName} {user.LastName},<br/><br/> " +
+                          $"Welcome to RepairShop!<br/><br/> Here's your login and password: <br/><br/> Login: {model.Username}<br/>Password:{model.Password}" +
+                            "<br/><br/>For your security it is recommended that you change your password.<br/>To do this go to: <b>My Account >> Change password</b>" +
+                            $"<br/><br/> " +
+                            $"To confirme your account click in this link: " +
+                           $"<a href = \"{confirmationLink}\">Account Confirmation</a>" +
+                            "<br/><br/>Best regards, " +
+                            "<br/>RepairShop");
+
+                        if (model.IsClient)
+                        {
+                            var client = await _userHelper.GetClientByUserEmail(model.Username);
+
+                            if (client is not null)
+                            {
+                                client.UserClientId = user.Id;
+
+                                await _clientRepository.UpdateAsync(client);
+                            }
+                        }
+
+                        ViewBag.Message = "User created successfully! A confirmation email has been sent.";
+                        return this.View();
+                    }
                 }
+                return View(model);
             }
-            return View(model);
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+                return View(model);
+            }
+           
         }
 
         [HttpGet]

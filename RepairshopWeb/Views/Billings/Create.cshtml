@@ -12,49 +12,20 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="IssueDate" style="font-family: Arial; font-size:small;"></label>
-                <div class="input-group date" id="datepicker">
-                    <input asp-for="IssueDate" type="text" class="form-control" value="" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-                <span asp-validation-for="IssueDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="RepairOrderId" style="font-family: Arial; font-size:small;"></label>
                 <select asp-for="RepairOrderId" asp-items="ViewBag.RepairOrderId" style="width:100%; font-family: Arial; height: 30px"></select>
                 <span asp-validation-for="RepairOrderId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClientId" style="font-family: Arial; font-size:small;"></label>
-                <select asp-for="ClientId" asp-items="ViewBag.ClientId" style="width:100%; font-family: Arial; height: 30px"></select>
-                <span asp-validation-for="ClientId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="VehicleId" style="font-family: Arial; font-size:small;"></label>
-                <select asp-for="VehicleId" asp-items="ViewBag.VehicleId" style="width:100%; font-family: Arial; height: 30px"></select>
-                <span asp-validation-for="VehicleId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="control-section">
-                    <div class="control_wrapper TextBox-control-section">
-                        <ejs-maskedtextbox asp-for="Nif" id="nif" mask="000000000" placeholder="NIF" floatLabelType="Auto" style="font-family: Arial; font-size:medium;"></ejs-maskedtextbox>
-                    </div>
-                </div>
-                <span asp-validation-for="Nif" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaymentMethod" style="font-family: Arial; font-size:small;"></label>
-                @{
-                    var payMethods = new string[] { "Cash", "Credit card", "MB WAY", "Bank transfer" };
-                }
-                <ejs-combobox asp-for="PaymentMethod" id="paymentmethod" dataSource="payMethods"></ejs-combobox>
+                <label asp-for="PaymentMethod" style="font-family: Arial; font-size:small;" class="control-label"></label>
+                <select asp-for="PaymentMethod" class="form-control">
+                    <option selected disabled>(Select the Payment Method...)</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Debit/Credit cards">Debit/Credit cards</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                    <option value="MB WAY ">MB WAY </option>
+                </select>
                 <span asp-validation-for="PaymentMethod" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <ejs-maskedtextbox asp-for="TotalToPay" id="totaltopay" placeholder="Total to pay" floatLabelType="Auto" style="font-family: Arial; font-size:medium;"></ejs-maskedtextbox>
-                <span asp-validation-for="TotalToPay" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="Save"><i class="fa-regular fa-floppy-disk"></i></button>

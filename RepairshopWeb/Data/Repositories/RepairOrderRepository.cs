@@ -191,7 +191,11 @@ namespace RepairshopWeb.Data.Repositories
 
         public async Task<RepairOrder> GetRepairOrderByIdAsync(int id)
         {
-            return await _context.RepairOrders.FindAsync(id);
+            return await _context.RepairOrders
+                .Include(p => p.Items)
+                .Include(p => p.Appointment)
+                .Include(p => p.Vehicle)
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public IQueryable GetAllWithUsers()

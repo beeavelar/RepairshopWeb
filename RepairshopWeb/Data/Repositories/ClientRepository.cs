@@ -59,5 +59,10 @@ namespace RepairshopWeb.Data.Repositories
             _context.Clients.Update(client);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<Client> GetClientById(int id)
+        {
+            return await _context.Clients.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
+        }
     }
 }

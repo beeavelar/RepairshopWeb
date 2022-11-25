@@ -16,7 +16,7 @@ namespace RepairshopWeb.Controllers.API
         }
 
         [HttpGet]
-        public IActionResult GetClients()
+        public IActionResult GetVehicles()
         {
             return Ok(_vehicleRepository.GetAllWithUsers());
         }

@@ -46,7 +46,7 @@ namespace RepairshopWeb.Controllers
             return View(client);
         }
 
-        //[Authorize(Roles = "MECHANIC, RECEPTIONIST")]
+        [Authorize(Roles = "MECHANIC, RECEPTIONIST")]
         // GET: Clients/Create
         public IActionResult Create()
         {

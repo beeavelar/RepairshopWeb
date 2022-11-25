@@ -146,7 +146,6 @@ namespace RepairshopWeb.Data.Repositories
                     .Include(ro => ro.RepairOrder)
                     .Include(v => v.Vehicle)
                     .Include(c => c.Client)
-                    .Where(app => app.IsActive)
                     .OrderByDescending(app => app.Date);
             }
 
@@ -155,7 +154,7 @@ namespace RepairshopWeb.Data.Repositories
                 .Include(ro => ro.RepairOrder)
                 .Include(c => c.Client)
                 .Include(v => v.Vehicle)
-                .Where(app => app.User == user && app.IsActive) //onde o User for igual ao user
+                .Where(app => app.User == user) //onde o User for igual ao user
                 .OrderByDescending(app => app.Date);
         }
 
